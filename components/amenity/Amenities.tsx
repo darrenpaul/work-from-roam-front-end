@@ -1,13 +1,13 @@
 import Selector from 'elements/Selector';
 import { AMENITIES, getAmenityIcon } from 'utils/amenity';
+import { LIGHT_COPY } from 'shared/styles/colors';
+import { useState } from 'react';
 import {
   amenityButtonStyle,
   amenityContainerStyle,
   amenityListContainerStyle,
-  amenitySelectorContainerStyle
-  } from './styles';
-import { LIGHT_COPY } from 'shared/styles/colors';
-import { useState } from 'react';
+  amenitySelectorContainerStyle,
+} from './styles';
 
 interface Params {
   initialData: AmenityType;
@@ -43,9 +43,9 @@ interface AmenityType {
 }
 
 const Amenities = ({ initialData, onChange }: Params) => {
-  const [amenities, setAmenities] = useState(initialData);
+  const [amenities, setAmenities] = useState<AmenityType>(initialData);
 
-  const handleInputChange = (id: string, value: object) => {
+  const handleInputChange = (id: keyof AmenityType, value: object) => {
     const newState = { ...amenities, [id]: { ...amenities[id], ...value } };
     setAmenities(newState);
     onChange(newState);
@@ -56,9 +56,13 @@ const Amenities = ({ initialData, onChange }: Params) => {
       {AMENITIES.map((amenity, index) => (
         <div key={index} className={amenityContainerStyle()}>
           <button
-            className={amenityButtonStyle(amenities[amenity.key].available)}
+            className={amenityButtonStyle(
+              amenities[amenity.key as keyof AmenityType].available as boolean,
+            )}
             onClick={() =>
-              handleInputChange(amenity.key, { available: !amenities[amenity.key].available })
+              handleInputChange(amenity.key, {
+                available: !amenities[amenity.key as keyof AmenityType].available,
+              })
             }
             value={amenity.name}
           >

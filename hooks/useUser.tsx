@@ -19,7 +19,7 @@ export default function useFirebaseAuth() {
   const formatUserObject = (user: UserType, accessToken: string) => {
     return {
       user,
-      accessToken
+      accessToken,
     };
   };
 
@@ -54,6 +54,6 @@ export default function useFirebaseAuth() {
 
   return {
     authUser,
-    loading
+    loading,
   };
 }

@@ -6,6 +6,7 @@ import SignUp from './SignUp';
 import useShowModal from 'hooks/useModal';
 import { doSignInUser, doSignUpUser } from 'services/user';
 import { getCopy } from 'utils/copyReader';
+import { humanError } from 'utils/errors';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 const SignUpSignIn = () => {
@@ -80,7 +81,7 @@ const SignUpSignIn = () => {
     try {
       await doSignInUser(email, password);
     } catch (error) {
-      console.log(error);
+      humanError(error.code);
     }
     setLoading(false);
   };

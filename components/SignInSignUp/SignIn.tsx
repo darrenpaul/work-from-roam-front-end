@@ -23,7 +23,7 @@ const SignIn = ({ onSignIn }: Params) => {
 
   const handleInputChange = (id: string, value: string) => {
     // if (value) setErrors({ ...errors, [id]: "" });
-    setUserData({ ...userData, [id]: value });
+    setUserData({ ...userData, [id]: value.trim() });
   };
 
   return (

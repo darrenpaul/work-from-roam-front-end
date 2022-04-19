@@ -1,10 +1,11 @@
 import { httpRequest } from './httpRequest';
+import { SpotSuggestionType } from 'types/spotSuggestion';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 const API_VERSION = 'api/v1';
 const KEY = 'spot-suggestion';
 
-export const createSpotSuggestion = (accessToken: String, spotData) => {
+export const createSpotSuggestion = (accessToken: String, spotData: SpotSuggestionType) => {
   const url = `${BASE_URL}/${API_VERSION}/${KEY}/create`;
   return httpRequest({
     url,
@@ -26,7 +27,11 @@ export const getSpotSuggestion = (accessToken: String, id: String) => {
   });
 };
 
-export const acceptSpotSuggestion = (accessToken: string, id: string, spotData) => {
+export const acceptSpotSuggestion = (
+  accessToken: string,
+  id: string,
+  spotData: SpotSuggestionType
+) => {
   const url = `${BASE_URL}/${API_VERSION}/${KEY}/accept/${id}`;
   return httpRequest({
     url,

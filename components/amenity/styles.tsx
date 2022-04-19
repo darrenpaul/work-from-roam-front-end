@@ -13,7 +13,7 @@ export const amenitySelectorContainerStyle = () => {
   return [...base].join(' ');
 };
 
-export const amenityButtonStyle = (isActive) => {
+export const amenityButtonStyle = (isActive: boolean) => {
   const base = ['flex flex-col', 'justify-center items-center', 'w-12 h-12', 'rounded-full'];
   const effects = [];
   if (isActive) {

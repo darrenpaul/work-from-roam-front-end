@@ -38,11 +38,11 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
     country: initialSpot.country || '',
     website: initialSpot.website || '',
     images: initialSpot.images || [],
-    placeId: initialSpot.placeId || ''
+    placeId: initialSpot.placeId || '',
   });
   const [amenities, setAmenities] = useState(BASE_AMENITIES);
   const [operatingHours, setOperatingHours] = useState(
-    initialSpot.operatingHours || BASE_OPERATING_HOURS
+    initialSpot.operatingHours || BASE_OPERATING_HOURS,
   );
   const [errors, setErrors] = useState({
     name: '',
@@ -57,7 +57,7 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
     website: '',
     operatingHours: '',
     images: '',
-    placeId: ''
+    placeId: '',
   });
   const [images, setImages] = useState([]);
   const [showCropper, setShowCropper] = useState(false);
@@ -145,13 +145,27 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
       <div className={spotFormInputsContainerStyle()}>
         <Heading3>Add a new spot</Heading3>
 
-        <ImageInput onChange={handleImageSelect} />
+        <Image Input onChange={handleImageSelect} />
 
         {images.map((image, index) => (
-          <Image key={index} src={image} alt="something" width={160} height={120} layout="fixed" />
+          <Image
+            unoptimized={true}
+            key={index}
+            src={image}
+            alt="something"
+            width={160}
+            height={120}
+            layout="fixed"
+          />
         ))}
 
-        <ImageCrop show={showCropper} image={cropImage} handleCropSave={handleCropSave} />
+        <Image
+          unoptimized={true}
+          Crop
+          show={showCropper}
+          image={cropImage}
+          handleCropSave={handleCropSave}
+        />
 
         <Input
           id="name"
@@ -252,8 +266,8 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
 export async function getStaticProps() {
   return {
     props: {
-      protected: true
-    }
+      protected: true,
+    },
   };
 }
 

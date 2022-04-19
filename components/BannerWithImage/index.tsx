@@ -6,8 +6,8 @@ import {
   contentContainerStyle,
   contentWrapperContainerStyle,
   imageContainerStyle,
-  mainContainerStyle
-  } from './styles';
+  mainContainerStyle,
+} from './styles';
 
 interface Params {
   srcImage: string;
@@ -24,7 +24,7 @@ const BannerWithImage = ({
   title = '',
   description = '',
   buttonText,
-  buttonOnClick = () => {}
+  buttonOnClick = () => {},
 }: Params) => {
   return (
     <section className={mainContainerStyle()}>

@@ -4,9 +4,14 @@ import Paragraph from 'elements/typography/Paragraphy';
 import useSpotCompare from 'hooks/useSpotCompare';
 import { doSpotSuggestionAccept } from 'services/spotSuggestion';
 import { successNotification } from 'utils/notifications';
-import { suggestionGroupStyle } from './styles';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+
+const suggestionGroupStyle = () => {
+  const base = ['grid grid-cols-4 grid-flow-col'];
+
+  return [...base].join(' ');
+};
 
 const SpotSuggestionCompare = ({ authUser }: AuthUserType) => {
   const [spotData, setSpotData] = useState({});
@@ -30,7 +35,7 @@ const SpotSuggestionCompare = ({ authUser }: AuthUserType) => {
     const originalData = spotData?.[parentKey] || spotCompare.spot[parentKey];
     handleCompareAccept(parentKey, {
       ...originalData,
-      [key]: { ...originalData[key], [option]: suggestedValue }
+      [key]: { ...originalData[key], [option]: suggestedValue },
     });
   };
 
@@ -83,7 +88,7 @@ const SpotSuggestionCompare = ({ authUser }: AuthUserType) => {
             >
               Accept
             </Button>
-          </div>
+          </div>,
         );
       }
     }

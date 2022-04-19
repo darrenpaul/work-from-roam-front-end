@@ -12,12 +12,12 @@ const SignUp = ({ onSignUp }: Params) => {
     firstName: '',
     lastName: '',
     email: '',
-    password: ''
+    password: '',
   });
   const [errors, setErrors] = useState({
     firstName: '',
     lastName: '',
-    password: ''
+    password: '',
   });
 
   const handleSignUpUser = () => {

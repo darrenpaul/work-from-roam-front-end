@@ -1,6 +1,29 @@
 {
-  "extends": "next/core-web-vitals",
+  "root": true,
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "next/core-web-vitals"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["tsconfig.json", "tsconfig.dev.json"],
+    "sourceType": "module"
+  },
+  "ignorePatterns": [
+    "*", // ignore all files,
+    "/lib/**/*" // Ignore built files.,
+  ],
   "rules": {
-    "prettier/prettier": ["error", {}, { "usePrettierrc": true }]
+    "import/no-unresolved": 0,
+    "object-curly-spacing": ["error", "always"],
+    "new-cap": 0,
+    "max-len": ["error", { "code": 200 }],
+    "@typescript-eslint/no-var-requires": 0,
+    "indent": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-explicit-any": 0
   }
 }

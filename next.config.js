@@ -2,9 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['images.unsplash.com'],
-    formats: ['image/avif', 'image/webp']
-  }
+    formats: ['image/webp'],
+    loader: 'imgix',
+    path: 'https://images.unsplash.com',
+  },
 };
 
 module.exports = nextConfig;
