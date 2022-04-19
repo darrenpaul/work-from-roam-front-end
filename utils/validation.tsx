@@ -14,26 +14,8 @@ export const spotFormValidation = (spotData) => {
     city,
     zipCode,
     country,
-    coordinates
+    coordinates,
   } = spotData;
-
-  // {
-  //     "name": "",
-  //     "email": "",
-  //     "phoneNumber": "",
-  //     "phoneCode": "27",
-  //     "coordinates": {
-  //         "lat": null,
-  //         "lng": null
-  //     },
-  //     "address": "",
-  //     "city": "",
-  //     "zipCode": "",
-  //     "country": "",
-  //     "website": "",
-  //     "images": [],
-  //     "placeId": ""
-  // }
 
   const errors = {};
   if (isEmpty(name)) {
@@ -86,6 +68,32 @@ export const spotFormValidation = (spotData) => {
   }
   if (isEmpty(coordinates.lng.toString())) {
     errors.coordinates = 'Coordinates are required';
+  }
+
+  let isValid = true;
+  if (Object.keys(errors).length > 0) {
+    isValid = false;
+  }
+
+  return { errors, isValid };
+};
+
+export const signInFormValidation = (signInData) => {
+  const { email, password } = signInData;
+
+  const errors = {};
+
+  if (isEmpty(email)) {
+    errors.email = 'Email is required';
+  }
+  if (!isEmpty(email)) {
+    if (!isEmail(email)) {
+      errors.email = 'Email is invalid';
+    }
+  }
+
+  if (isEmpty(password)) {
+    errors.password = 'Password is required';
   }
 
   let isValid = true;

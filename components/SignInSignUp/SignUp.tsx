@@ -1,6 +1,8 @@
 import Button from 'elements/Button';
+import Heading5 from 'elements/typography/Heading5';
 import Input from 'elements/Input';
 import { formContainerStyle } from 'shared/styles/forms';
+import { ITEM_SPACE } from 'shared/styles/spacing';
 import { useState } from 'react';
 
 interface Params {
@@ -31,6 +33,8 @@ const SignUp = ({ onSignUp }: Params) => {
 
   return (
     <div className={formContainerStyle()}>
+      <Heading5>Create a new account</Heading5>
+
       <Input
         id="firstName"
         value={userData.firstName}
@@ -38,6 +42,7 @@ const SignUp = ({ onSignUp }: Params) => {
         error={errors.firstName}
         label="First Name"
         placeholder="Enter your first name"
+        styles={`${ITEM_SPACE}`}
       />
 
       <Input

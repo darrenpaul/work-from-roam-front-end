@@ -9,8 +9,8 @@ import LabelWithIcon from 'elements/LabelWithIcon';
 import LinkWithIcon from 'elements/LinkWithIcon';
 import Paragraph from 'elements/typography/Paragraphy';
 import PhoneIcon from 'assets/icons/Phone';
-import { cleanUrl } from 'utils/url';
 import { dayNames } from 'utils/dateUtils';
+import { ITEM_SPACE } from 'shared/styles/spacing';
 import { spotDetailContainerStyle } from './styles';
 
 const SpotDetailPanel = ({
@@ -24,7 +24,7 @@ const SpotDetailPanel = ({
   phoneNumber,
   operatingHours,
   amenities,
-  handleApproval
+  handleApproval,
 }) => {
   const operatingTime = (day) => {
     const openTime = operatingHours[day].openTime;
@@ -40,27 +40,27 @@ const SpotDetailPanel = ({
     <div className={spotDetailContainerStyle()}>
       <Heading3>{name}</Heading3>
 
-      <LinkWithIcon styles="mt-4" icon={GlobeIcon} url={website}></LinkWithIcon>
+      <LinkWithIcon styles={`${ITEM_SPACE}`} icon={GlobeIcon} url={website}></LinkWithIcon>
 
       <AddressContainer
         address={address}
         city={city}
         zipCode={zipCode}
         country={country}
-        styles="mt-4"
+        styles={`${ITEM_SPACE}`}
       />
 
       {email && <LabelWithIcon icon={EnvelopeIcon}>{email}</LabelWithIcon>}
 
       {phoneNumber && (
-        <LabelWithIcon styles="mt-4" icon={PhoneIcon}>
+        <LabelWithIcon styles={`${ITEM_SPACE}`} icon={PhoneIcon}>
           {phoneNumber}
         </LabelWithIcon>
       )}
 
       <AmenityList amenities={amenities} />
 
-      <Heading5 styles="mt-4">Operating Hours</Heading5>
+      <Heading5 styles={`${ITEM_SPACE}`}>Operating Hours</Heading5>
       {dayNames.map(({ nice, key }) => (
         <div key={key}>
           <Paragraph>{nice}</Paragraph>

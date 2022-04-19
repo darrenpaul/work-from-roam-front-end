@@ -2,9 +2,9 @@ export const humanError = (errorCode: string) => {
   switch (errorCode) {
     case 'auth/invalid-email':
       return 'Invalid email address';
-      break;
-
+    case 'auth/wrong-password':
+      return 'Incorrect password';
     default:
-      break;
+      return errorCode;
   }
 };

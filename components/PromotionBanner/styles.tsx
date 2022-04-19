@@ -1,5 +1,5 @@
-export const mainContainerStyle = () => {
-  const base = ['w-full h-96 bg-red-400'];
+export const mainContainerStyle = (styles) => {
+  const base = ['w-full h-96', styles];
   return base.join(' ');
 };
 
@@ -19,9 +19,9 @@ export const contentContainerStyle = () => {
     'top-0 left-0',
     'z-10',
     'flex flex-col justify-center',
-    'w-1/2 h-full',
+    'w-full md:w-1/2 h-full',
     'p-16',
-    'text-left'
+    'text-left',
   ];
   return base.join(' ');
 };

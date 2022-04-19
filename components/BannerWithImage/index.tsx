@@ -2,6 +2,7 @@ import Button from 'elements/Button';
 import Heading3 from 'elements/typography/Heading3';
 import Image from 'next/image';
 import Paragraph from 'elements/typography/Paragraphy';
+import { ITEM_SPACE } from 'shared/styles/spacing';
 import {
   contentContainerStyle,
   contentWrapperContainerStyle,
@@ -17,7 +18,6 @@ interface Params {
   buttonText?: string;
   buttonOnClick?: Function;
 }
-
 const BannerWithImage = ({
   srcImage,
   altText,
@@ -35,9 +35,9 @@ const BannerWithImage = ({
       <div className={contentWrapperContainerStyle()}>
         <div className={contentContainerStyle()}>
           <Heading3>{title}</Heading3>
-          <Paragraph styles="mt-4">{description}</Paragraph>
+          <Paragraph styles={`${ITEM_SPACE}`}>{description}</Paragraph>
           {buttonText && (
-            <Button styles="mt-4" onClick={buttonOnClick}>
+            <Button styles={`${ITEM_SPACE}`} onClick={buttonOnClick}>
               {buttonText}
             </Button>
           )}

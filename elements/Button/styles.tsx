@@ -1,6 +1,6 @@
 export const buttonStyle = (
   variant: { normal: string; hover: string; text: string },
-  styles: string
+  styles: string,
 ) => {
   const base = [
     'text-center',
@@ -10,9 +10,8 @@ export const buttonStyle = (
     'px-4 py-2',
     'rounded',
     'break-normal',
-    'grow',
     'ease-in duration-300',
-    'w-full'
+    'w-full',
   ];
 
   return [...base, styles].join(' ');

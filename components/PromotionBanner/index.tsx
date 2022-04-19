@@ -2,6 +2,7 @@ import Button from 'elements/Button';
 import Heading3 from 'elements/typography/Heading3';
 import Image from 'next/image';
 import Paragraph from 'elements/typography/Paragraphy';
+import { ITEM_SPACE } from 'shared/styles/spacing';
 import {
   contentContainerStyle,
   contentWrapperContainerStyle,
@@ -25,9 +26,10 @@ const PromotionBanner = ({
   description = '',
   buttonText,
   buttonOnClick = () => {},
+  styles = '',
 }: Params) => {
   return (
-    <section className={mainContainerStyle()}>
+    <section className={mainContainerStyle(styles)}>
       <div className={imageContainerStyle()}>
         <Image src={srcImage} alt={altText} layout="fill" objectFit="cover" />
       </div>
@@ -35,11 +37,11 @@ const PromotionBanner = ({
       <div className={contentWrapperContainerStyle()}>
         <div className={contentContainerStyle()}>
           <Heading3 color="text-zinc-50">{title}</Heading3>
-          <Paragraph color="text-zinc-200" styles="mt-4">
+          <Paragraph color="text-zinc-200" styles={`${ITEM_SPACE}`}>
             {description}
           </Paragraph>
           {buttonText && (
-            <Button styles="mt-4" onClick={buttonOnClick}>
+            <Button styles={`${ITEM_SPACE}`} onClick={buttonOnClick}>
               {buttonText}
             </Button>
           )}

@@ -11,59 +11,59 @@ export const BASE_AMENITIES = () => {
     wifi: {
       available: false,
       option: '',
-      cost: ''
+      cost: '',
     },
     plugPoints: {
       available: false,
       option: '',
-      cost: ''
+      cost: '',
     },
     petFriendly: {
       available: false,
       option: '',
-      cost: ''
+      cost: '',
     },
     parking: {
       available: false,
       option: '',
-      cost: ''
+      cost: '',
     },
     wheelChairAccessible: {
       available: false,
       option: '',
-      cost: ''
-    }
+      cost: '',
+    },
   };
 };
 
 const BASE_TIME = {
   openTime: '09:00',
   closeTime: '17:00',
-  open: true
+  open: true,
 };
 
 export const BASE_OPERATING_HOURS = {
   monday: {
-    ...BASE_TIME
+    ...BASE_TIME,
   },
   tuesday: {
-    ...BASE_TIME
+    ...BASE_TIME,
   },
   wednesday: {
-    ...BASE_TIME
+    ...BASE_TIME,
   },
   thursday: {
-    ...BASE_TIME
+    ...BASE_TIME,
   },
   friday: {
-    ...BASE_TIME
+    ...BASE_TIME,
   },
   saturday: {
-    ...BASE_TIME
+    ...BASE_TIME,
   },
   sunday: {
-    ...BASE_TIME
-  }
+    ...BASE_TIME,
+  },
 };
 
 export const batchAdd = (accessToken) => {
@@ -78,7 +78,7 @@ export const batchAdd = (accessToken) => {
       geometry,
       place_id,
       website,
-      opening_hours
+      opening_hours,
     } = place;
 
     if (
@@ -169,7 +169,7 @@ export const batchAdd = (accessToken) => {
           website: website,
           operatingHours,
           phoneNumber,
-          phoneCode
+          phoneCode,
         };
         if (name.toLowerCase().includes('the scrub')) {
           console.log(newData);

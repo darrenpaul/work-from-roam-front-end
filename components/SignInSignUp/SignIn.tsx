@@ -1,7 +1,10 @@
+import Button from 'elements/Button';
+import Heading5 from 'elements/typography/Heading5';
 import Input from 'elements/Input';
 import { formContainerStyle } from 'shared/styles/forms';
+import { ITEM_SPACE } from 'shared/styles/spacing';
+import { signInFormValidation } from 'utils/validation';
 import { useState } from 'react';
-import Button, from 'elements/Button';
 
 interface Params {
   onSignIn: Function;
@@ -10,15 +13,21 @@ interface Params {
 const SignIn = ({ onSignIn }: Params) => {
   const [userData, setUserData] = useState({
     email: '',
-    password: ''
+    password: '',
   });
   const [errors, setErrors] = useState({
     email: '',
-    password: ''
+    password: '',
   });
 
-  const handleSignInUser = () => {
-    onSignIn(userData);
+  const handleSignInUser = async () => {
+    const { errors, isValid } = signInFormValidation(userData);
+
+    setErrors(errors);
+
+    if (isValid) {
+      await onSignIn(userData);
+    }
   };
 
   const handleInputChange = (id: string, value: string) => {
@@ -28,6 +37,7 @@ const SignIn = ({ onSignIn }: Params) => {
 
   return (
     <div className={formContainerStyle()}>
+      <Heading5>Sign into your account</Heading5>
       <Input
         id="email"
         value={userData.email}
@@ -35,6 +45,7 @@ const SignIn = ({ onSignIn }: Params) => {
         error={errors.email}
         label="Email"
         placeholder="Enter your email"
+        styles={`${ITEM_SPACE}`}
       />
 
       <Input
@@ -47,9 +58,7 @@ const SignIn = ({ onSignIn }: Params) => {
         type="password"
       />
 
-      <Button onClick={handleSignInUser}>
-        Sign In
-      </Button>
+      <Button onClick={handleSignInUser}>Sign In</Button>
     </div>
   );
 };

@@ -1,9 +1,9 @@
-import useFirebaseAuth from '../hooks/useUser';
+import useFirebaseAuth from 'hooks/useUser';
 import { createContext, useContext } from 'react';
 
 const authUserContext = createContext({
   authUser: null,
-  loading: true
+  loading: true,
 });
 
 export function AuthUserProvider({ children }: any) {

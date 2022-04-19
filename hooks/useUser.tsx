@@ -38,12 +38,13 @@ export default function useFirebaseAuth() {
         const response = await getUser(accessToken);
         const user = formatUserObject(response, accessToken);
         setAuthUser(user);
+        setLoading(false);
       } catch (error) {
         console.log(error);
         setAuthUser(null);
+        setLoading(false);
       }
     }
-    setLoading(false);
   };
 
   useEffect(() => {

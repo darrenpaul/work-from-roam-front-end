@@ -7,8 +7,8 @@ import {
   inputStyle,
   labelContainersStyle,
   labelStyle,
-  requiredSymbolStyle
-  } from './styles';
+  requiredSymbolStyle,
+} from './styles';
 
 interface InputParams {
   id: string;
@@ -24,6 +24,7 @@ interface InputParams {
   onFocusFn?: Function;
   onBlurFn?: Function;
   phoneCode?: string;
+  styles?: string;
 }
 
 const Input = ({
@@ -39,7 +40,8 @@ const Input = ({
   nextInput,
   type = 'text',
   onFocusFn = () => {},
-  onBlurFn = () => {}
+  onBlurFn = () => {},
+  styles = '',
 }: InputParams) => {
   const handleInputChange = (id, value) => {
     inputChange(id, value);
@@ -50,7 +52,7 @@ const Input = ({
   };
 
   return (
-    <div className={inputContainerStyle()}>
+    <div className={inputContainerStyle(styles)}>
       {label && <label className={labelStyle()}>{labelText()}</label>}
 
       <div className={inputInnerContainerStyle()}>

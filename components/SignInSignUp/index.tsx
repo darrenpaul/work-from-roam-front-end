@@ -5,6 +5,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import useShowModal from 'hooks/useModal';
 import { doSignInUser, doSignUpUser } from 'services/user';
+import { errorNotification } from 'utils/notifications';
 import { getCopy } from 'utils/copyReader';
 import { humanError } from 'utils/errors';
 import { useEffect, useState } from 'react';
@@ -67,6 +68,7 @@ const SignUpSignIn = () => {
 
   const handleSignUp = async (userData) => {
     setLoading(true);
+
     try {
       await doSignUpUser(userData);
     } catch (error) {
@@ -78,12 +80,14 @@ const SignUpSignIn = () => {
   const handleSignIn = async (userData) => {
     setLoading(true);
     const { email, password } = userData;
+
     try {
       await doSignInUser(email, password);
+      setLoading(false);
     } catch (error) {
-      humanError(error.code);
+      errorNotification(humanError(error.code));
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
