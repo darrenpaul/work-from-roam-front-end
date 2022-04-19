@@ -1,15 +1,32 @@
 export const modalContainerStyle = () => {
-  return 'w-screen h-screen z-50 fixed top-0 left-0 pointer-events-none';
+  const base = ['w-screen h-screen', 'z-50', 'fixed', 'top-0 left-0', 'pointer-events-none'];
+  return base.join(' ');
 };
 
 export const modalBackdropStyle = () => {
-  return 'backdrop-brightness-50 backdrop-blur backdrop-contrast-50 w-screen h-screen fixed top-0 left-0 pointer-events-auto';
+  const base = [
+    'backdrop-brightness-50 backdrop-blur backdrop-contrast-50',
+    'w-screen h-screen',
+    'fixed',
+    'top-0 left-0',
+    'pointer-events-auto'
+  ];
+  return base.join(' ');
 };
 
 export const modalContentWrapperStyle = () => {
-  return 'fixed w-screen h-screen top-0 left-0 relative flex flex-col justify-center items-center pointer-events-none';
+  const base = [
+    'relative',
+    'flex flex-col justify-center items-center',
+    'w-screen h-screen',
+    'top-0 left-0',
+    'fixed',
+    'pointer-events-none'
+  ];
+  return base.join(' ');
 };
 
 export const modalContentContainerStyle = () => {
-  return 'bg-red-400 p-4 pointer-events-auto';
+  const base = ['bg-form', 'p-4', 'rounded', 'pointer-events-auto'];
+  return base.join(' ');
 };

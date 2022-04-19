@@ -1,4 +1,4 @@
-import Heading3 from 'elements/typography/Heading3';
+import Heading5 from 'elements/typography/Heading5';
 import Link from 'next/link';
 import Paragraph from 'elements/typography/Paragraphy';
 import { getAmenityIcon } from 'utils/amenity';
@@ -25,7 +25,7 @@ const SpotDetail = ({ spot, onClick }) => {
   return (
     <div onClick={onClick} className={spotDetailOverlayContainerStyle()}>
       <div className={spotDetailContainerStyle()}>
-        <Heading3>{name}</Heading3>
+        <Heading5>{name}</Heading5>
         <Paragraph>{description}</Paragraph>
         <div className={spotAmenitiesContainerStyle()}>
           {amenityKeys.map((amenity, index) => (

@@ -1,37 +1,30 @@
 import Button from '../../elements/Button';
+import Heading5 from 'elements/typography/Heading5';
 import Input from '../../elements/Input';
+import Modal from 'containers/Modal';
 import Selector from '../../elements/Selector';
-import styled from 'styled-components';
-import { generateHours, generateMinutes } from '../../utils/dateUtils';
+import useShowModal from 'hooks/useModal';
+import {
+  floatingWindowContainerStyle,
+  inputContainerStyle,
+  selectorContainerStyle,
+  timeSelectorContainerStyle
+  } from './styles';
+import { generateHours, generateMinutes, splitTime } from '../../utils/dateUtils';
 import { useState } from 'react';
 
-const Container = styled.div`
-  display: flex;
-`;
-const FloatingWindow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  background: red;
-  left: 0;
-  top: 0;
-  z-index: 100;
-`;
 const hours = generateHours();
 const minutes = generateMinutes();
 
-const TimeSelector = ({ onChange, id, hour, minute }) => {
-  const [selectorState, setSelectorState] = useState(false);
+const TimeSelector = ({ onChange, id, time }) => {
+  const { showModal, handleShowModal, handleCloseModal } = useShowModal();
 
   const showSelector = () => {
-    setSelectorState(true);
+    handleShowModal();
   };
 
   const hideSelector = () => {
-    setSelectorState(false);
+    handleCloseModal();
   };
 
   const handleChange = (selectorId, value) => {
@@ -39,38 +32,41 @@ const TimeSelector = ({ onChange, id, hour, minute }) => {
   };
 
   return (
-    <Container>
+    <div className={timeSelectorContainerStyle()}>
       <Input
         id={'mondayOpening'}
         placeholder={'Opening'}
-        value={`${hour}:${minute}`}
+        value={time}
         error={''}
         inputChange={() => {}}
         onFocusFn={showSelector}
       />
-      {selectorState && (
-        <div
-          style={{
-            width: '100vw',
-            height: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          <FloatingWindow>
-            <Selector id={'hour'} options={hours} onChange={handleChange} initialValue={hour} />
-            <Selector
-              id={'minute'}
-              options={minutes}
-              onChange={handleChange}
-              initialValue={minute}
-            />
+      <Modal showState={showModal} handleClose={handleCloseModal}>
+        <div className={floatingWindowContainerStyle()}>
+          <div className={inputContainerStyle()}>
+            <Heading5>Select time</Heading5>
+
+            <div className={selectorContainerStyle()}>
+              <Selector
+                id={'hour'}
+                options={hours}
+                onChange={handleChange}
+                initialValue={splitTime(time).hour}
+              />
+
+              <Selector
+                id={'minute'}
+                options={minutes}
+                onChange={handleChange}
+                initialValue={splitTime(time).minute}
+              />
+            </div>
+
             <Button onClick={hideSelector}>Save</Button>
-          </FloatingWindow>
+          </div>
         </div>
-      )}
-    </Container>
+      </Modal>
+    </div>
   );
 };
 

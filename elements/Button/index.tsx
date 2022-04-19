@@ -3,13 +3,26 @@ import { buttonStyle } from './styles';
 interface Params {
   children: React.ReactNode;
   onClick: Function;
-  variant?: { normal: string; hover: string };
+  variant?: { normal: string; hover: string; text: string };
   styles?: string;
 }
 
 export const BUTTON_VARIANTS = {
-  primary: { normal: 'bg-green-500', hover: 'bg-green-400' },
-  secondary: { normal: 'bg-blue-500', hover: 'bg-blue-400' },
+  primary: {
+    normal: 'bg-button-primary',
+    hover: 'hover:bg-button-primary-hover',
+    text: 'text-light-copy'
+  },
+  secondary: {
+    normal: 'bg-transparent',
+    hover: 'bg-transparent',
+    text: 'text-dark-copy'
+  },
+  info: {
+    normal: 'bg-transparent',
+    hover: 'bg-transparent',
+    text: 'text-dark-copy'
+  },
   warning: { normal: 'bg-red-500', hover: 'bg-red-100' }
 };
 

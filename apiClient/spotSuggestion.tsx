@@ -16,6 +16,28 @@ export const createSpotSuggestion = (accessToken: String, spotData) => {
   });
 };
 
+export const getSpotSuggestion = (accessToken: String, id: String) => {
+  const url = `${BASE_URL}/${API_VERSION}/${KEY}/${id}`;
+  return httpRequest({
+    url,
+    method: 'GET',
+
+    headers: { Authorization: `Bearer ${accessToken}` }
+  });
+};
+
+export const acceptSpotSuggestion = (accessToken: string, id: string, spotData) => {
+  const url = `${BASE_URL}/${API_VERSION}/${KEY}/accept/${id}`;
+  return httpRequest({
+    url,
+    method: 'POST',
+    data: {
+      ...spotData
+    },
+    headers: { Authorization: `Bearer ${accessToken}` }
+  });
+};
+
 // export const getSpot = (accessToken: String, id: String) => {
 //   const url = `${BASE_URL}/${API_VERSION}/${KEY}/${id}`;
 //   return httpRequest({
@@ -26,12 +48,12 @@ export const createSpotSuggestion = (accessToken: String, spotData) => {
 //   });
 // };
 
-// export const getSpots = (accessToken: String) => {
-//   const url = `${BASE_URL}/${API_VERSION}/${KEY}/all`;
-//   return httpRequest({
-//     url,
-//     method: 'GET',
+export const getSpotsSuggestions = (accessToken: String) => {
+  const url = `${BASE_URL}/${API_VERSION}/${KEY}/all`;
+  return httpRequest({
+    url,
+    method: 'GET',
 
-//     headers: { Authorization: `Bearer ${accessToken}` }
-//   });
-// };
+    headers: { Authorization: `Bearer ${accessToken}` }
+  });
+};

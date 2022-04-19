@@ -28,3 +28,8 @@ export const formatTimeObject = (timeObject: { hour: string; minute: string }) =
   const { hour, minute } = timeObject;
   return `${hour}:${minute}`;
 };
+
+export const splitTime = (time) => {
+  const [hour, minute] = time.split(':');
+  return { hour, minute };
+};

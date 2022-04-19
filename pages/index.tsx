@@ -42,6 +42,7 @@ const Home = ({ authUser }: AuthUserType) => {
         srcImage={getCopy(`${contentB}:imageSrc`)}
         altText={getCopy(`${contentB}:imageAlt`)}
         reverse={true}
+        styles="mt-4 md:mt-0"
       />
 
       {!isLoggedIn && (

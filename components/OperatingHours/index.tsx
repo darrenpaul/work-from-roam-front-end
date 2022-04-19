@@ -1,61 +1,46 @@
-import Flex from 'containers/Flex';
 import Heading6 from 'elements/typography/Heading6';
-import styled from 'styled-components';
 import SwitchButton from 'elements/SwitchButton';
 import TimeSelector from 'components/TimeSelector';
-import { dayNames } from 'utils/dateUtils';
+import { dayNames, splitTime } from 'utils/dateUtils';
+import { operatingHourContainerStyle, operatingHoursContainerStyle } from './styles';
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  align-items: center;
-`;
-
-const OperatingHours = ({ initialData, onChange }) => {
+const OperatingHours = ({ data, onChange }) => {
   const handleIsOpenChange = (id, value) => {
     onChange(id, { open: value });
   };
 
-  const handleOpenTimeChange = (id, value) => {
-    const key = 'openTime';
-    const merged = { ...initialData[id][key], ...value };
-    onChange(id, { [key]: merged });
+  const handleTimeChange = (key, id, value) => {
+    const { hour, minute } = splitTime(data[id][key]);
+    const timeObject = { hour, minute, ...value };
+    const timeString = `${timeObject.hour}:${timeObject.minute}`;
+    onChange(id, { [key]: timeString });
   };
-
-  const handleCloseTimeChange = (id, value) => {
-    const key = 'closeTime';
-    const merged = { ...initialData[id][key], ...value };
-    onChange(id, { [key]: merged });
-  };
-
   return (
-    <Flex>
+    <div className={operatingHoursContainerStyle()}>
       {dayNames.map(({ nice, key }, index) => (
-        <Grid key={index}>
+        <div className={operatingHourContainerStyle()} key={index}>
           <Heading6>{nice}</Heading6>
 
           <SwitchButton
             id={key}
             onChange={(id, value) => handleIsOpenChange(id, value)}
-            initialValue={initialData[key]}
+            initialValue={data[key].open}
           />
 
           <TimeSelector
-            onChange={handleOpenTimeChange}
+            onChange={(id, value) => handleTimeChange('openTime', id, value)}
             id={key}
-            hour={initialData[key].openTime.hour}
-            minute={initialData[key].openTime.minute}
+            time={data[key].openTime}
           />
 
           <TimeSelector
-            onChange={handleCloseTimeChange}
+            onChange={(id, value) => handleTimeChange('closeTime', id, value)}
             id={key}
-            hour={initialData[key].closeTime.hour}
-            minute={initialData[key].closeTime.minute}
+            time={data[key].closeTime}
           />
-        </Grid>
+        </div>
       ))}
-    </Flex>
+    </div>
   );
 };
 

@@ -1,11 +1,11 @@
 import Loader from 'react-spinners/PuffLoader';
-import { loaderContainerStyle } from './styles';
+import { LOADER_COLOR, pageLoaderContainerStyle } from './styles';
 import { Params } from './params';
 
 const PageLoader = ({ loading }: Params) => {
   return (
-    <div className={loaderContainerStyle()}>
-      <Loader loading={loading} size={150} />
+    <div className={pageLoaderContainerStyle()}>
+      <Loader color={LOADER_COLOR} loading={loading} size={150} />
     </div>
   );
 };

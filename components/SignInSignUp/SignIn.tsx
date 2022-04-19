@@ -1,6 +1,7 @@
-import Button from 'elements/Button';
 import Input from 'elements/Input';
+import { formContainerStyle } from 'shared/styles/forms';
 import { useState } from 'react';
+import Button, from 'elements/Button';
 
 interface Params {
   onSignIn: Function;
@@ -8,8 +9,8 @@ interface Params {
 
 const SignIn = ({ onSignIn }: Params) => {
   const [userData, setUserData] = useState({
-    email: 'drobertpaul@gmail.com',
-    password: '@Apples10'
+    email: '',
+    password: ''
   });
   const [errors, setErrors] = useState({
     email: '',
@@ -26,25 +27,29 @@ const SignIn = ({ onSignIn }: Params) => {
   };
 
   return (
-    <div>
+    <div className={formContainerStyle()}>
       <Input
-        id={'email'}
+        id="email"
         value={userData.email}
         inputChange={handleInputChange}
         error={errors.email}
-        placeholder={'Email'}
+        label="Email"
+        placeholder="Enter your email"
       />
 
       <Input
-        id={'password'}
+        id="password"
         value={userData.password}
         inputChange={handleInputChange}
         error={errors.password}
-        placeholder={'Password'}
-        type={'password'}
+        label="Password"
+        placeholder="Enter your password"
+        type="password"
       />
 
-      <Button onClick={handleSignInUser}>Sign In</Button>
+      <Button onClick={handleSignInUser}>
+        Sign In
+      </Button>
     </div>
   );
 };

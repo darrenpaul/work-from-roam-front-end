@@ -1,5 +1,5 @@
 import Select from 'react-select';
-import { useState } from 'react';
+import { selectorStyle } from './styles';
 
 interface Params {
   id: String;
@@ -9,7 +9,7 @@ interface Params {
   initialValue: { value: string; label: string };
 }
 
-const Selector = ({ id, options, onChange, value, initialValue }: Params) => {
+const Selector = ({ id, options, onChange, value, initialValue, styles }: Params) => {
   const formatOptions = () => {
     return options.map((option) => ({
       value: option,
@@ -23,6 +23,7 @@ const Selector = ({ id, options, onChange, value, initialValue }: Params) => {
 
   return (
     <Select
+      className={selectorStyle(styles)}
       value={value}
       onChange={handleChange}
       options={formatOptions()}

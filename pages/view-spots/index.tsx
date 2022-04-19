@@ -1,5 +1,5 @@
 import PageWrapper from 'containers/PageWrapper';
-import Spots from 'components/Spots';
+import Spots from 'components/Spots/Spots';
 import { AuthUserType } from 'types/user';
 
 const ViewSpotsPage = ({ authUser }: AuthUserType) => {

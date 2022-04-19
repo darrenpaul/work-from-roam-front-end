@@ -5,6 +5,9 @@ export interface SpotType {
   phoneCode: string;
   coordinates: { lat: string; lng: string };
   address: string;
+  city: string;
+  zipCode: string;
+  country: string;
   amenities: Array<string>;
   website: string;
   operatingHours: {

@@ -3,6 +3,7 @@ import Map from 'components/Map';
 import MarkerCoffee from 'components/Map/markers/MarkerCoffee';
 import Paragraph from 'elements/typography/Paragraphy';
 import SpotDetail from 'components/Map/overlays/SpotDetail';
+import SpotDetailPanel from 'components/SpotDetailPanel';
 import { dayNames, formatTimeObject } from 'utils/dateUtils';
 import { getSpots } from 'apiClient/spot';
 import { spotDetailContainerStyle, spotsContainerStyle } from './styles';
@@ -11,6 +12,7 @@ import { useEffect, useState } from 'react';
 const Spots = ({ accessToken }) => {
   const [spots, setSpots] = useState([]);
   const [selectedSpot, setSelectedSpot] = useState();
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
     if (spots.length === 0) {
@@ -28,8 +30,8 @@ const Spots = ({ accessToken }) => {
 
   const operatingTime = (day) => {
     const { operatingHours } = selectedSpot;
-    const openTime = formatTimeObject(operatingHours[day].openTime);
-    const closeTime = formatTimeObject(operatingHours[day].closeTime);
+    const openTime = operatingHours[day].openTime;
+    const closeTime = operatingHours[day].closeTime;
     const isOpen = operatingHours[day].open;
     if (isOpen === false) {
       return 'Closed';
@@ -43,6 +45,9 @@ const Spots = ({ accessToken }) => {
         fullHeight={true}
         onMapClick={() => setSelectedSpot(null)}
         onChildClick={handleSelectSpot}
+        onMapLoaded={(mapLoaded) => {
+          setMapLoaded(mapLoaded);
+        }}
       >
         {spots.map((spot) => (
           <MarkerCoffee
@@ -64,22 +69,7 @@ const Spots = ({ accessToken }) => {
         )}
       </Map>
 
-      {selectedSpot && (
-        <div className={spotDetailContainerStyle()}>
-          <Heading3>{selectedSpot?.name}</Heading3>
-          <Paragraph>{selectedSpot?.website}</Paragraph>
-          <Paragraph>{selectedSpot?.address}</Paragraph>
-          <Paragraph>{selectedSpot?.email}</Paragraph>
-          <Paragraph>{selectedSpot?.phoneNumber}</Paragraph>
-
-          {dayNames.map(({ nice, key }) => (
-            <div key={key}>
-              <Paragraph>{nice}</Paragraph>
-              <Paragraph>{operatingTime(key)}</Paragraph>
-            </div>
-          ))}
-        </div>
-      )}
+      {selectedSpot && <SpotDetailPanel {...selectedSpot} />}
     </div>
   );
 };

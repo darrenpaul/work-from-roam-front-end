@@ -1,5 +1,6 @@
 import Button from 'elements/Button';
 import Input from 'elements/Input';
+import { formContainerStyle } from 'shared/styles/forms';
 import { useState } from 'react';
 
 interface Params {
@@ -8,10 +9,10 @@ interface Params {
 
 const SignUp = ({ onSignUp }: Params) => {
   const [userData, setUserData] = useState({
-    firstName: 'darren',
-    lastName: 'paul',
-    email: 'pears@gmail.com',
-    password: '@Apples10'
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
   });
   const [errors, setErrors] = useState({
     firstName: '',
@@ -29,38 +30,42 @@ const SignUp = ({ onSignUp }: Params) => {
   };
 
   return (
-    <div>
+    <div className={formContainerStyle()}>
       <Input
-        id={'firstName'}
+        id="firstName"
         value={userData.firstName}
         inputChange={handleInputChange}
         error={errors.firstName}
-        placeholder={'First Name'}
+        label="First Name"
+        placeholder="Enter your first name"
       />
 
       <Input
-        id={'lastName'}
+        id="lastName"
         value={userData.lastName}
         inputChange={handleInputChange}
         error={errors.lastName}
-        placeholder={'Last Name'}
+        label="Last Name"
+        placeholder="Enter your last name"
       />
 
       <Input
-        id={'email'}
+        id="email"
         value={userData.email}
         inputChange={handleInputChange}
         error={errors.email}
-        placeholder={'Email'}
+        label="Email"
+        placeholder="Enter your email"
       />
 
       <Input
-        id={'password'}
+        id="password"
         value={userData.password}
         inputChange={handleInputChange}
         error={errors.password}
-        placeholder={'Password'}
-        type={'password'}
+        label="Password"
+        placeholder="Enter your password"
+        type="password"
       />
 
       <Button onClick={handleSignUpUser}>Sign Up</Button>

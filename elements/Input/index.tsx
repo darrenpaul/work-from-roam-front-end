@@ -1,7 +1,14 @@
 import Selector from 'elements/Selector';
 import { callCodes } from 'utils/countryCodes';
-import { inputContainerStyle, inputErrorStyle, inputStyle } from './styles';
-import { useEffect } from 'react';
+import {
+  inputContainerStyle,
+  inputErrorStyle,
+  inputInnerContainerStyle,
+  inputStyle,
+  labelContainersStyle,
+  labelStyle,
+  requiredSymbolStyle
+  } from './styles';
 
 interface InputParams {
   id: string;
@@ -9,6 +16,8 @@ interface InputParams {
   inputChange: Function;
   error: string;
   name?: string;
+  label?: string;
+  required?: boolean;
   placeholder?: string;
   nextInput?: string;
   type?: string;
@@ -20,6 +29,8 @@ interface InputParams {
 const Input = ({
   id,
   name,
+  label,
+  required,
   placeholder,
   value,
   phoneCode,
@@ -34,28 +45,36 @@ const Input = ({
     inputChange(id, value);
   };
 
+  const labelText = () => {
+    return `${label}${required ? ' *' : ''}`;
+  };
+
   return (
     <div className={inputContainerStyle()}>
-      {type === 'telephone' && (
-        <Selector
-          id={'phoneCode'}
-          options={callCodes()}
-          onChange={handleInputChange}
-          initialValue={phoneCode}
-        />
-      )}
+      {label && <label className={labelStyle()}>{labelText()}</label>}
 
-      <input
-        className={inputStyle()}
-        id={id}
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        onChange={(event) => handleInputChange(id, event.target.value)}
-        type={type}
-        onFocus={() => onFocusFn()}
-        onBlur={() => onBlurFn()}
-      />
+      <div className={inputInnerContainerStyle()}>
+        {type === 'telephone' && (
+          <Selector
+            id={'phoneCode'}
+            options={callCodes()}
+            onChange={handleInputChange}
+            initialValue={phoneCode}
+          />
+        )}
+        <input
+          className={inputStyle()}
+          id={id}
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          onChange={(event) => handleInputChange(id, event.target.value)}
+          type={type}
+          onFocus={() => onFocusFn()}
+          onBlur={() => onBlurFn()}
+        />
+      </div>
+
       <small className={inputErrorStyle()}>{error}</small>
     </div>
   );

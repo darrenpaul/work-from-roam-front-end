@@ -1,6 +1,12 @@
 import Selector from 'elements/Selector';
 import { AMENITIES, getAmenityIcon } from 'utils/amenity';
-import { amenityButtonStyle, amenityContainerStyle, amenityListContainerStyle } from './styles';
+import {
+  amenityButtonStyle,
+  amenityContainerStyle,
+  amenityListContainerStyle,
+  amenitySelectorContainerStyle
+  } from './styles';
+import { LIGHT_COPY } from 'shared/styles/colors';
 import { useState } from 'react';
 
 interface Params {
@@ -56,11 +62,11 @@ const Amenities = ({ initialData, onChange }: Params) => {
             }
             value={amenity.name}
           >
-            {getAmenityIcon(amenity.key)}
+            {getAmenityIcon(amenity.key, amenities[amenity.key].available && LIGHT_COPY)}
           </button>
 
           {amenity.options.length > 0 && amenities[amenity.key].available && (
-            <>
+            <div className={amenitySelectorContainerStyle()}>
               <Selector
                 id={amenity.key}
                 options={amenity.options}
@@ -74,7 +80,7 @@ const Amenities = ({ initialData, onChange }: Params) => {
                 initialValue={amenities[amenity.key].cost}
                 onChange={(id: string, cost: string) => handleInputChange(id, { cost })}
               />
-            </>
+            </div>
           )}
         </div>
       ))}

@@ -1,4 +1,5 @@
 import {
+  approveSpot,
   createSpot,
   getPendingSpots,
   getSpot,
@@ -38,4 +39,9 @@ export const doGetPendingSpots = (accessToken: String) => {
     .catch((error) => {
       console.log(error);
     });
+};
+
+export const doSpotApprove = async (accessToken: String, id: String) => {
+  const response = await approveSpot(accessToken, id);
+  return response;
 };

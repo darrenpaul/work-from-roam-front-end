@@ -1,14 +1,19 @@
-export const buttonStyle = (variant: { normal: string; hover: string }, styles: string) => {
+export const buttonStyle = (
+  variant: { normal: string; hover: string; text: string },
+  styles: string
+) => {
   const base = [
-    'w-max',
     'text-center',
-    'text-white',
     variant.normal,
+    variant.hover,
+    variant.text,
     'px-4 py-2',
     'rounded',
-    'break-normal'
+    'break-normal',
+    'grow',
+    'ease-in duration-300',
+    'w-full'
   ];
-  const effects = [`hover:${variant.hover}`];
 
-  return [...base, ...effects, styles].join(' ');
+  return [...base, styles].join(' ');
 };

@@ -1,5 +1,5 @@
 import GoogleMap from 'google-map-react';
-import PageLoader from 'elements/Loaders/PageLoader';
+import MapLoader from 'elements/Loaders/MapLoader';
 import { mapContainerWrapperStyle } from './styles';
 import { ReactNode, useEffect, useState } from 'react';
 
@@ -10,10 +10,18 @@ interface Params {
   fullHeight: boolean;
   onMapClick: Function;
   onChildClick: Function;
+  onMapLoaded: Function;
   children: ReactNode;
 }
 
-const Map = ({ initialCenter, fullHeight, onMapClick, onChildClick, children }: Params) => {
+const Map = ({
+  initialCenter,
+  fullHeight,
+  onMapClick,
+  onChildClick,
+  onMapLoaded,
+  children
+}: Params) => {
   const [center, setCenter] = useState(initialCenter || null);
   const [zoom, setZoom] = useState(18);
   const [mapLoading, setMapLoading] = useState(true);
@@ -33,6 +41,7 @@ const Map = ({ initialCenter, fullHeight, onMapClick, onChildClick, children }: 
 
   const handleApiLoaded = () => {
     setMapLoading(false);
+    onMapLoaded(true);
   };
 
   const handleOnMapClick = (event: any) => {
@@ -46,7 +55,7 @@ const Map = ({ initialCenter, fullHeight, onMapClick, onChildClick, children }: 
 
   return (
     <div className={mapContainerWrapperStyle(fullHeight)}>
-      {mapLoading && <PageLoader loading={mapLoading} />}
+      {mapLoading && <MapLoader loading={mapLoading} />}
 
       {center && (
         <GoogleMap

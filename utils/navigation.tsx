@@ -23,6 +23,8 @@ export const NAVIGATION_ROUTES = [
   },
   {
     href: '/admin',
-    text: 'Admin'
+    text: 'Admin',
+    protected: true,
+    admin: true
   }
 ];

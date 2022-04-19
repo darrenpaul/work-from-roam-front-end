@@ -16,6 +16,15 @@ export const createSpot = (accessToken: String, spotData) => {
   });
 };
 
+export const approveSpot = (accessToken: String, id: String) => {
+  const url = `${BASE_URL}/${API_VERSION}/${KEY}/approve/${id}`;
+  return httpRequest({
+    url,
+    method: 'POST',
+    headers: { Authorization: `Bearer ${accessToken}` }
+  });
+};
+
 export const getSpot = (accessToken: String, id: String) => {
   const url = `${BASE_URL}/${API_VERSION}/${KEY}/${id}`;
   return httpRequest({

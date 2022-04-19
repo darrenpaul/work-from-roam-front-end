@@ -1,4 +1,4 @@
-import Button from 'elements/Button';
+import Button, { BUTTON_VARIANTS } from 'elements/Button';
 import FormLoader from 'elements/Loaders/FormLoader';
 import Modal from 'containers/Modal';
 import SignIn from './SignIn';
@@ -92,7 +92,8 @@ const SignUpSignIn = () => {
       ) : (
         <Modal showState={showModal} handleClose={onModalClose}>
           {showSignUp ? <SignUp onSignUp={handleSignUp} /> : <SignIn onSignIn={handleSignIn} />}
-          <Button onClick={handleFormToggle}>
+
+          <Button onClick={handleFormToggle} variant={BUTTON_VARIANTS.info}>
             {showSignUp ? haveAccountText : needAccountText}
           </Button>
         </Modal>

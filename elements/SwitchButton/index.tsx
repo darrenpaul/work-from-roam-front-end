@@ -1,5 +1,4 @@
 import { Switch } from './styles';
-import { useState } from 'react';
 
 interface Params {
   id: string;

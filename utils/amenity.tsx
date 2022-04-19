@@ -4,6 +4,8 @@ import PlugIcon from 'assets/icons/Plug';
 import WheelChairIcon from 'assets/icons/WheelChair';
 import WifiIcon from 'assets/icons/Wifi';
 
+export const missingData = 'Unknown';
+
 const WIFI_OPTIONS = [
   'Up to 1mbps',
   'Up to 5mbps',
@@ -13,9 +15,9 @@ const WIFI_OPTIONS = [
   'Up to 100mbps'
 ];
 
-const PARKING_OPTIONS = ['On street', , 'Off street'];
+const PARKING_OPTIONS = ['On street', 'Off street', 'On and Off street'];
 
-const COST_OPTIONS = ['Free', 'Paid'];
+const COST_OPTIONS = ['Free', 'Paid', 'Free and Paid'];
 
 export const AMENITIES = [
   { name: 'WiFi', key: 'wifi', options: WIFI_OPTIONS, cost: COST_OPTIONS },
@@ -30,17 +32,17 @@ export const AMENITIES = [
   }
 ];
 
-export const getAmenityIcon = (amenity: string) => {
+export const getAmenityIcon = (amenity: string, color: string) => {
   switch (amenity) {
     case 'wifi':
-      return <WifiIcon />;
+      return <WifiIcon color={color} />;
     case 'plugPoints':
-      return <PlugIcon />;
+      return <PlugIcon color={color} />;
     case 'petFriendly':
-      return <PawIcon />;
+      return <PawIcon color={color} />;
     case 'parking':
-      return <ParkingIcon />;
+      return <ParkingIcon color={color} />;
     case 'wheelChairAccessible':
-      return <WheelChairIcon />;
+      return <WheelChairIcon color={color} />;
   }
 };

@@ -37,14 +37,8 @@ export const BASE_AMENITIES = () => {
 };
 
 const BASE_TIME = {
-  openTime: {
-    hour: '09',
-    minute: '00'
-  },
-  closeTime: {
-    hour: '17',
-    minute: '00'
-  },
+  openTime: '09:00',
+  closeTime: '17:00',
   open: true
 };
 
@@ -103,15 +97,15 @@ export const batchAdd = (accessToken) => {
       if (opening_hours?.weekday_text) {
         opening_hours?.weekday_text.forEach((item) => {
           const day = item.split(':')[0].toLowerCase();
-          let openTime = { hour: '09', minute: '00' };
-          let closeTime = { hour: '17', minute: '00' };
+          let openTime = '09:00';
+          let closeTime = '17:00';
           let open = false;
           const regex = item.match(/^(.+): (\d{1,2}:\d{1,2} \w+) .+ (\d{1,2}:\d{1,2} \w+)/);
           if (regex) {
             const openObject = dayjs(regex[2], 'h:mm A').format('HH:mm').split(':');
             const closeObject = dayjs(regex[3], 'h:mm A').format('HH:mm').split(':');
-            openTime = { hour: openObject[0], minute: openObject[1] };
-            closeTime = { hour: closeObject[0], minute: closeObject[1] };
+            openTime = dayjs(regex[2], 'h:mm A').format('HH:mm');
+            closeTime = dayjs(regex[3], 'h:mm A').format('HH:mm');
             open = true;
           }
 
@@ -119,22 +113,71 @@ export const batchAdd = (accessToken) => {
         });
       }
 
-      const newData = {
-        name: name,
-        coordinates: geometry.location,
-        address: formatted_address,
-        placeId: place_id,
-        website: website,
-        operatingHours,
-        phoneNumber,
-        phoneCode
-      };
-      if (name.toLowerCase().includes('the scrub')) {
-        console.log(newData);
+      const addressPieces = formatted_address.split(',');
+      let address = addressPieces[0];
+      let city = addressPieces[1];
+      let zipCode = addressPieces[2];
+      let country = addressPieces[3];
+
+      if (addressPieces.length > 4) {
+        address = `${addressPieces[0]}, ${addressPieces[1]}`;
+        city = addressPieces[2];
+        zipCode = addressPieces[3];
+        country = addressPieces[4];
       }
-      await doCreateSpot(accessToken, newData);
-      count++;
-      console.log(count);
+
+      if (addressPieces.length > 5) {
+        address = `${addressPieces[0]}, ${addressPieces[1]}, ${addressPieces[2]}`;
+        city = addressPieces[3];
+        zipCode = addressPieces[4];
+        country = addressPieces[5];
+      }
+      if (addressPieces.length > 5) {
+        address = `${addressPieces[0]}, ${addressPieces[1]}, ${addressPieces[2]}`;
+        city = addressPieces[3];
+        zipCode = addressPieces[4];
+        country = addressPieces[5];
+      }
+      if (addressPieces.length > 6) {
+        address = `${addressPieces[0]}, ${addressPieces[1]}, ${addressPieces[2]}, ${addressPieces[3]}`;
+        city = addressPieces[4];
+        zipCode = addressPieces[5];
+        country = addressPieces[6];
+      }
+
+      if (addressPieces.length > 7) {
+        address = `${addressPieces[0]}, ${addressPieces[1]}, ${addressPieces[2]}, ${addressPieces[3]}, ${addressPieces[4]}`;
+        city = addressPieces[5];
+        zipCode = addressPieces[6];
+        country = addressPieces[7];
+      }
+
+      if (address && city && zipCode && country) {
+        address = address.trim();
+        city = city.trim();
+        zipCode = zipCode.trim();
+        country = country.trim();
+
+        const newData = {
+          name,
+          coordinates: geometry.location,
+          address,
+          city,
+          zipCode,
+          country,
+          placeId: place_id,
+          website: website,
+          operatingHours,
+          phoneNumber,
+          phoneCode
+        };
+        if (name.toLowerCase().includes('the scrub')) {
+          console.log(newData);
+        }
+        await doCreateSpot(accessToken, newData);
+        count++;
+        console.log(count);
+      }
     }
   });
 };

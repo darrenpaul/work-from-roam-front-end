@@ -1,3 +1,4 @@
 export const footerContainerStyle = () => {
-  return 'bg-blue-200 h-28';
+  const base = ['bg-footer', 'h-28', 'drop-shadow-lg'];
+  return base.join(' ');
 };
