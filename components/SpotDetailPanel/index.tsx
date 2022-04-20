@@ -40,7 +40,9 @@ const SpotDetailPanel = ({
     <div className={spotDetailContainerStyle()}>
       <Heading3>{name}</Heading3>
 
-      <LinkWithIcon styles={`${ITEM_SPACE}`} icon={GlobeIcon} url={website}></LinkWithIcon>
+      {website && (
+        <LinkWithIcon styles={`${ITEM_SPACE}`} icon={GlobeIcon} url={website}></LinkWithIcon>
+      )}
 
       <AddressContainer
         address={address}

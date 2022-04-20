@@ -145,26 +145,21 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
       <div className={spotFormInputsContainerStyle()}>
         <Heading3>Add a new spot</Heading3>
 
-        <Image Input onChange={handleImageSelect} />
-
+        <ImageInput onChange={handleImageSelect} />
         {images.map((image, index) => (
-          <Image
-            unoptimized={true}
-            key={index}
-            src={image}
-            alt="something"
-            width={160}
-            height={120}
-            layout="fixed"
-          />
+          <Image key={index} src={image} alt="something" width={160} height={120} layout="fixed" />
         ))}
 
-        <Image
-          unoptimized={true}
-          Crop
-          show={showCropper}
-          image={cropImage}
-          handleCropSave={handleCropSave}
+        <ImageCrop show={showCropper} image={cropImage} handleCropSave={handleCropSave} />
+
+        <Input
+          id="name"
+          value={spotData.name}
+          inputChange={handleInputChange}
+          error={errors.name}
+          label="Shop Name"
+          required={true}
+          placeholder="Enter shop name"
         />
 
         <Input

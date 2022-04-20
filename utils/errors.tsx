@@ -4,6 +4,8 @@ export const humanError = (errorCode: string) => {
       return 'Invalid email address';
     case 'auth/wrong-password':
       return 'Incorrect password';
+    case 'auth/user-not-found':
+      return 'Account does not exists';
     default:
       return errorCode;
   }

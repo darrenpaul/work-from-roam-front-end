@@ -103,3 +103,37 @@ export const signInFormValidation = (signInData) => {
 
   return { errors, isValid };
 };
+
+export const signUpFormValidation = (signUpData) => {
+  const { firstName, lastName, email, password } = signUpData;
+
+  const errors = {};
+
+  if (isEmpty(firstName)) {
+    errors.firstName = 'First name is required';
+  }
+
+  if (isEmpty(lastName)) {
+    errors.lastName = 'Last name is required';
+  }
+
+  if (isEmpty(email)) {
+    errors.email = 'Email is required';
+  }
+  if (!isEmpty(email)) {
+    if (!isEmail(email)) {
+      errors.email = 'Email is invalid';
+    }
+  }
+
+  if (isEmpty(password)) {
+    errors.password = 'Password is required';
+  }
+
+  let isValid = true;
+  if (Object.keys(errors).length > 0) {
+    isValid = false;
+  }
+
+  return { errors, isValid };
+};
