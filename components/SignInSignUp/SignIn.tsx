@@ -2,7 +2,6 @@ import Button from 'elements/Button';
 import Heading5 from 'elements/typography/Heading5';
 import Input from 'elements/Input';
 import { formContainerStyle } from 'shared/styles/forms';
-import { ITEM_TOP_SPACE } from 'shared/styles/spacing';
 import { signInFormValidation } from 'utils/validation';
 import { useState } from 'react';
 
@@ -45,7 +44,7 @@ const SignIn = ({ onSignIn }: Params) => {
         error={errors.email}
         label="Email"
         placeholder="Enter your email"
-        styles={`${ITEM_TOP_SPACE}`}
+        styles={'mt-item'}
       />
 
       <Input

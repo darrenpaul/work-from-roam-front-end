@@ -1,5 +1,3 @@
-import { ITEM_LEFT_SPACE } from 'shared/styles/spacing';
-
 export const amenityListContainerStyle = () => {
   const base = ['flex flex-col items-start', 'w-full'];
   return [...base].join(' ');
@@ -11,7 +9,7 @@ export const amenityContainerStyle = () => {
 };
 
 export const amenitySelectorContainerStyle = () => {
-  const base = ['grid grid-cols-2', 'items-center', ITEM_LEFT_SPACE, 'grow'];
+  const base = ['grid grid-cols-2', 'items-center', 'ml-item', 'grow'];
   return [...base].join(' ');
 };
 

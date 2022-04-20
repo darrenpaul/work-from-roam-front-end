@@ -2,7 +2,6 @@ import Button from 'elements/Button';
 import Heading3 from 'elements/typography/Heading3';
 import Image from 'next/image';
 import Paragraph from 'elements/typography/Paragraphy';
-import { ITEM_TOP_SPACE } from 'shared/styles/spacing';
 import {
   contentContainerStyle,
   contentWrapperContainerStyle,
@@ -37,11 +36,11 @@ const PromotionBanner = ({
       <div className={contentWrapperContainerStyle()}>
         <div className={contentContainerStyle()}>
           <Heading3 color="text-zinc-50">{title}</Heading3>
-          <Paragraph color="text-zinc-200" styles={`${ITEM_TOP_SPACE}`}>
+          <Paragraph color="text-zinc-200" styles={'mt-item'}>
             {description}
           </Paragraph>
           {buttonText && (
-            <Button styles={`${ITEM_TOP_SPACE}`} onClick={buttonOnClick}>
+            <Button styles={'mt-item'} onClick={buttonOnClick}>
               {buttonText}
             </Button>
           )}

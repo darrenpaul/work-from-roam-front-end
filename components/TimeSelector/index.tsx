@@ -8,8 +8,8 @@ import {
   floatingWindowContainerStyle,
   inputContainerStyle,
   selectorContainerStyle,
-  timeSelectorContainerStyle
-  } from './styles';
+  timeSelectorContainerStyle,
+} from './styles';
 import { generateHours, generateMinutes, splitTime } from '../../utils/dateUtils';
 import { useState } from 'react';
 

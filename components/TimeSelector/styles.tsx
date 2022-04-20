@@ -9,7 +9,7 @@ export const floatingWindowContainerStyle = () => {
 };
 
 export const inputContainerStyle = () => {
-  const base = ['flex', 'flex-col', 'w-max', 'rounded', 'bg-form', 'p-4'];
+  const base = ['flex', 'flex-col', 'w-screen md:w-96', 'rounded', 'bg-form', 'p-4'];
   return base.join(' ');
 };
 

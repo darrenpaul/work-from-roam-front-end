@@ -9,7 +9,7 @@ export const modalBackdropStyle = () => {
     'w-screen h-screen',
     'fixed',
     'top-0 left-0',
-    'pointer-events-auto'
+    'pointer-events-auto',
   ];
   return base.join(' ');
 };
@@ -21,7 +21,7 @@ export const modalContentWrapperStyle = () => {
     'w-screen h-screen',
     'top-0 left-0',
     'fixed',
-    'pointer-events-none'
+    'pointer-events-none',
   ];
   return base.join(' ');
 };
