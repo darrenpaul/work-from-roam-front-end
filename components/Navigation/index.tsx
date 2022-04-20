@@ -8,16 +8,16 @@ import { doSignOutUser } from 'services/user';
 import { getCopy } from 'utils/copyReader';
 import { infoNotification } from 'utils/notifications';
 import { NAVIGATION_ROUTES } from 'utils/navigation';
+import { ROLES } from 'utils/roles';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import {
   navigationButtonsContainerStyle,
   navigationContainerStyle,
   navigationLinksContainerStyle,
   navigationLinkStyle,
-  navigationMenuButtonStyleStyle
-  } from './styles';
-import { ROLES } from 'utils/roles';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+  navigationMenuButtonStyleStyle,
+} from './styles';
 
 const COMPANY_NAME = 'Work.From.Roam';
 
@@ -38,7 +38,7 @@ const Navigation = ({ authUser }) => {
 
   const handleSignOutUser = () => {
     doSignOutUser();
-
+    router.push('/');
     infoNotification(getCopy('signUpSignInCopy:signOutSuccess'));
   };
 

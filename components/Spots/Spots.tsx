@@ -21,6 +21,7 @@ const Spots = ({ accessToken }) => {
   });
 
   const handleSelectSpot = ({ spot }) => {
+    if (!spot) return;
     if (selectedSpot?.id === spot.id) {
       setSelectedSpot(null);
     } else {

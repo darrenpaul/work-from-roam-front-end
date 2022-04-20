@@ -12,6 +12,5 @@ export const doCreateAmenity = (accessToken, data) => {
 
 export const doGetAmenities = async (accessToken) => {
   const amenities = await getAmenities(accessToken);
-  console.log(amenities);
   return amenities;
 };

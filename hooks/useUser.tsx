@@ -33,23 +33,28 @@ export default function useFirebaseAuth() {
     }
 
     const accessToken = authState.accessToken;
-    if (accessToken) {
+
+    if (!accessToken) {
+      setAuthUser(null);
+      setLoading(false);
+      return false;
+    }
+
+    while (true) {
       try {
         const response = await getUser(accessToken);
         const user = formatUserObject(response, accessToken);
         setAuthUser(user);
         setLoading(false);
+        return;
       } catch (error) {
         console.log(error);
-        setAuthUser(null);
-        setLoading(false);
       }
     }
   };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(authStateChanged);
-
     return () => unsubscribe();
   }, []);
 

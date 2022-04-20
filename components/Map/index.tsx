@@ -1,5 +1,6 @@
 import GoogleMap from 'google-map-react';
 import MapLoader from 'elements/Loaders/MapLoader';
+import MarkerHome from 'components/Map/markers/MarkerHome';
 import { mapContainerWrapperStyle } from './styles';
 import { ReactNode, useEffect, useState } from 'react';
 
@@ -20,9 +21,11 @@ const Map = ({
   onMapClick,
   onChildClick,
   onMapLoaded,
-  children
+  children,
 }: Params) => {
-  const [center, setCenter] = useState(initialCenter || null);
+  const [center, setCenter] = useState(
+    initialCenter || { lat: -33.92706384916972, lng: 18.426755163696136 },
+  );
   const [zoom, setZoom] = useState(18);
   const [mapLoading, setMapLoading] = useState(true);
 
@@ -69,6 +72,7 @@ const Map = ({
           onChildClick={handleOnChildClick}
         >
           {children}
+          {center && <MarkerHome onClick={() => {}} lat={center.lat} lng={center.lng} />}
         </GoogleMap>
       )}
     </div>
