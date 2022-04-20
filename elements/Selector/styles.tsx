@@ -1,4 +1,4 @@
 export const selectorStyle = (styles: string) => {
-  const base = ['w-48', styles];
+  const base = ['w-full', styles];
   return base.join(' ');
 };

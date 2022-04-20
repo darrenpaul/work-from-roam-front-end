@@ -4,6 +4,6 @@ export const spotFormContainerStyle = () => {
 };
 
 export const spotFormInputsContainerStyle = () => {
-  const base = ['flex flex-col', 'w-screen-1/2'];
+  const base = ['flex flex-col', 'w-full md:w-screen-1/2'];
   return base.join(' ');
 };

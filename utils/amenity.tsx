@@ -12,7 +12,7 @@ const WIFI_OPTIONS = [
   'Up to 10mbps',
   'Up to 20mbps',
   'Up to 50mbps',
-  'Up to 100mbps'
+  'Up to 100mbps',
 ];
 
 const PARKING_OPTIONS = ['On street', 'Off street', 'On and Off street'];
@@ -28,8 +28,8 @@ export const AMENITIES = [
     name: 'Wheel Chair Accessible',
     key: 'wheelChairAccessible',
     options: [],
-    cost: []
-  }
+    cost: [],
+  },
 ];
 
 export const getAmenityIcon = (amenity: string, color: string) => {

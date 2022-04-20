@@ -12,14 +12,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const { authUser, loading } = useFirebaseAuth();
   const router = useRouter();
 
-  if (loading && !authUser) {
+  if (loading) {
     return <Loader loading={loading} />;
   }
 
   if (pageProps.protected) {
     if (!authUser) {
       router.push('/');
-      return <h1>Not Authenticated</h1>;
     }
   }
 

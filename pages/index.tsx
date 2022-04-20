@@ -5,7 +5,7 @@ import PromotionBanner from 'components/PromotionBanner';
 import { addSignUpUrlQuery } from 'utils/signInSignUp';
 import { AuthUserType } from 'types/user';
 import { getCopy } from 'utils/copyReader';
-import { ITEM_SPACE } from 'shared/styles/spacing';
+import { ITEM_TOP_SPACE } from 'shared/styles/spacing';
 import { useRouter } from 'next/router';
 
 const bannerContent = 'homePageCopy:banner';
@@ -54,7 +54,7 @@ const Home = ({ authUser }: AuthUserType) => {
           description={getCopy(`${promotionBannerContent}:description`)}
           buttonText={getCopy(`${promotionBannerContent}:buttonText`)}
           buttonOnClick={handleShowSignUp}
-          styles={`${ITEM_SPACE}`}
+          styles={`${ITEM_TOP_SPACE}`}
         />
       )}
     </PageWrapper>
