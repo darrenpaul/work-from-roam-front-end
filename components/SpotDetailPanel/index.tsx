@@ -9,13 +9,16 @@ import LabelWithIcon from 'elements/LabelWithIcon';
 import LinkWithIcon from 'elements/LinkWithIcon';
 import Paragraph from 'elements/typography/Paragraphy';
 import PhoneIcon from 'assets/icons/Phone';
+import { createDirectionURL } from 'utils/map';
 import { dayNames } from 'utils/dateUtils';
 import { spotDetailContainerStyle } from './styles';
 
 const SpotDetailPanel = ({
   name,
   website,
+  coordinates,
   address,
+  suburb,
   city,
   zipCode,
   country,
@@ -35,6 +38,11 @@ const SpotDetailPanel = ({
     return `${openTime} - ${closeTime}`;
   };
 
+  const handleDirectionButtonClick = () => {
+    const directionURL = createDirectionURL(name, coordinates, address, city, zipCode, country);
+    window.open(directionURL);
+  };
+
   return (
     <div className={spotDetailContainerStyle()}>
       <Heading3>{name}</Heading3>
@@ -43,6 +51,7 @@ const SpotDetailPanel = ({
 
       <AddressContainer
         address={address}
+        suburb={suburb}
         city={city}
         zipCode={zipCode}
         country={country}
@@ -66,6 +75,8 @@ const SpotDetailPanel = ({
           <Paragraph>{operatingTime(key)}</Paragraph>
         </div>
       ))}
+
+      <Button onClick={handleDirectionButtonClick}>Directions</Button>
 
       {handleApproval && <Button onClick={handleApproval}>Approve</Button>}
     </div>

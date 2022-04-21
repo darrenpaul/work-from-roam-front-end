@@ -123,6 +123,10 @@ const SpotSuggestionCompare = ({ authUser }: AuthUserType) => {
       {getCompareComponent('phoneCode')}
       {getCompareComponent('phoneNumber')}
       {getCompareComponent('address')}
+      {getCompareComponent('suburb')}
+      {getCompareComponent('city')}
+      {getCompareComponent('zipCode')}
+      {getCompareComponent('country')}
       {splitNestedData('amenities')}
       {splitNestedData('operatingHours')}
       {getCompareComponent('status')}

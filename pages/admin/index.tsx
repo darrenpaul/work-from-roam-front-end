@@ -4,6 +4,7 @@ import PendingSpots from 'components/Spots/PendingSpots';
 import SpotApproval from 'components/SpotApproval';
 import { AuthUserType } from 'types/user';
 import { batchAdd } from 'utils/spot';
+import { doMigration } from 'migrations/spot/0002-fix-address-pending';
 
 const AdminPage = ({ authUser }: AuthUserType) => {
   const { accessToken } = authUser;
@@ -13,6 +14,7 @@ const AdminPage = ({ authUser }: AuthUserType) => {
       <PendingSpots accessToken={accessToken} />
       <SpotApproval accessToken={accessToken} />
       <Button onClick={() => batchAdd(accessToken)}>batch add</Button>
+      <Button onClick={() => doMigration(accessToken)}>Migrate</Button>
     </PageWrapper>
   );
 };

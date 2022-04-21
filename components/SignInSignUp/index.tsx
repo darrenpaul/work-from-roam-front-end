@@ -5,11 +5,12 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import useShowModal from 'hooks/useModal';
 import { doSignInUser, doSignUpUser } from 'services/user';
-import { errorNotification, successNotification } from 'utils/notifications';
+import { errorNotification } from 'utils/notifications';
 import { getCopy } from 'utils/copyReader';
 import { humanError } from 'utils/errors';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { VIEW_SPOTS_ROUTE } from 'utils/routes';
 const SignUpSignIn = () => {
   const { showModal, handleShowModal, handleCloseModal } = useShowModal();
   const router = useRouter();
@@ -85,6 +86,7 @@ const SignUpSignIn = () => {
 
     try {
       await doSignInUser(email, password);
+      router.push(VIEW_SPOTS_ROUTE);
       setLoading(false);
     } catch (error) {
       errorNotification(humanError(error.code));

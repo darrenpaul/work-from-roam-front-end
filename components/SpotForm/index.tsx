@@ -33,6 +33,7 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
     phoneCode: initialSpot.phoneCode || '27',
     coordinates: initialSpot.coordinates || { lat: '', lng: '' },
     address: initialSpot.address || '',
+    suburb: initialSpot.suburb || '',
     city: initialSpot.city || '',
     zipCode: initialSpot.zipCode || '',
     country: initialSpot.country || '',
@@ -40,7 +41,7 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
     images: initialSpot.images || [],
     placeId: initialSpot.placeId || '',
   });
-  const [amenities, setAmenities] = useState(BASE_AMENITIES);
+  const [amenities, setAmenities] = useState(initialSpot.amenities || BASE_AMENITIES);
   const [operatingHours, setOperatingHours] = useState(
     initialSpot.operatingHours || BASE_OPERATING_HOURS,
   );
@@ -51,6 +52,7 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
     phoneCode: '',
     coordinates: '',
     address: '',
+    suburb: '',
     city: '',
     zipCode: '',
     country: '',
@@ -163,16 +165,6 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
         />
 
         <Input
-          id="name"
-          value={spotData.name}
-          inputChange={handleInputChange}
-          error={errors.name}
-          label="Shop Name"
-          required={true}
-          placeholder="Enter shop name"
-        />
-
-        <Input
           id="email"
           value={spotData.email}
           inputChange={handleInputChange}
@@ -209,6 +201,16 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
           label="Address"
           required={true}
           placeholder="Enter the address for the shop"
+        />
+
+        <Input
+          id="suburb"
+          value={spotData.suburb}
+          inputChange={handleInputChange}
+          error={errors.suburb}
+          label="Suburb"
+          required={true}
+          placeholder="Enter the suburb where the shop is located"
         />
 
         <Input

@@ -1,7 +1,6 @@
 import batchJsonData from 'data/batchData.json';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import dayjs from 'dayjs';
-import { async } from '@firebase/util';
 import { doCreateSpot } from 'services/spot';
 
 dayjs.extend(customParseFormat);

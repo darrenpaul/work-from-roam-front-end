@@ -1,30 +1,32 @@
+import { HOME_ROUTE, VIEW_SPOTS_ROUTE } from './routes';
+
 export const NAVIGATION_ROUTES = [
   {
-    href: '/',
-    text: 'Home'
+    href: HOME_ROUTE,
+    text: 'Home',
   },
   {
-    href: '/view-spots',
+    href: VIEW_SPOTS_ROUTE,
     text: 'View Spots',
-    protected: true
+    protected: true,
   },
   {
     href: '/add-spot',
     text: 'Add Spot',
-    protected: true
+    protected: true,
   },
   {
     href: '/about',
-    text: 'About'
+    text: 'About',
   },
   {
     href: '/contact',
-    text: 'Contact'
+    text: 'Contact',
   },
   {
     href: '/admin',
     text: 'Admin',
     protected: true,
-    admin: true
-  }
+    admin: true,
+  },
 ];

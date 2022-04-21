@@ -3,8 +3,9 @@ import {
   createSpot,
   getPendingSpots,
   getSpot,
-  getSpots
-  } from '../apiClient/spot';
+  getSpots,
+  updateSpot,
+} from '../apiClient/spot';
 
 export const doCreateSpot = (accessToken: String, spotData) => {
   createSpot(accessToken, spotData)
@@ -16,29 +17,21 @@ export const doCreateSpot = (accessToken: String, spotData) => {
     });
 };
 
+export const doUpdateSpot = async (accessToken: String, id: String, spotData) => {
+  return await updateSpot(accessToken, id, spotData);
+};
+
 export const doGetSpot = async (accessToken: String, id: String) => {
   const spotData = await getSpot(accessToken, id);
   return spotData;
 };
 
-export const doGetSpots = (accessToken: String) => {
-  getSpots(accessToken)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+export const doGetSpots = async (accessToken: String) => {
+  return await getSpots(accessToken);
 };
 
-export const doGetPendingSpots = (accessToken: String) => {
-  getPendingSpots(accessToken)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+export const doGetPendingSpots = async (accessToken: String) => {
+  return await getPendingSpots(accessToken);
 };
 
 export const doSpotApprove = async (accessToken: String, id: String) => {

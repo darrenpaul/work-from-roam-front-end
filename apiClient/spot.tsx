@@ -17,6 +17,18 @@ export const createSpot = (accessToken: String, spotData: SpotType) => {
   });
 };
 
+export const updateSpot = (accessToken: String, id: String, spotData: SpotType) => {
+  const url = `${BASE_URL}/${API_VERSION}/${KEY}/update/${id}`;
+  return httpRequest({
+    url,
+    method: 'POST',
+    data: {
+      ...spotData,
+    },
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+};
+
 export const approveSpot = (accessToken: String, id: String) => {
   const url = `${BASE_URL}/${API_VERSION}/${KEY}/approve/${id}`;
   return httpRequest({
