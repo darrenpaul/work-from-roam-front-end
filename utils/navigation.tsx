@@ -16,12 +16,9 @@ export const NAVIGATION_ROUTES = [
     protected: true,
   },
   {
-    href: '/about',
-    text: 'About',
-  },
-  {
-    href: '/contact',
-    text: 'Contact',
+    href: '/account',
+    text: 'Account',
+    protected: true,
   },
   {
     href: '/admin',

@@ -1,12 +1,9 @@
-import Heading3 from 'elements/typography/Heading3';
 import Map from 'components/Map';
 import MarkerCoffee from 'components/Map/markers/MarkerCoffee';
-import Paragraph from 'elements/typography/Paragraphy';
 import SpotDetail from 'components/Map/overlays/SpotDetail';
 import SpotDetailPanel from 'components/SpotDetailPanel';
-import { dayNames, formatTimeObject } from 'utils/dateUtils';
 import { getSpots } from 'apiClient/spot';
-import { spotDetailContainerStyle, spotsContainerStyle } from './styles';
+import { spotsContainerStyle } from './styles';
 import { useEffect, useState } from 'react';
 
 const Spots = ({ accessToken }) => {
@@ -27,17 +24,6 @@ const Spots = ({ accessToken }) => {
     } else {
       setSelectedSpot(spot);
     }
-  };
-
-  const operatingTime = (day) => {
-    const { operatingHours } = selectedSpot;
-    const openTime = operatingHours[day].openTime;
-    const closeTime = operatingHours[day].closeTime;
-    const isOpen = operatingHours[day].open;
-    if (isOpen === false) {
-      return 'Closed';
-    }
-    return `${openTime} - ${closeTime}`;
   };
 
   return (

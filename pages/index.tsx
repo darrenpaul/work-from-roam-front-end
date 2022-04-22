@@ -12,6 +12,8 @@ const contentA = 'homePageCopy:contentBlockA';
 const contentB = 'homePageCopy:contentBlockB';
 const promotionBannerContent = 'homePageCopy:promotionBanner';
 
+const PAGE_TITLE = 'WFR | Home';
+
 const Home = ({ authUser }: AuthUserType) => {
   const router = useRouter();
   const isLoggedIn = !!authUser && authUser.accessToken;
@@ -21,7 +23,7 @@ const Home = ({ authUser }: AuthUserType) => {
   };
 
   return (
-    <PageWrapper authUser={authUser}>
+    <PageWrapper title={PAGE_TITLE} authUser={authUser}>
       <BannerWithImage
         srcImage={getCopy(`${bannerContent}:imageSrc`)}
         altText={getCopy(`${bannerContent}:imageAlt`)}

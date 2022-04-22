@@ -13,9 +13,9 @@ export const createUser = (accessToken: String, userData: UserData) => {
     method: 'POST',
     data: {
       firstName,
-      lastName
+      lastName,
     },
-    headers: { Authorization: `Bearer ${accessToken}` }
+    headers: { Authorization: `Bearer ${accessToken}` },
   });
 };
 
@@ -25,7 +25,22 @@ export const getUser = (accessToken: String) => {
     url,
     method: 'GET',
 
-    headers: { Authorization: `Bearer ${accessToken}` }
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+};
+
+export const updateUser = (accessToken: String, userData: UserData, id: string) => {
+  const url = `${BASE_URL}/${API_VERSION}/${KEY}/update/${id}`;
+  const { firstName, lastName } = userData;
+  console.log(url);
+  return httpRequest({
+    url,
+    method: 'POST',
+    data: {
+      firstName,
+      lastName,
+    },
+    headers: { Authorization: `Bearer ${accessToken}` },
   });
 };
 

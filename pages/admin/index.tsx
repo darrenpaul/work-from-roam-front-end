@@ -6,11 +6,13 @@ import { AuthUserType } from 'types/user';
 import { batchAdd } from 'utils/spot';
 import { doMigration } from 'migrations/spot/0002-fix-address-pending';
 
+const PAGE_TITLE = 'WFR | Admin';
+
 const AdminPage = ({ authUser }: AuthUserType) => {
   const { accessToken } = authUser;
 
   return (
-    <PageWrapper authUser={authUser}>
+    <PageWrapper title={PAGE_TITLE} authUser={authUser}>
       <PendingSpots accessToken={accessToken} />
       <SpotApproval accessToken={accessToken} />
       <Button onClick={() => batchAdd(accessToken)}>batch add</Button>

@@ -1,12 +1,12 @@
 const HEIGHT = 'h-14';
 
-export const navigationContainerStyle = () => {
+export const containerStyle = () => {
   const base = [
     'flex',
     'items-center',
-    'justify-between',
     'w-screen',
     HEIGHT,
+    'justify-between',
     'fixed',
     'top-0',
     'left-0',
@@ -14,43 +14,41 @@ export const navigationContainerStyle = () => {
     'text-dark-copy',
     'z-50',
     'px-8',
-    'md:px-36',
-    'drop-shadow-lg'
+    'drop-shadow-lg',
   ];
 
   return base.join(' ');
 };
 
-export const navigationMenuButtonStyleStyle = () => {
-  const base = ['md:hidden sm:flex', 'z-[99]'];
+export const menuButtonStyle = () => {
+  const base = ['lg:hidden sm:flex', 'z-[99]'];
 
   return base.join(' ');
 };
 
-export const navigationLinksContainerStyle = (showMenu) => {
-  const showMobileMenu = showMenu ? 'flex' : 'hidden md:flex';
+export const linksContainerStyle = (showMenu) => {
+  const showMobileMenu = showMenu ? 'flex' : 'hidden lg:flex';
   const base = [
     showMobileMenu,
-    'fixed md:relative',
-    'w-screen h-screen md:w-fit md:h-full',
-    'bg-navigation md:bg-transparent',
+    'fixed lg:relative',
+    'w-screen h-screen lg:w-max lg:h-full',
+    'bg-navigation lg:bg-transparent',
     'top-0 left-0',
-    'flex-col md:flex-row',
-    'md:justify-end md:items-center',
+    'flex-col lg:flex-row',
+    'lg:justify-end lg:items-center',
     'grow',
-    'pt-14 md:pt-0',
-    'md:ml-28',
-    'z-50'
+    'pt-14 lg:pt-0',
+    'z-50',
   ];
   return base.join(' ');
 };
 
-export const navigationButtonsContainerStyle = () => {
-  const base = ['flex', 'ml-0 md:ml-8'];
+export const buttonsContainerStyle = () => {
+  const base = ['flex', 'ml-0 lg:ml-8'];
   return base.join(' ');
 };
 
-export const navigationLinkStyle = (currentPath: string, href: string) => {
+export const linkStyle = (currentPath: string, href: string) => {
   const base = ['px-4', 'text-center', 'text-dark-copy', 'ease-in duration-100'];
   const active = [];
   if (currentPath === href) {

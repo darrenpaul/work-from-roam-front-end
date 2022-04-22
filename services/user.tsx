@@ -1,5 +1,5 @@
 import { auth } from '../services/firebase';
-import { createUser } from '../apiClient/user';
+import { createUser, updateUser } from '../apiClient/user';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { UserData } from '../types/user';
 
@@ -19,4 +19,8 @@ export const doSignInUser = async (email: string, password: string) => {
 
 export const doSignOutUser = () => {
   signOut(auth);
+};
+
+export const doUpdateUser = async (accessToken: string, userData: UserData, id: string) => {
+  await updateUser(accessToken, userData, id);
 };

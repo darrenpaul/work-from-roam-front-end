@@ -12,18 +12,18 @@ import { ROLES } from 'utils/roles';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
-  navigationButtonsContainerStyle,
-  navigationContainerStyle,
-  navigationLinksContainerStyle,
-  navigationLinkStyle,
-  navigationMenuButtonStyleStyle,
+  buttonsContainerStyle,
+  containerStyle,
+  linksContainerStyle,
+  linkStyle,
+  menuButtonStyle,
 } from './styles';
 
 const COMPANY_NAME = 'Work.From.Roam';
 
 const NavigationLink = ({ href, text, currentPath }) => {
   return (
-    <div className={navigationLinkStyle(href, currentPath)}>
+    <div className={linkStyle(href, currentPath)}>
       <Link href={href}>{text}</Link>
     </div>
   );
@@ -67,14 +67,14 @@ const Navigation = ({ authUser }) => {
   };
 
   return (
-    <div className={navigationContainerStyle()}>
+    <div className={containerStyle()}>
       <Heading5>{COMPANY_NAME}</Heading5>
 
-      <div className={navigationMenuButtonStyleStyle()} onClick={handleShowMobileMenu}>
+      <div className={menuButtonStyle()} onClick={handleShowMobileMenu}>
         {showMobileMenu ? <CrossIcon /> : <BarsIcon />}
       </div>
 
-      <div className={navigationLinksContainerStyle(showMobileMenu)}>
+      <div className={linksContainerStyle(showMobileMenu)}>
         {isLoggedIn &&
           buildLinks().map((route, index) => {
             return (
@@ -86,7 +86,7 @@ const Navigation = ({ authUser }) => {
               />
             );
           })}
-        <div className={navigationButtonsContainerStyle()}>
+        <div className={buttonsContainerStyle()}>
           {isLoggedIn ? (
             <Button onClick={handleSignOutUser} variant={BUTTON_VARIANTS.warning}>
               Sign out

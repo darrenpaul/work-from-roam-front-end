@@ -7,6 +7,8 @@ import { SpotType } from 'types/spot';
 import { successNotification } from 'utils/notifications';
 import { useRouter } from 'next/router';
 
+const PAGE_TITLE = 'WFR | Spot Suggestion';
+
 const SpotSuggestionPage = ({ authUser }: AuthUserType) => {
   const router = useRouter();
   const { accessToken } = authUser;
@@ -20,7 +22,7 @@ const SpotSuggestionPage = ({ authUser }: AuthUserType) => {
   };
 
   return (
-    <PageWrapper authUser={authUser}>
+    <PageWrapper title={PAGE_TITLE} authUser={authUser}>
       {!loading && <SpotForm initialSpot={spot} onSubmit={handleSubmit} />}
     </PageWrapper>
   );

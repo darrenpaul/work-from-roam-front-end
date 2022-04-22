@@ -1,14 +1,15 @@
+import Heading3 from 'elements/typography/Heading3';
 import PageWrapper from 'containers/PageWrapper';
-import Spots from 'components/Spots/Spots';
+import UserUpdateForm from 'components/forms/UserUpdateForm';
 import { AuthUserType } from 'types/user';
 
-const PAGE_TITLE = 'WFR | View Spots';
+const PAGE_TITLE = 'WFR | Account';
 
 const ViewSpotsPage = ({ authUser }: AuthUserType) => {
-  const { accessToken } = authUser;
   return (
     <PageWrapper title={PAGE_TITLE} authUser={authUser}>
-      <Spots accessToken={accessToken} />
+      <Heading3>Account Settings</Heading3>
+      <UserUpdateForm authUser={authUser} styles="mt-item" />
     </PageWrapper>
   );
 };
