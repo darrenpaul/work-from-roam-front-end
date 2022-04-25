@@ -2,7 +2,11 @@ import Heading5 from 'elements/typography/Heading5';
 import Link from 'next/link';
 import Paragraph from 'elements/typography/Paragraphy';
 import { getAmenityIcon } from 'utils/amenity';
-import { spotAmenitiesContainerStyle, spotDetailContainerStyle, spotDetailOverlayContainerStyle } from './styles';
+import {
+  spotAmenitiesContainerStyle,
+  spotDetailContainerStyle,
+  spotDetailOverlayContainerStyle,
+} from './styles';
 
 const divStyle = {
   position: 'relative',
@@ -12,7 +16,7 @@ const divStyle = {
   boxShadow: '0 2px 7px 1px rgba(0, 0, 0, 0.3)',
   padding: 10,
   fontSize: 14,
-  zIndex: 100
+  zIndex: 100,
 };
 
 const SpotDetail = ({ spot, onClick }) => {

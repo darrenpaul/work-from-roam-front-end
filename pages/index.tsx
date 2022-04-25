@@ -25,6 +25,7 @@ const Home = ({ authUser }: AuthUserType) => {
   return (
     <PageWrapper title={PAGE_TITLE} authUser={authUser}>
       <BannerWithImage
+        title="Find a places near you, to work, play, or study."
         srcImage={getCopy(`${bannerContent}:imageSrc`)}
         altText={getCopy(`${bannerContent}:imageAlt`)}
       />

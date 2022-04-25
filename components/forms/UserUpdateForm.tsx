@@ -4,7 +4,7 @@ import Input from 'elements/Input';
 import { AuthUserType } from 'types/user';
 import { doUpdateUser } from 'services/user';
 import { errorNotification, successNotification } from 'utils/notifications';
-import { formContainerStyle } from './styles';
+import { formContainerStyle, formInputsContainerStyle } from './styles';
 import { useState } from 'react';
 
 interface Params {
@@ -40,29 +40,32 @@ const UserUpdateForm = ({ authUser, styles }: Params) => {
 
   return (
     <div className={formContainerStyle(styles)}>
-      <Heading3>Add a new spot</Heading3>
+      <div className={formInputsContainerStyle()}>
+        <Heading3>User Information</Heading3>
 
-      <Input
-        id="firstName"
-        value={userInfo.firstName}
-        inputChange={handleInputChange}
-        error={errors.firstName}
-        label="First Name"
-        required={true}
-        placeholder="Enter first name"
-      />
+        <Input
+          id="firstName"
+          value={userInfo.firstName}
+          inputChange={handleInputChange}
+          error={errors.firstName}
+          label="First Name"
+          required={true}
+          placeholder="Enter first name"
+          styles="mt-item"
+        />
 
-      <Input
-        id="lastName"
-        value={userInfo.lastName}
-        inputChange={handleInputChange}
-        error={errors.lastName}
-        label="Last Name"
-        required={true}
-        placeholder="Enter last name"
-      />
+        <Input
+          id="lastName"
+          value={userInfo.lastName}
+          inputChange={handleInputChange}
+          error={errors.lastName}
+          label="Last Name"
+          required={true}
+          placeholder="Enter last name"
+        />
 
-      <Button onClick={handleSubmit}>Update</Button>
+        <Button onClick={handleSubmit}>Update</Button>
+      </div>
     </div>
   );
 };

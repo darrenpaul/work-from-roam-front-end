@@ -8,7 +8,6 @@ const PAGE_TITLE = 'WFR | Account';
 const ViewSpotsPage = ({ authUser }: AuthUserType) => {
   return (
     <PageWrapper title={PAGE_TITLE} authUser={authUser}>
-      <Heading3>Account Settings</Heading3>
       <UserUpdateForm authUser={authUser} styles="mt-item" />
     </PageWrapper>
   );

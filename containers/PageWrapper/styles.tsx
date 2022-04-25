@@ -4,6 +4,6 @@ export const pageContainerStyle = () => {
 };
 
 export const pageContentContainerStyle = () => {
-  const base = ['max-w-screen-xl', 'mx-auto', 'px-sides'];
+  const base = ['max-w-screen-xl', 'mx-auto', 'px-sides', 'min-h-[calc(100vh_-_128px)]'];
   return base.join(' ');
 };

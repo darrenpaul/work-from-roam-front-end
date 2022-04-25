@@ -4,6 +4,12 @@ export const paragraphStyle = (color?: string, styles?: string) => {
   return [...base, styles].join(' ');
 };
 
+export const heading1Style = (color?: string, styles: string) => {
+  const textColor = color ? color : 'text-dark-copy';
+  const base = ['text-5xl', 'font-bold', textColor, 'break-normal'];
+  return [...base, styles].join(' ');
+};
+
 export const heading3Style = (color?: string, styles: string) => {
   const textColor = color ? color : 'text-dark-copy';
   const base = ['text-3xl', 'font-bold', textColor, 'break-normal'];

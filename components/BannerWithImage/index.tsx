@@ -1,10 +1,11 @@
 import Button from 'elements/Button';
-import Heading3 from 'elements/typography/Heading3';
+import Heading1 from 'elements/typography/Heading1';
 import Image from 'next/image';
 import Paragraph from 'elements/typography/Paragraphy';
 import {
   contentContainerStyle,
   contentWrapperContainerStyle,
+  gradientOverlayStyle,
   imageContainerStyle,
   mainContainerStyle,
 } from './styles';
@@ -31,9 +32,10 @@ const BannerWithImage = ({
         <Image src={srcImage} alt={altText} layout="fill" objectFit="cover" />
       </div>
 
+      <div className={gradientOverlayStyle()}></div>
       <div className={contentWrapperContainerStyle()}>
         <div className={contentContainerStyle()}>
-          <Heading3>{title}</Heading3>
+          <Heading1 color="text-light-copy">{title}</Heading1>
           <Paragraph styles={'mt-item'}>{description}</Paragraph>
           {buttonText && (
             <Button styles={'mt-item'} onClick={buttonOnClick}>

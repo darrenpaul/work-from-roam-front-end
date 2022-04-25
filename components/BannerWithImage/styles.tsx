@@ -3,6 +3,17 @@ export const mainContainerStyle = () => {
   return base.join(' ');
 };
 
+export const gradientOverlayStyle = () => {
+  const base = [
+    'absolute',
+    'left-0',
+    'w-full h-screen',
+    'brightness-50',
+    'bg-gradient-to-r from-black/[0.5] to-transparent',
+  ];
+  return base.join(' ');
+};
+
 export const imageContainerStyle = () => {
   const base = ['absolute', 'left-0', 'w-full h-screen'];
   return base.join(' ');
@@ -21,7 +32,7 @@ export const contentContainerStyle = () => {
     'flex flex-col justify-center',
     'w-1/2 h-full',
     'p-16',
-    'text-left'
+    'text-left',
   ];
   return base.join(' ');
 };

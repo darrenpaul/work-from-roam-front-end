@@ -1,5 +1,5 @@
 import PageWrapper from 'containers/PageWrapper';
-import SpotForm from 'components/SpotForm';
+import SpotForm from 'components/forms/SpotForm';
 import useSpot from 'hooks/useSpot';
 import { AuthUserType } from 'types/user';
 import { doCreateSpot } from 'services/spot';
@@ -24,7 +24,7 @@ const SpotSuggestionPage = ({ authUser }: AuthUserType) => {
 
   return (
     <PageWrapper title={PAGE_TITLE} authUser={authUser}>
-      {!loading && <SpotForm initialSpot={spot} onSubmit={handleSubmit} />}
+      {!loading && <SpotForm initialSpot={spot} onSubmit={handleSubmit} showHomeMarker={false} />}
     </PageWrapper>
   );
 };

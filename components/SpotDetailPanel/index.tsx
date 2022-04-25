@@ -3,8 +3,8 @@ import AmenityList from './AmenityList';
 import Button from 'elements/Button';
 import EnvelopeIcon from 'assets/icons/Envelope';
 import GlobeIcon from 'assets/icons/Globe';
-import Heading3 from 'elements/typography/Heading3';
 import Heading5 from 'elements/typography/Heading5';
+import Heading6 from 'elements/typography/Heading6';
 import LabelWithIcon from 'elements/LabelWithIcon';
 import LinkWithIcon from 'elements/LinkWithIcon';
 import Paragraph from 'elements/typography/Paragraphy';
@@ -45,7 +45,7 @@ const SpotDetailPanel = ({
 
   return (
     <div className={spotDetailContainerStyle()}>
-      <Heading3>{name}</Heading3>
+      <Heading5>{name}</Heading5>
 
       {website && <LinkWithIcon styles={'mt-item'} icon={GlobeIcon} url={website}></LinkWithIcon>}
 
@@ -68,7 +68,7 @@ const SpotDetailPanel = ({
 
       <AmenityList amenities={amenities} />
 
-      <Heading5 styles={'mt-item'}>Operating Hours</Heading5>
+      <Heading6 styles={'mt-item'}>Operating Hours</Heading6>
       {dayNames.map(({ nice, key }) => (
         <div key={key}>
           <Paragraph>{nice}</Paragraph>
@@ -76,7 +76,9 @@ const SpotDetailPanel = ({
         </div>
       ))}
 
-      <Button onClick={handleDirectionButtonClick}>Directions</Button>
+      <Button styles="mt-item" onClick={handleDirectionButtonClick}>
+        Directions
+      </Button>
 
       {handleApproval && <Button onClick={handleApproval}>Approve</Button>}
     </div>

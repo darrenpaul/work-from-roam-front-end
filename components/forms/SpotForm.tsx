@@ -11,7 +11,7 @@ import OperatingHours from 'components/OperatingHours';
 import { BASE_AMENITIES, BASE_OPERATING_HOURS } from 'utils/spot';
 import { blobObjectFromBlobUrl, readFile } from 'utils/file';
 import { errorNotification } from 'utils/notifications';
-import { spotFormContainerStyle, spotFormInputsContainerStyle } from './styles';
+import { formContainerStyle, formInputsContainerStyle } from './styles';
 import { spotFormValidation } from 'utils/validation';
 import { SpotType } from 'types/spot';
 import { uploadBlobToFirebase } from 'utils/image';
@@ -23,9 +23,10 @@ const IMAGE_SAVE_DIRECTORY = 'spots';
 interface Params {
   initialSpot: SpotType;
   onSubmit: Function;
+  showHomeMarker: boolean;
 }
 
-const SpotForm = ({ initialSpot, onSubmit }: Params) => {
+const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
   const [spotData, setSpotData] = useState({
     name: initialSpot.name || '',
     email: initialSpot.email || '',
@@ -81,7 +82,6 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
   };
 
   const handleInputChange = (id: string, value: any) => {
-    // if (value) setErrors({ ...errors, [id]: "" });
     setSpotData({ ...spotData, [id]: value });
   };
 
@@ -129,7 +129,7 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
   };
 
   return (
-    <div className={spotFormContainerStyle()}>
+    <div className={formContainerStyle()}>
       <Map
         fullHeight={true}
         initialCenter={spotData.coordinates}
@@ -138,13 +138,14 @@ const SpotForm = ({ initialSpot, onSubmit }: Params) => {
         onMapLoaded={(mapLoaded) => {
           setMapLoaded(mapLoaded);
         }}
+        showHomeMarker={showHomeMarker}
       >
         {mapLoaded && (
           <MarkerCoffee lat={spotData.coordinates.lat} lng={spotData.coordinates.lng} />
         )}
       </Map>
 
-      <div className={spotFormInputsContainerStyle()}>
+      <div className={formInputsContainerStyle()}>
         <Heading3>Add a new spot</Heading3>
 
         <ImageInput onChange={handleImageSelect} />

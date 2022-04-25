@@ -10,7 +10,7 @@ const LinkWithIcon = ({ icon, url, styles = '' }) => {
 
       <Paragraph styles="ml-2">
         <a target="_blank" href={url} rel="noreferrer">
-          {cleanUrl(url)}
+          View Website
         </a>
       </Paragraph>
     </div>

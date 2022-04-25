@@ -12,6 +12,7 @@ interface Params {
   onMapClick: Function;
   onChildClick: Function;
   onMapLoaded: Function;
+  showHomeMarker: boolean;
   children: ReactNode;
 }
 
@@ -21,6 +22,7 @@ const Map = ({
   onMapClick,
   onChildClick,
   onMapLoaded,
+  showHomeMarker = true,
   children,
 }: Params) => {
   const [center, setCenter] = useState(
@@ -72,7 +74,9 @@ const Map = ({
           onChildClick={handleOnChildClick}
         >
           {children}
-          {center && <MarkerHome onClick={() => {}} lat={center.lat} lng={center.lng} />}
+          {center && showHomeMarker && (
+            <MarkerHome onClick={() => {}} lat={center.lat} lng={center.lng} />
+          )}
         </GoogleMap>
       )}
     </div>
