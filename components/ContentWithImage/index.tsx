@@ -27,8 +27,8 @@ const ContentWithImage = ({ title, description, srcImage, altText, ...props }: P
       </div>
 
       <div className={paragraphContainerStyle()}>
-        <Heading3 styles="mx-16">{title}</Heading3>
-        <Paragraph styles="mt-4 mx-16">{description}</Paragraph>
+        <Heading3 styles="mx-sides">{title}</Heading3>
+        <Paragraph styles="mt-4 mx-sides">{description}</Paragraph>
       </div>
     </div>
   );

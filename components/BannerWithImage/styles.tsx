@@ -30,8 +30,8 @@ export const contentContainerStyle = () => {
     'top-0 left-0',
     'z-10',
     'flex flex-col justify-center',
-    'w-1/2 h-full',
-    'p-16',
+    'w-full md:w-1/2 h-full',
+    'p-sides',
     'text-left',
   ];
   return base.join(' ');
