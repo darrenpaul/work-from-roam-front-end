@@ -11,7 +11,6 @@ export const doMigration = async (accessToken) => {
         suburb = splitAddress[1].trim();
         spot.address = splitAddress.slice(0, -1).join(', ');
       }
-      console.log('fghjk');
       spot.suburb = suburb;
     }
   }

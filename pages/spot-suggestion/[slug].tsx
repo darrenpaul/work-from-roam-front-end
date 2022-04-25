@@ -11,7 +11,7 @@ const PAGE_TITLE = 'WFR | Spot Suggestion';
 
 const SpotSuggestionPage = ({ authUser }: AuthUserType) => {
   const router = useRouter();
-  const { accessToken } = authUser;
+  const accessToken = authUser?.accessToken;
   const id = `${router.query.slug}`;
   const { spot, revalidate, loading } = useSpot({ accessToken, id });
 
@@ -27,5 +27,13 @@ const SpotSuggestionPage = ({ authUser }: AuthUserType) => {
     </PageWrapper>
   );
 };
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      protected: true,
+    },
+  };
+}
 
 export default SpotSuggestionPage;

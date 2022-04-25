@@ -8,26 +8,21 @@ import {
   spotDetailOverlayContainerStyle,
 } from './styles';
 
-const divStyle = {
-  position: 'relative',
-  transform: 'translate(-50%, -150%)',
-  width: 220,
-  backgroundColor: 'white',
-  boxShadow: '0 2px 7px 1px rgba(0, 0, 0, 0.3)',
-  padding: 10,
-  fontSize: 14,
-  zIndex: 100,
-};
+interface Params {
+  spot: any;
+  onClick: Function;
+  isLoggedIn: boolean;
+}
 
-const SpotDetail = ({ spot, onClick }) => {
+const SpotDetail = ({ spot, onClick, isLoggedIn }: Params) => {
   const { amenities, name, description, id } = spot;
-  const amenityKeys = [];
+  const amenityKeys: string[] = [];
   Object.keys(amenities).forEach((key) => {
     if (amenities[key].available === true) amenityKeys.push(key);
   });
 
   return (
-    <div onClick={onClick} className={spotDetailOverlayContainerStyle()}>
+    <div onClick={() => onClick()} className={spotDetailOverlayContainerStyle()}>
       <div className={spotDetailContainerStyle()}>
         <Heading5>{name}</Heading5>
         <Paragraph>{description}</Paragraph>
@@ -36,7 +31,7 @@ const SpotDetail = ({ spot, onClick }) => {
             <div key={index}>{getAmenityIcon(amenity)}</div>
           ))}
         </div>
-        <Link href={`/spot-suggestion/${id}`}>Add suggestion</Link>
+        {isLoggedIn && <Link href={`/spot-suggestion/${id}`}>Add suggestion</Link>}
       </div>
     </div>
   );

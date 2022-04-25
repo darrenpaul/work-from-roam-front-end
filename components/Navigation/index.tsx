@@ -2,8 +2,9 @@ import BarsIcon from 'assets/icons/Bars';
 import Button, { BUTTON_VARIANTS } from 'elements/Button';
 import CrossIcon from 'assets/icons/Cross';
 import Heading5 from 'elements/typography/Heading5';
-import Link from 'next/link';
+import NavigationLink from './NavigationLink';
 import { addSignInUrlQuery } from 'utils/signInSignUp';
+import { AuthUserType } from 'types/user';
 import { doSignOutUser } from 'services/user';
 import { getCopy } from 'utils/copyReader';
 import { infoNotification } from 'utils/notifications';
@@ -15,21 +16,12 @@ import {
   buttonsContainerStyle,
   containerStyle,
   linksContainerStyle,
-  linkStyle,
   menuButtonStyle,
 } from './styles';
 
 const COMPANY_NAME = 'Work.From.Roam';
 
-const NavigationLink = ({ href, text, currentPath }) => {
-  return (
-    <div className={linkStyle(href, currentPath)}>
-      <Link href={href}>{text}</Link>
-    </div>
-  );
-};
-
-const Navigation = ({ authUser }) => {
+const Navigation = ({ authUser }: AuthUserType) => {
   const isLoggedIn = !!authUser?.user?.uid;
   const isAdmin = authUser?.user.role === ROLES.ADMIN;
   const router = useRouter();
@@ -51,7 +43,7 @@ const Navigation = ({ authUser }) => {
   };
 
   const buildLinks = () => {
-    const links = [];
+    const links: { href: string; text: string; protected?: boolean; admin?: boolean }[] = [];
 
     NAVIGATION_ROUTES.forEach((route) => {
       if (route.protected && !isLoggedIn) {
@@ -75,17 +67,16 @@ const Navigation = ({ authUser }) => {
       </div>
 
       <div className={linksContainerStyle(showMobileMenu)}>
-        {isLoggedIn &&
-          buildLinks().map((route, index) => {
-            return (
-              <NavigationLink
-                key={index}
-                href={route.href}
-                text={route.text}
-                currentPath={currentPath}
-              />
-            );
-          })}
+        {buildLinks().map((route, index) => {
+          return (
+            <NavigationLink
+              key={index}
+              href={route.href}
+              text={route.text}
+              currentPath={currentPath}
+            />
+          );
+        })}
         <div className={buttonsContainerStyle()}>
           {isLoggedIn ? (
             <Button onClick={handleSignOutUser} variant={BUTTON_VARIANTS.warning}>

@@ -48,7 +48,7 @@ export const getSpot = (accessToken: String, id: String) => {
   });
 };
 
-export const getSpots = (accessToken: String) => {
+export const getSpots = (accessToken?: string) => {
   const url = `${BASE_URL}/${API_VERSION}/${KEY}/all`;
   return httpRequest({
     url,

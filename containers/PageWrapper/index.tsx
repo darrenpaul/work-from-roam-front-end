@@ -5,7 +5,7 @@ import { pageContainerStyle, pageContentContainerStyle } from './styles';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const PageWrapper = ({ showFoooter = true, title, authUser, children }) => {
+const PageWrapper = ({ showFoooter = true, title, authUser, bottomMargin = true, children }) => {
   return (
     <div className={pageContainerStyle()}>
       <Head>
@@ -17,7 +17,7 @@ const PageWrapper = ({ showFoooter = true, title, authUser, children }) => {
 
       <ToastContainer />
 
-      <div className={pageContentContainerStyle()}>{children}</div>
+      <div className={pageContentContainerStyle(bottomMargin)}>{children}</div>
 
       {showFoooter && <Footer />}
     </div>

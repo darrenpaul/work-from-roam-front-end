@@ -2,25 +2,32 @@ import Map from 'components/Map';
 import MarkerCoffee from 'components/Map/markers/MarkerCoffee';
 import SpotDetail from 'components/Map/overlays/SpotDetail';
 import SpotDetailPanel from 'components/SpotDetailPanel';
-import { getSpots } from 'apiClient/spot';
+import { doGetSpots } from 'services/spot';
 import { spotsContainerStyle } from './styles';
 import { useEffect, useState } from 'react';
 
-const Spots = ({ accessToken }) => {
+interface Params {
+  accessToken?: string;
+}
+
+const Spots = ({ accessToken }: Params) => {
   const [spots, setSpots] = useState([]);
   const [selectedSpot, setSelectedSpot] = useState();
   const [mapLoaded, setMapLoaded] = useState(false);
 
+  const isLoggedIn = accessToken !== undefined;
+
   useEffect(() => {
     if (spots.length === 0) {
-      getSpots(accessToken).then((spots) => setSpots(spots));
+      doGetSpots(accessToken).then((spots) => setSpots(spots));
     }
   });
 
   const handleSelectSpot = ({ spot }) => {
     if (!spot) return;
+
     if (selectedSpot?.id === spot.id) {
-      setSelectedSpot(null);
+      setSelectedSpot(undefined);
     } else {
       setSelectedSpot(spot);
     }
@@ -43,6 +50,7 @@ const Spots = ({ accessToken }) => {
             lat={spot.coordinates.lat}
             lng={spot.coordinates.lng}
             spot={spot}
+            isLoggedIn={isLoggedIn}
           />
         ))}
 

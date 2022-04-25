@@ -11,19 +11,19 @@ export const BUTTON_VARIANTS = {
   primary: {
     normal: 'bg-button-primary',
     hover: 'hover:bg-button-primary-hover',
-    text: 'text-light-copy'
+    text: 'text-light-copy',
   },
   secondary: {
     normal: 'bg-transparent',
     hover: 'bg-transparent',
-    text: 'text-dark-copy'
+    text: 'text-dark-copy',
   },
   info: {
     normal: 'bg-transparent',
     hover: 'bg-transparent',
-    text: 'text-dark-copy'
+    text: 'text-dark-copy',
   },
-  warning: { normal: 'bg-red-500', hover: 'bg-red-100' }
+  warning: { normal: 'bg-red-500', hover: 'bg-red-100', text: 'text-light-copy' },
 };
 
 const Button = ({ children, onClick, variant = BUTTON_VARIANTS.primary, styles = '' }: Params) => {

@@ -32,7 +32,7 @@ export const getUser = (accessToken: String) => {
 export const updateUser = (accessToken: String, userData: UserData, id: string) => {
   const url = `${BASE_URL}/${API_VERSION}/${KEY}/update/${id}`;
   const { firstName, lastName } = userData;
-  console.log(url);
+
   return httpRequest({
     url,
     method: 'POST',

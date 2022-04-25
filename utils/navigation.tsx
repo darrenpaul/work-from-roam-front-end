@@ -8,7 +8,6 @@ export const NAVIGATION_ROUTES = [
   {
     href: VIEW_SPOTS_ROUTE,
     text: 'View Spots',
-    protected: true,
   },
   {
     href: '/add-spot',

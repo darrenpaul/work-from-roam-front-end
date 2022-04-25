@@ -1,14 +1,16 @@
 export interface AuthUserType {
-  user: {
-    uid: string;
-    firstName: string;
-    lastName: string;
-    role: string;
-    status: string;
-    createdDate: Date;
-    modifiedDate: Date;
+  authUser: {
+    user: {
+      uid: string;
+      firstName: string;
+      lastName: string;
+      role: string;
+      status: string;
+      createdDate: Date;
+      modifiedDate: Date;
+    };
+    accessToken: string;
   };
-  accessToken: string;
 }
 
 export interface UserData {

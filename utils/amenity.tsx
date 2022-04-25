@@ -36,7 +36,7 @@ export const AMENITIES = [
   },
 ];
 
-export const getAmenityIcon = (amenity: string, color: string) => {
+export const getAmenityIcon = (amenity: string, color?: string) => {
   switch (amenity) {
     case 'wifi':
       return <WifiIcon color={color} />;
