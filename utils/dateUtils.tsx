@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const dayNames = [
   { nice: 'Monday', short: 'Mon', key: 'monday' },
   { nice: 'Tuesday', short: 'Tue', key: 'tuesday' },
@@ -5,7 +7,7 @@ export const dayNames = [
   { nice: 'Thursday', short: 'Thu', key: 'thursday' },
   { nice: 'Friday', short: 'Fri', key: 'friday' },
   { nice: 'Saturday', short: 'Sat', key: 'saturday' },
-  { nice: 'Sunday', short: 'Sun', key: 'sunday' }
+  { nice: 'Sunday', short: 'Sun', key: 'sunday' },
 ];
 
 export const generateHours = () => {
@@ -32,4 +34,8 @@ export const formatTimeObject = (timeObject: { hour: string; minute: string }) =
 export const splitTime = (time) => {
   const [hour, minute] = time.split(':');
   return { hour, minute };
+};
+
+export const stringDateAndTimeFromSeconds = (seconds: number) => {
+  return dayjs.unix(seconds).format('DD-MMM-YYYY HH:mm');
 };

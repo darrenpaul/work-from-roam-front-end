@@ -3,6 +3,7 @@ import MarkerCoffee from 'components/Map/markers/MarkerCoffee';
 import SpotDetail from 'components/Map/overlays/SpotDetail';
 import SpotDetailPanel from 'components/SpotDetailPanel';
 import { doGetSpots } from 'services/spot';
+import { getVisibleSpots } from 'utils/map';
 import { spotsContainerStyle } from './styles';
 import { useEffect, useState } from 'react';
 
@@ -12,6 +13,7 @@ interface Params {
 
 const Spots = ({ accessToken }: Params) => {
   const [spots, setSpots] = useState([]);
+  const [visibleSpots, setVisibleSpots] = useState([]);
   const [selectedSpot, setSelectedSpot] = useState();
   const [mapLoaded, setMapLoaded] = useState(false);
 
@@ -33,6 +35,13 @@ const Spots = ({ accessToken }: Params) => {
     }
   };
 
+  const handleOnMapChange = (mapData) => {
+    const mapCenter = mapData?.center;
+    const mapZoom = mapData?.zoom;
+    const visibleSpots = getVisibleSpots(mapCenter, mapZoom, spots);
+    setVisibleSpots(visibleSpots);
+  };
+
   return (
     <div className={spotsContainerStyle()}>
       <Map
@@ -42,15 +51,15 @@ const Spots = ({ accessToken }: Params) => {
         onMapLoaded={(mapLoaded) => {
           setMapLoaded(mapLoaded);
         }}
+        onMapChange={handleOnMapChange}
       >
-        {spots.map((spot) => (
+        {visibleSpots.map((spot) => (
           <MarkerCoffee
             onClick={() => handleSelectSpot(spot)}
             key={spot.id}
             lat={spot.coordinates.lat}
             lng={spot.coordinates.lng}
             spot={spot}
-            isLoggedIn={isLoggedIn}
           />
         ))}
 
@@ -60,6 +69,7 @@ const Spots = ({ accessToken }: Params) => {
             spot={selectedSpot}
             lat={selectedSpot.coordinates.lat}
             lng={selectedSpot.coordinates.lng}
+            isLoggedIn={isLoggedIn}
           />
         )}
       </Map>

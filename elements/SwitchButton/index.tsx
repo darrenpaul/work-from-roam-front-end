@@ -12,7 +12,7 @@ const SwitchButton = ({ id, onChange, initialValue }: Params) => {
   };
 
   return (
-    <Switch onClick={handleChange}>
+    <Switch onChange={handleChange}>
       <input type="checkbox" defaultChecked={initialValue} />
       <span />
     </Switch>

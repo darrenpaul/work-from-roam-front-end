@@ -21,11 +21,7 @@ const OperatingHours = ({ data, onChange }) => {
         <div className={operatingHourContainerStyle()} key={index}>
           <Heading6>{nice}</Heading6>
 
-          <SwitchButton
-            id={key}
-            onChange={(id, value) => handleIsOpenChange(id, value)}
-            initialValue={data[key].open}
-          />
+          <SwitchButton id={key} onChange={handleIsOpenChange} initialValue={data[key].open} />
 
           <TimeSelector
             onChange={(id, value) => handleTimeChange('openTime', id, value)}

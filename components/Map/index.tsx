@@ -1,6 +1,7 @@
 import GoogleMap from 'google-map-react';
 import MapLoader from 'elements/Loaders/MapLoader';
 import MarkerHome from 'components/Map/markers/MarkerHome';
+import { DEFAULT_MAP_ZOOM } from 'utils/map';
 import { mapContainerWrapperStyle } from './styles';
 import { ReactNode, useEffect, useState } from 'react';
 
@@ -12,6 +13,7 @@ interface Params {
   onMapClick: Function;
   onChildClick: Function;
   onMapLoaded: Function;
+  onMapChange: Function;
   showHomeMarker: boolean;
   children: ReactNode;
 }
@@ -22,13 +24,14 @@ const Map = ({
   onMapClick,
   onChildClick,
   onMapLoaded,
+  onMapChange,
   showHomeMarker = true,
   children,
 }: Params) => {
   const [center, setCenter] = useState(
     initialCenter || { lat: -33.92706384916972, lng: 18.426755163696136 },
   );
-  const [zoom, setZoom] = useState(18);
+  const [zoom, setZoom] = useState(DEFAULT_MAP_ZOOM);
   const [mapLoading, setMapLoading] = useState(true);
 
   useEffect(() => {
@@ -67,6 +70,7 @@ const Map = ({
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={handleApiLoaded}
           bootstrapURLKeys={{ key: GOOGLE_MAPS_API_KEY }}
+          onChange={onMapChange}
           defaultCenter={center}
           defaultZoom={zoom}
           center={center}

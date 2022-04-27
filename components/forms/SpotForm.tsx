@@ -79,6 +79,9 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
     }
 
     errorNotification('There are errors');
+    if (Object.keys(errors).includes('coordinates')) {
+      errorNotification('Please select a location on the map');
+    }
   };
 
   const handleInputChange = (id: string, value: any) => {

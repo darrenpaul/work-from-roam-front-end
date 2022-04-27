@@ -8,19 +8,14 @@ import SpotDetailPanel from 'components/SpotDetailPanel';
 import { dayNames, formatTimeObject } from 'utils/dateUtils';
 import { doSpotApprove } from 'services/spot';
 import { getPendingSpots } from 'apiClient/spot';
+import { getVisibleSpots } from 'utils/map';
 import { spotDetailContainerStyle, spotsContainerStyle } from './styles';
 import { successNotification } from 'utils/notifications';
 import { useEffect, useState } from 'react';
 
-const PendingSpots = ({ accessToken }) => {
-  const [spots, setSpots] = useState([]);
+const PendingSpots = ({ accessToken, spots }) => {
+  const [visibleSpots, setVisibleSpots] = useState([]);
   const [selectedSpot, setSelectedSpot] = useState();
-
-  useEffect(() => {
-    if (spots.length === 0) {
-      getPendingSpots(accessToken).then((spots) => setSpots(spots));
-    }
-  }, []);
 
   const handleSelectSpot = ({ spot }) => {
     if (selectedSpot?.id === spot.id) {
@@ -35,6 +30,13 @@ const PendingSpots = ({ accessToken }) => {
     successNotification('Spot approved successfully');
   };
 
+  const handleOnMapChange = (mapData) => {
+    const mapCenter = mapData?.center;
+    const mapZoom = mapData?.zoom;
+    const visibleSpots = getVisibleSpots(mapCenter, mapZoom, spots);
+    setVisibleSpots(visibleSpots);
+  };
+
   return (
     <div className={spotsContainerStyle()}>
       <Map
@@ -42,8 +44,9 @@ const PendingSpots = ({ accessToken }) => {
         onMapClick={() => setSelectedSpot(null)}
         onChildClick={handleSelectSpot}
         onMapLoaded={() => setSelectedSpot(null)}
+        onMapChange={handleOnMapChange}
       >
-        {spots.map((spot) => (
+        {visibleSpots.map((spot) => (
           <MarkerCoffee
             onClick={() => handleSelectSpot(spot)}
             key={spot.id}
