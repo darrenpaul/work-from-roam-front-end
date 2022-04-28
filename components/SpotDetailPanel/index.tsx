@@ -6,6 +6,7 @@ import GlobeIcon from 'assets/icons/Globe';
 import Heading5 from 'elements/typography/Heading5';
 import Heading6 from 'elements/typography/Heading6';
 import LabelWithIcon from 'elements/LabelWithIcon';
+import Link from 'next/link';
 import LinkWithIcon from 'elements/LinkWithIcon';
 import Paragraph from 'elements/typography/Paragraphy';
 import PhoneIcon from 'assets/icons/Phone';
@@ -14,6 +15,7 @@ import { dayNames } from 'utils/dateUtils';
 import { spotDetailContainerStyle } from './styles';
 
 const SpotDetailPanel = ({
+  id,
   name,
   website,
   coordinates,
@@ -27,6 +29,7 @@ const SpotDetailPanel = ({
   operatingHours,
   amenities,
   handleApproval,
+  isLoggedIn,
 }) => {
   const operatingTime = (day) => {
     const openTime = operatingHours[day].openTime;
@@ -46,6 +49,7 @@ const SpotDetailPanel = ({
   return (
     <div className={spotDetailContainerStyle()}>
       <Heading5>{name}</Heading5>
+      {isLoggedIn && <Link href={`/spot-suggestion/${id}`}>Add suggestion</Link>}
 
       {website && <LinkWithIcon styles={'mt-item'} icon={GlobeIcon} url={website}></LinkWithIcon>}
 

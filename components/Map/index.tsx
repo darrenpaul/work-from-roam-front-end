@@ -1,7 +1,7 @@
 import GoogleMap from 'google-map-react';
 import MapLoader from 'elements/Loaders/MapLoader';
 import MarkerHome from 'components/Map/markers/MarkerHome';
-import { DEFAULT_MAP_ZOOM } from 'utils/map';
+import { DEFAULT_CENTER_COORDINATES, DEFAULT_MAP_ZOOM } from 'utils/map';
 import { mapContainerWrapperStyle } from './styles';
 import { ReactNode, useEffect, useState } from 'react';
 
@@ -28,9 +28,7 @@ const Map = ({
   showHomeMarker = true,
   children,
 }: Params) => {
-  const [center, setCenter] = useState(
-    initialCenter || { lat: -33.92706384916972, lng: 18.426755163696136 },
-  );
+  const [center, setCenter] = useState(initialCenter || DEFAULT_CENTER_COORDINATES);
   const [zoom, setZoom] = useState(DEFAULT_MAP_ZOOM);
   const [mapLoading, setMapLoading] = useState(true);
 

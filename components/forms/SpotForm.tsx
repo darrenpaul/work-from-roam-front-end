@@ -32,7 +32,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
     email: initialSpot.email || '',
     phoneNumber: initialSpot.phoneNumber || '',
     phoneCode: initialSpot.phoneCode || '27',
-    coordinates: initialSpot.coordinates || { lat: '', lng: '' },
+    coordinates: initialSpot.coordinates || undefined,
     address: initialSpot.address || '',
     suburb: initialSpot.suburb || '',
     city: initialSpot.city || '',
@@ -130,11 +130,10 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
     const newState = { ...operatingHours, [id]: merged };
     setOperatingHours(newState);
   };
-
+  console.log(spotData.coordinates);
   return (
     <div className={formContainerStyle()}>
       <Map
-        fullHeight={true}
         initialCenter={spotData.coordinates}
         onMapClick={handleMapClick}
         onChildClick={() => {}}
@@ -143,13 +142,13 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
         }}
         showHomeMarker={showHomeMarker}
       >
-        {mapLoaded && (
+        {mapLoaded && spotData.coordinates?.lat && spotData.coordinates?.lng && (
           <MarkerCoffee lat={spotData.coordinates.lat} lng={spotData.coordinates.lng} />
         )}
       </Map>
 
       <div className={formInputsContainerStyle()}>
-        <Heading3>Add a new spot</Heading3>
+        <Heading3 styles="mt-sides">Add a new spot</Heading3>
 
         <ImageInput onChange={handleImageSelect} />
         {images.map((image, index) => (

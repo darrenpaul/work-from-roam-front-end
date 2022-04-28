@@ -38,12 +38,13 @@ export const linksContainerStyle = (showMenu) => {
     'lg:justify-end lg:items-center',
     'grow',
     'pt-14 lg:pt-0',
+    'px-item md:px-0',
     'z-50',
   ];
   return base.join(' ');
 };
 
 export const buttonsContainerStyle = () => {
-  const base = ['flex', 'ml-0 lg:ml-8'];
+  const base = ['flex', 'ml-0 lg:ml-8 mt-item md:mt-0'];
   return base.join(' ');
 };

@@ -74,7 +74,7 @@ const Spots = ({ accessToken }: Params) => {
         )}
       </Map>
 
-      {selectedSpot && <SpotDetailPanel {...selectedSpot} />}
+      {selectedSpot && <SpotDetailPanel {...selectedSpot} isLoggedIn={isLoggedIn} />}
     </div>
   );
 };

@@ -33,6 +33,8 @@ module.exports = {
         'button-primary-hover': '#34d399',
         'button-secondary': '#10b981',
         'button-secondary-hover': '#34d399',
+        'button-warning': '#fb7185',
+        'button-warning-hover': '#fda4af',
       },
       spacing: {
         item: '1rem',

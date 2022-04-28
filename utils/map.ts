@@ -2,6 +2,8 @@ const BASE_URL = 'https://www.google.com/maps/dir';
 
 export const DEFAULT_MAP_ZOOM = 15;
 
+export const DEFAULT_CENTER_COORDINATES = { lat: -33.92706384916972, lng: 18.426755163696136 };
+
 export const createDirectionURL = (name, coordinates, address, city, zipCode, country) => {
   //   const formattedCoordinates = `${coordinates.lat},${coordinates.lng}`;
   const formattedName = name.replaceAll(' ', '+');

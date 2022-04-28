@@ -23,7 +23,11 @@ export const BUTTON_VARIANTS = {
     hover: 'bg-transparent',
     text: 'text-dark-copy',
   },
-  warning: { normal: 'bg-red-500', hover: 'bg-red-100', text: 'text-light-copy' },
+  warning: {
+    normal: 'bg-button-warning',
+    hover: 'hover:bg-button-warning-hover',
+    text: 'text-light-copy',
+  },
 };
 
 const Button = ({ children, onClick, variant = BUTTON_VARIANTS.primary, styles = '' }: Params) => {

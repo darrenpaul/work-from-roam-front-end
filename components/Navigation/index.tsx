@@ -77,6 +77,7 @@ const Navigation = ({ authUser }: AuthUserType) => {
             />
           );
         })}
+
         <div className={buttonsContainerStyle()}>
           {isLoggedIn ? (
             <Button onClick={handleSignOutUser} variant={BUTTON_VARIANTS.warning}>
