@@ -5,9 +5,7 @@ import {
   inputErrorStyle,
   inputInnerContainerStyle,
   inputStyle,
-  labelContainersStyle,
   labelStyle,
-  requiredSymbolStyle,
 } from './styles';
 
 interface InputParams {
@@ -48,7 +46,7 @@ const Input = ({
   };
 
   const labelText = () => {
-    return `${label}${required ? ' *' : ''}`;
+    return `${label}${!required ? ' (optional)' : ''}`;
   };
 
   return (

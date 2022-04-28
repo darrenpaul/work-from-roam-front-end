@@ -114,6 +114,35 @@ const SpotSuggestionCompare = ({ authUser }: AuthUserType) => {
     );
   };
 
+  const getCompareCoordinatesComponent = () => {
+    const spotValue = spotCompare?.spot?.coordinates;
+    const spotSuggestionValue = spotCompare?.spotSuggestion?.coordinates;
+    if (
+      spotValue?.lat === spotSuggestionValue?.lat &&
+      spotValue?.lng === spotSuggestionValue?.lng
+    ) {
+      return null;
+    }
+    return (
+      <div className={suggestionGroupStyle()}>
+        <Paragraph>Coordinates</Paragraph>
+        <Paragraph>
+          {`${spotCompare?.spot?.coordinates?.lat.toString()}, ${spotCompare?.spot?.coordinates?.lng.toString()}`}
+        </Paragraph>
+        <Paragraph>
+          {`${spotCompare?.spotSuggestion?.coordinates?.lat.toString()}, ${spotCompare?.spotSuggestion?.coordinates?.lng.toString()}`}
+        </Paragraph>
+        <Button
+          onClick={() =>
+            handleCompareAccept('coordinates', spotCompare?.spotSuggestion?.coordinates)
+          }
+        >
+          Accept
+        </Button>
+      </div>
+    );
+  };
+
   return (
     <PageWrapper authUser={authUser}>
       <Button onClick={() => console.log(spotData)}>Log</Button>
@@ -122,6 +151,7 @@ const SpotSuggestionCompare = ({ authUser }: AuthUserType) => {
       {getCompareComponent('email')}
       {getCompareComponent('phoneCode')}
       {getCompareComponent('phoneNumber')}
+      {getCompareCoordinatesComponent()}
       {getCompareComponent('address')}
       {getCompareComponent('suburb')}
       {getCompareComponent('city')}

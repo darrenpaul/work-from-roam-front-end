@@ -10,10 +10,10 @@ export const spotFormValidation = (spotData) => {
     phoneNumber,
     phoneCode,
     website,
-    address,
-    city,
-    zipCode,
-    country,
+    // address,
+    // city,
+    // zipCode,
+    // country,
     coordinates,
   } = spotData;
 
@@ -47,26 +47,30 @@ export const spotFormValidation = (spotData) => {
     }
   }
 
-  if (isEmpty(address)) {
-    errors.address = 'Address is required';
-  }
+  // if (isEmpty(address)) {
+  //   errors.address = 'Address is required';
+  // }
 
-  if (isEmpty(city)) {
-    errors.city = 'City is required';
-  }
+  // if (isEmpty(city)) {
+  //   errors.city = 'City is required';
+  // }
 
-  if (isEmpty(zipCode)) {
-    errors.zipCode = 'Zip code is required';
-  }
+  // if (isEmpty(zipCode)) {
+  //   errors.zipCode = 'Zip code is required';
+  // }
 
-  if (isEmpty(country)) {
-    errors.country = 'Country is required';
-  }
+  // if (isEmpty(country)) {
+  //   errors.country = 'Country is required';
+  // }
 
-  if (isEmpty(coordinates.lat.toString())) {
-    errors.coordinates = 'Coordinates are required';
-  }
-  if (isEmpty(coordinates.lng.toString())) {
+  if (coordinates) {
+    if (isEmpty(coordinates?.lat.toString())) {
+      errors.coordinates = 'Coordinates are required';
+    }
+    if (isEmpty(coordinates?.lng.toString())) {
+      errors.coordinates = 'Coordinates are required';
+    }
+  } else {
     errors.coordinates = 'Coordinates are required';
   }
 

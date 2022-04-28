@@ -37,11 +37,13 @@ const Map = ({
   }, []);
 
   const getUserLocation = () => {
-    if (navigator && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        const { latitude, longitude } = position.coords;
-        setCenter({ lat: latitude, lng: longitude });
-      });
+    if (!initialCenter) {
+      if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          const { latitude, longitude } = position.coords;
+          setCenter({ lat: latitude, lng: longitude });
+        });
+      }
     }
   };
 

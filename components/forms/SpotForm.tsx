@@ -8,6 +8,7 @@ import Input from 'elements/Input';
 import Map from 'components/Map';
 import MarkerCoffee from 'components/Map/markers/MarkerCoffee';
 import OperatingHours from 'components/OperatingHours';
+import Paragraph from 'elements/typography/Paragraphy';
 import { BASE_AMENITIES, BASE_OPERATING_HOURS } from 'utils/spot';
 import { blobObjectFromBlobUrl, readFile } from 'utils/file';
 import { errorNotification } from 'utils/notifications';
@@ -24,9 +25,10 @@ interface Params {
   initialSpot: SpotType;
   onSubmit: Function;
   showHomeMarker: boolean;
+  isAdmin: boolean;
 }
 
-const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
+const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = false }: Params) => {
   const [spotData, setSpotData] = useState({
     name: initialSpot.name || '',
     email: initialSpot.email || '',
@@ -130,7 +132,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
     const newState = { ...operatingHours, [id]: merged };
     setOperatingHours(newState);
   };
-  console.log(spotData.coordinates);
+
   return (
     <div className={formContainerStyle()}>
       <Map
@@ -149,13 +151,14 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
 
       <div className={formInputsContainerStyle()}>
         <Heading3 styles="mt-sides">Add a new spot</Heading3>
+        <Paragraph>Fill in as much as you can and we'll do this rest!</Paragraph>
 
-        <ImageInput onChange={handleImageSelect} />
+        {/* <ImageInput onChange={handleImageSelect} />
         {images.map((image, index) => (
           <Image key={index} src={image} alt="something" width={160} height={120} layout="fixed" />
-        ))}
+        ))} */}
 
-        <ImageCrop show={showCropper} image={cropImage} handleCropSave={handleCropSave} />
+        {/* <ImageCrop show={showCropper} image={cropImage} handleCropSave={handleCropSave} /> */}
 
         <Input
           id="name"
@@ -165,6 +168,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
           label="Shop Name"
           required={true}
           placeholder="Enter shop name"
+          styles="mt-item"
         />
 
         <Input
@@ -202,7 +206,6 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
           inputChange={handleInputChange}
           error={errors.address}
           label="Address"
-          required={true}
           placeholder="Enter the address for the shop"
         />
 
@@ -212,7 +215,6 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
           inputChange={handleInputChange}
           error={errors.suburb}
           label="Suburb"
-          required={true}
           placeholder="Enter the suburb where the shop is located"
         />
 
@@ -222,7 +224,6 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
           inputChange={handleInputChange}
           error={errors.city}
           label="City"
-          required={true}
           placeholder="Enter the city where the shop is located"
         />
 
@@ -232,7 +233,6 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
           inputChange={handleInputChange}
           error={errors.zipCode}
           label="Zip Code"
-          required={true}
           placeholder="Enter the zip code where the shop is located"
         />
         <Input
@@ -241,7 +241,6 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
           inputChange={handleInputChange}
           error={errors.country}
           label="Country"
-          required={true}
           placeholder="Enter the country where the shop is located"
         />
 
@@ -249,13 +248,15 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true }: Params) => {
 
         <Amenities initialData={amenities} onChange={handleAmenityChange} />
 
-        <Input
-          id="placeId"
-          value={spotData.placeId}
-          inputChange={handleInputChange}
-          error={errors.placeId}
-          placeholder="Google Place ID"
-        />
+        {isAdmin && (
+          <Input
+            id="placeId"
+            value={spotData.placeId}
+            inputChange={handleInputChange}
+            error={errors.placeId}
+            placeholder="Google Place ID"
+          />
+        )}
 
         <Button onClick={handleSubmit}>Submit</Button>
       </div>

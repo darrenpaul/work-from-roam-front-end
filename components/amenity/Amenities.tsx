@@ -50,7 +50,7 @@ const Amenities = ({ initialData, onChange }: Params) => {
     setAmenities(newState);
     onChange(newState);
   };
-  console.log(AMENITIES);
+
   return (
     <div className={amenityListContainerStyle()}>
       {AMENITIES.map((amenity, index) => (
@@ -61,7 +61,7 @@ const Amenities = ({ initialData, onChange }: Params) => {
             )}
             onClick={() =>
               handleInputChange(amenity.key, {
-                available: !amenities[amenity.key as keyof AmenityType].available,
+                available: !amenities[amenity.key as keyof AmenityType]?.available,
               })
             }
             value={amenity.name}
