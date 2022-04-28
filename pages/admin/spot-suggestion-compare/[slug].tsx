@@ -147,7 +147,7 @@ const SpotSuggestionCompare = ({ authUser }: AuthUserType) => {
     <PageWrapper authUser={authUser}>
       <Button onClick={() => console.log(spotData)}>Log</Button>
       <Button onClick={handleSubmit}>Submit</Button>
-      {getCompareComponent('name')}
+      {getCompareComponent('company')}
       {getCompareComponent('email')}
       {getCompareComponent('phoneCode')}
       {getCompareComponent('phoneNumber')}

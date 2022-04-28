@@ -16,7 +16,7 @@ import { spotDetailContainerStyle } from './styles';
 
 const SpotDetailPanel = ({
   id,
-  name,
+  company,
   website,
   address,
   suburb,
@@ -42,25 +42,27 @@ const SpotDetailPanel = ({
   };
 
   const handleDirectionButtonClick = () => {
-    const directionURL = createDirectionURL(name, userLocation, address, city, zipCode, country);
+    const directionURL = createDirectionURL(company, userLocation, address, city, zipCode, country);
     window.open(directionURL);
   };
 
   return (
     <div className={spotDetailContainerStyle()}>
-      <Heading5>{name}</Heading5>
+      <Heading5>{company}</Heading5>
       {isLoggedIn && <Link href={`/spot-suggestion/${id}`}>Add suggestion</Link>}
 
       {website && <LinkWithIcon styles={'mt-item'} icon={GlobeIcon} url={website}></LinkWithIcon>}
 
-      <AddressContainer
-        address={address}
-        suburb={suburb}
-        city={city}
-        zipCode={zipCode}
-        country={country}
-        styles={'mt-item'}
-      />
+      {address && city && country && (
+        <AddressContainer
+          address={address}
+          suburb={suburb}
+          city={city}
+          zipCode={zipCode}
+          country={country}
+          styles={'mt-item'}
+        />
+      )}
 
       {email && <LabelWithIcon icon={EnvelopeIcon}>{email}</LabelWithIcon>}
 

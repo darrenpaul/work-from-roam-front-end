@@ -15,7 +15,7 @@ interface Params {
 }
 
 const SpotDetail = ({ spot, onClick, isLoggedIn }: Params) => {
-  const { amenities, name, description, id } = spot;
+  const { amenities, company, description, id } = spot;
   const amenityKeys: string[] = [];
   Object.keys(amenities).forEach((key) => {
     if (amenities[key].available === true) amenityKeys.push(key);
@@ -24,7 +24,7 @@ const SpotDetail = ({ spot, onClick, isLoggedIn }: Params) => {
   return (
     <div onClick={() => onClick()} className={spotDetailOverlayContainerStyle()}>
       <div className={spotDetailContainerStyle()}>
-        <Heading5>{name}</Heading5>
+        <Heading5>{company}</Heading5>
         <Paragraph>{description}</Paragraph>
         <div className={spotAmenitiesContainerStyle()}>
           {amenityKeys.map((amenity, index) => (

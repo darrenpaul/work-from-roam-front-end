@@ -1,4 +1,3 @@
-import { SpotType } from 'types/spot';
 import {
   approveSpot,
   createSpot,
@@ -8,14 +7,8 @@ import {
   updateSpot,
 } from '../apiClient/spot';
 
-export const doCreateSpot = (accessToken: string, spotData) => {
-  createSpot(accessToken, spotData)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+export const doCreateSpot = async (accessToken: string, spotData) => {
+  await createSpot(accessToken, spotData);
 };
 
 export const doUpdateSpot = async (accessToken: string, id: string, spotData) => {

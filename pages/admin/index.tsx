@@ -6,7 +6,7 @@ import SpotsTable from 'components/Spots/SpotsTable';
 import { AuthUserType } from 'types/user';
 import { batchAdd } from 'utils/spot';
 import { doGetPendingSpots } from 'services/spot';
-import { doMigration } from 'migrations/spot/0002-fix-address-pending';
+import { doMigration } from 'migrations/spot/0003-add-company-field';
 import { doSpotApprove } from 'services/spot';
 import { successNotification } from 'utils/notifications';
 import { useEffect, useState } from 'react';

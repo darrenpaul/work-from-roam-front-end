@@ -3,9 +3,9 @@ import SpotForm from 'components/forms/SpotForm';
 import useSpot from 'hooks/useSpot';
 import { AuthUserType } from 'types/user';
 import { doCreateSpot } from 'services/spot';
+import { errorNotification, successNotification } from 'utils/notifications';
 import { ROLES } from 'utils/roles';
 import { SpotType } from 'types/spot';
-import { successNotification } from 'utils/notifications';
 import { useRouter } from 'next/router';
 
 const PAGE_TITLE = 'WFR | Add Spot';
@@ -19,9 +19,12 @@ const SpotSuggestionPage = ({ authUser }: AuthUserType) => {
   const isAdmin = user?.role === ROLES.ADMIN;
 
   const handleSubmit = async (spotData: SpotType) => {
-    await doCreateSpot(accessToken, { ...spotData });
-    successNotification('Spot created successfully');
-    console.log('Spot submitted');
+    try {
+      await doCreateSpot(accessToken, { ...spotData });
+      successNotification('Spot created successfully');
+    } catch (error) {
+      errorNotification(error?.data?.message);
+    }
   };
 
   return (

@@ -30,7 +30,7 @@ interface Params {
 
 const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = false }: Params) => {
   const [spotData, setSpotData] = useState({
-    name: initialSpot.name || '',
+    company: initialSpot.company || '',
     email: initialSpot.email || '',
     phoneNumber: initialSpot.phoneNumber || '',
     phoneCode: initialSpot.phoneCode || '27',
@@ -49,7 +49,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
     initialSpot.operatingHours || BASE_OPERATING_HOURS,
   );
   const [errors, setErrors] = useState({
-    name: '',
+    company: '',
     email: '',
     phoneNumber: '',
     phoneCode: '',
@@ -161,10 +161,11 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
         {/* <ImageCrop show={showCropper} image={cropImage} handleCropSave={handleCropSave} /> */}
 
         <Input
-          id="name"
-          value={spotData.name}
+          id="company"
+          autoComplete="none"
+          value={spotData.company}
           inputChange={handleInputChange}
-          error={errors.name}
+          error={errors.company}
           label="Shop Name"
           required={true}
           placeholder="Enter shop name"
@@ -173,6 +174,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
 
         <Input
           id="email"
+          autoComplete="none"
           value={spotData.email}
           inputChange={handleInputChange}
           error={errors.email}
@@ -182,6 +184,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
 
         <Input
           id="phoneNumber"
+          autoComplete="none"
           value={spotData.phoneNumber}
           phoneCode={spotData.phoneCode}
           inputChange={handleInputChange}
@@ -193,6 +196,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
 
         <Input
           id="website"
+          autoComplete="none"
           value={spotData.website}
           inputChange={handleInputChange}
           error={errors.website}
@@ -202,6 +206,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
 
         <Input
           id="address"
+          autoComplete="none"
           value={spotData.address}
           inputChange={handleInputChange}
           error={errors.address}
@@ -211,6 +216,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
 
         <Input
           id="suburb"
+          autoComplete="none"
           value={spotData.suburb}
           inputChange={handleInputChange}
           error={errors.suburb}
@@ -220,6 +226,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
 
         <Input
           id="city"
+          autoComplete="none"
           value={spotData.city}
           inputChange={handleInputChange}
           error={errors.city}
@@ -229,14 +236,17 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
 
         <Input
           id="zipCode"
+          autoComplete="none"
           value={spotData.zipCode}
           inputChange={handleInputChange}
           error={errors.zipCode}
           label="Zip Code"
           placeholder="Enter the zip code where the shop is located"
         />
+
         <Input
           id="country"
+          autoComplete="none"
           value={spotData.country}
           inputChange={handleInputChange}
           error={errors.country}

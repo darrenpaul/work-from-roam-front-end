@@ -23,6 +23,7 @@ interface InputParams {
   onBlurFn?: Function;
   phoneCode?: string;
   styles?: string;
+  autoComplete?: string;
 }
 
 const Input = ({
@@ -36,6 +37,7 @@ const Input = ({
   inputChange,
   error,
   nextInput,
+  autoComplete = 'on',
   type = 'text',
   onFocusFn = () => {},
   onBlurFn = () => {},
@@ -72,6 +74,7 @@ const Input = ({
           type={type}
           onFocus={() => onFocusFn()}
           onBlur={() => onBlurFn()}
+          autoComplete={autoComplete}
         />
       </div>
 

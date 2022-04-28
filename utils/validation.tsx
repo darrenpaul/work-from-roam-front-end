@@ -5,7 +5,7 @@ import isURL from 'validator/lib/isURL';
 
 export const spotFormValidation = (spotData) => {
   const {
-    name,
+    company,
     email,
     phoneNumber,
     phoneCode,
@@ -18,8 +18,8 @@ export const spotFormValidation = (spotData) => {
   } = spotData;
 
   const errors = {};
-  if (isEmpty(name)) {
-    errors.name = 'Store name is required';
+  if (isEmpty(company)) {
+    errors.company = 'Store name is required';
   }
 
   if (!isEmpty(email)) {
