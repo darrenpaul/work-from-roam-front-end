@@ -4,15 +4,15 @@ export const DEFAULT_MAP_ZOOM = 15;
 
 export const DEFAULT_CENTER_COORDINATES = { lat: -33.92706384916972, lng: 18.426755163696136 };
 
-export const createDirectionURL = (name, coordinates, address, city, zipCode, country) => {
-  //   const formattedCoordinates = `${coordinates.lat},${coordinates.lng}`;
+export const createDirectionURL = (name, userCoordinates, address, city, zipCode, country) => {
+  const formattedCoordinates = `${userCoordinates?.lat},${userCoordinates?.lng}` || '';
   const formattedName = name.replaceAll(' ', '+');
   const formattedAddress = address.replaceAll(' ', '+');
   const formattedCity = city.replaceAll(' ', '+');
   const formattedZipCode = zipCode.replaceAll(' ', '+');
   const formattedCountry = country.replaceAll(' ', '+');
 
-  const directionURL = `${BASE_URL}/+${formattedName},+${formattedAddress},+${formattedCity},+${formattedZipCode},+${formattedCountry}`;
+  const directionURL = `${BASE_URL}/${formattedCoordinates}/+${formattedName},+${formattedAddress},+${formattedCity},+${formattedZipCode},+${formattedCountry}`;
   return directionURL;
 };
 

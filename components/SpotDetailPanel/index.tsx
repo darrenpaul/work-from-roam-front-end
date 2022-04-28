@@ -18,7 +18,6 @@ const SpotDetailPanel = ({
   id,
   name,
   website,
-  coordinates,
   address,
   suburb,
   city,
@@ -30,6 +29,7 @@ const SpotDetailPanel = ({
   amenities,
   handleApproval,
   isLoggedIn,
+  userLocation,
 }) => {
   const operatingTime = (day) => {
     const openTime = operatingHours[day].openTime;
@@ -42,7 +42,7 @@ const SpotDetailPanel = ({
   };
 
   const handleDirectionButtonClick = () => {
-    const directionURL = createDirectionURL(name, coordinates, address, city, zipCode, country);
+    const directionURL = createDirectionURL(name, userLocation, address, city, zipCode, country);
     window.open(directionURL);
   };
 

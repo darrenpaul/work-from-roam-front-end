@@ -16,6 +16,7 @@ const Spots = ({ accessToken }: Params) => {
   const [visibleSpots, setVisibleSpots] = useState([]);
   const [selectedSpot, setSelectedSpot] = useState();
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [userLocation, setUserLocation] = useState();
 
   const isLoggedIn = accessToken !== undefined;
 
@@ -24,6 +25,19 @@ const Spots = ({ accessToken }: Params) => {
       doGetSpots(accessToken).then((spots) => setSpots(spots));
     }
   });
+
+  useEffect(() => {
+    getUserLocation();
+  }, []);
+
+  const getUserLocation = () => {
+    if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const { latitude, longitude } = position.coords;
+        setUserLocation({ lat: latitude, lng: longitude });
+      });
+    }
+  };
 
   const handleSelectSpot = ({ spot }) => {
     if (!spot) return;
@@ -36,9 +50,9 @@ const Spots = ({ accessToken }: Params) => {
   };
 
   const handleOnMapChange = (mapData) => {
-    const mapCenter = mapData?.center;
+    const center = mapData?.center;
     const mapZoom = mapData?.zoom;
-    const visibleSpots = getVisibleSpots(mapCenter, mapZoom, spots);
+    const visibleSpots = getVisibleSpots(center, mapZoom, spots);
     setVisibleSpots(visibleSpots);
   };
 
@@ -74,7 +88,9 @@ const Spots = ({ accessToken }: Params) => {
         )}
       </Map>
 
-      {selectedSpot && <SpotDetailPanel {...selectedSpot} isLoggedIn={isLoggedIn} />}
+      {selectedSpot && (
+        <SpotDetailPanel {...selectedSpot} isLoggedIn={isLoggedIn} userLocation={userLocation} />
+      )}
     </div>
   );
 };
