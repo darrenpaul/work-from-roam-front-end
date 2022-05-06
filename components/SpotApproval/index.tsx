@@ -24,7 +24,7 @@ const SpotApproval = ({ accessToken }) => {
         spots?.map((item, index) => {
           return (
             <div className="flex" key={index}>
-              <Link href={`/admin/spot-suggestion-compare/${item.uid}`}>{item.name}</Link>
+              <Link href={`/admin/spot-suggestion-compare/${item.uid}`}>{item.company}</Link>
               <Button onClick={() => handleApprove(item)}>Accept</Button>
             </div>
           );

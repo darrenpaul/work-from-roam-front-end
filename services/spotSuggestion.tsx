@@ -2,8 +2,8 @@ import {
   acceptSpotSuggestion,
   createSpotSuggestion,
   getSpotsSuggestions,
-  getSpotSuggestion
-  } from 'apiClient/spotSuggestion';
+  getSpotSuggestion,
+} from 'apiClient/spotSuggestion';
 
 export const doCreateSpotSuggestion = async (accessToken: string, spotData) => {
   try {
@@ -29,5 +29,6 @@ export const doSpotSuggestionAccept = async (accessToken: string, id: string, sp
 };
 
 export const doGetSpotsSuggestions = async (accessToken: String) => {
-  return await getSpotsSuggestions(accessToken);
+  const spotsSuggests = await getSpotsSuggestions(accessToken);
+  return spotsSuggests;
 };
