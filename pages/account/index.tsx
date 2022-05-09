@@ -2,8 +2,8 @@ import Heading3 from 'elements/typography/Heading3';
 import PageWrapper from 'containers/PageWrapper';
 import UserUpdateForm from 'components/forms/UserUpdateForm';
 import { AuthUserType } from 'types/user';
-
-const PAGE_TITLE = 'WFR | Account';
+import { COMPANY_NAME } from 'shared/constants';
+const PAGE_TITLE = `${COMPANY_NAME} | Account`;
 
 const ViewSpotsPage = ({ authUser }: AuthUserType) => {
   return (

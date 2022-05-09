@@ -112,55 +112,25 @@ export const batchAdd = (accessToken) => {
         });
       }
 
-      const addressPieces = formatted_address.split(',');
-      let address = addressPieces[0];
-      let city = addressPieces[1];
-      let zipCode = addressPieces[2];
-      let country = addressPieces[3];
-
-      if (addressPieces.length > 4) {
-        address = `${addressPieces[0]}, ${addressPieces[1]}`;
-        city = addressPieces[2];
-        zipCode = addressPieces[3];
-        country = addressPieces[4];
-      }
-
-      if (addressPieces.length > 5) {
-        address = `${addressPieces[0]}, ${addressPieces[1]}, ${addressPieces[2]}`;
-        city = addressPieces[3];
-        zipCode = addressPieces[4];
-        country = addressPieces[5];
-      }
-      if (addressPieces.length > 5) {
-        address = `${addressPieces[0]}, ${addressPieces[1]}, ${addressPieces[2]}`;
-        city = addressPieces[3];
-        zipCode = addressPieces[4];
-        country = addressPieces[5];
-      }
-      if (addressPieces.length > 6) {
-        address = `${addressPieces[0]}, ${addressPieces[1]}, ${addressPieces[2]}, ${addressPieces[3]}`;
-        city = addressPieces[4];
-        zipCode = addressPieces[5];
-        country = addressPieces[6];
-      }
-
-      if (addressPieces.length > 7) {
-        address = `${addressPieces[0]}, ${addressPieces[1]}, ${addressPieces[2]}, ${addressPieces[3]}, ${addressPieces[4]}`;
-        city = addressPieces[5];
-        zipCode = addressPieces[6];
-        country = addressPieces[7];
-      }
+      const addressData = malaysiaAddress(formatted_address);
+      let address = addressData?.address;
+      let city = addressData?.city;
+      let suburb = addressData?.suburb;
+      let zipCode = addressData?.zipCode;
+      let country = addressData?.country;
 
       if (address && city && zipCode && country) {
         address = address.trim();
+        suburb = suburb.trim();
         city = city.trim();
         zipCode = zipCode.trim();
         country = country.trim();
 
         const newData = {
-          name,
+          company: name,
           coordinates: geometry.location,
           address,
+          suburb,
           city,
           zipCode,
           country,
@@ -170,13 +140,88 @@ export const batchAdd = (accessToken) => {
           phoneNumber,
           phoneCode,
         };
-        if (name.toLowerCase().includes('the scrub')) {
-          console.log(newData);
-        }
+
         await doCreateSpot(accessToken, newData);
         count++;
+        console.log(newData);
         console.log(count);
       }
     }
   });
+};
+
+const malaysiaAddress = (formattedAddress) => {
+  const splitAddress = formattedAddress.split(',');
+  const addressPieces = [];
+  splitAddress.forEach((item) => {
+    addressPieces.push(item.trim());
+  });
+
+  const city = addressPieces[addressPieces.length - 2];
+  const suburbZipCodeRegex = /^.+ ((\d{5}) (.+)), .+ .+/gm.exec(formattedAddress);
+  if (suburbZipCodeRegex) {
+    const suburb = suburbZipCodeRegex[suburbZipCodeRegex.length - 1];
+    const zipCode = suburbZipCodeRegex[suburbZipCodeRegex.length - 2];
+    const country = addressPieces[addressPieces.length - 1];
+    const justAddress = [];
+    for (const item of addressPieces) {
+      if (item.includes(suburb) || item.includes(zipCode)) {
+        break;
+      }
+
+      justAddress.push(item);
+    }
+
+    const address = justAddress.join(' ');
+
+    return { address, city, suburb, zipCode, country };
+  }
+};
+
+const southAfricaAddress = (formattedAddress) => {
+  // const splitAddress = formatted_address.split(',');
+  // const addressPieces = [];
+  // splitAddress.forEach((item) => {
+  //   addressPieces.push(item.trim());
+  // });
+  // let address = addressPieces[0];
+  // let city = addressPieces[1];
+  // let zipCode = addressPieces[2];
+  // let country = addressPieces[3];
+  // if (addressPieces.length > 3) {
+  //   address = `${addressPieces[0]}}`;
+  //   city = addressPieces[1];
+  //   zipCode = addressPieces[2];
+  //   country = addressPieces[3];
+  // }
+  // if (addressPieces.length > 4) {
+  //   address = `${addressPieces[0]}, ${addressPieces[1]}`;
+  //   city = addressPieces[2];
+  //   zipCode = addressPieces[3];
+  //   country = addressPieces[4];
+  // }
+  // if (addressPieces.length > 5) {
+  //   address = `${addressPieces[0]}, ${addressPieces[1]}, ${addressPieces[2]}`;
+  //   city = addressPieces[3];
+  //   zipCode = addressPieces[4];
+  //   country = addressPieces[5];
+  // }
+  // if (addressPieces.length > 5) {
+  //   address = `${addressPieces[0]}, ${addressPieces[1]}, ${addressPieces[2]}`;
+  //   city = addressPieces[3];
+  //   zipCode = addressPieces[4];
+  //   country = addressPieces[5];
+  // }
+  // if (addressPieces.length > 6) {
+  //   address = `${addressPieces[0]}, ${addressPieces[1]}, ${addressPieces[2]}, ${addressPieces[3]}`;
+  //   city = addressPieces[4];
+  //   zipCode = addressPieces[5];
+  //   country = addressPieces[6];
+  // }
+  // if (addressPieces.length > 7) {
+  //   address = `${addressPieces[0]}, ${addressPieces[1]}, ${addressPieces[2]}, ${addressPieces[3]}, ${addressPieces[4]}`;
+  //   city = addressPieces[5];
+  //   zipCode = addressPieces[6];
+  //   country = addressPieces[7];
+  // }
 };

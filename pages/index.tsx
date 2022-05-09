@@ -4,6 +4,7 @@ import PageWrapper from 'containers/PageWrapper';
 import PromotionBanner from 'components/PromotionBanner';
 import { addSignUpUrlQuery } from 'utils/signInSignUp';
 import { AuthUserType } from 'types/user';
+import { COMPANY_NAME } from 'shared/constants';
 import { getCopy } from 'utils/copyReader';
 import { useRouter } from 'next/router';
 
@@ -12,7 +13,7 @@ const contentA = 'homePageCopy:contentBlockA';
 const contentB = 'homePageCopy:contentBlockB';
 const promotionBannerContent = 'homePageCopy:promotionBanner';
 
-const PAGE_TITLE = 'WFR | Home';
+const PAGE_TITLE = `${COMPANY_NAME} | Home`;
 
 const Home = ({ authUser }: AuthUserType) => {
   const router = useRouter();

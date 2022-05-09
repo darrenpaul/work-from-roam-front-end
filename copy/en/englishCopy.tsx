@@ -6,9 +6,9 @@ export const homePageCopy = {
   },
 
   contentBlockA: {
-    title: 'What is Work From Roam?',
+    title: 'What is Indcura?',
     description:
-      'Work From Roam is a platform that allows you to find spots for working near you. Work From Roam has information about the WiFi, parking, and much more.',
+      'Indcura is a platform that allows you to find spots for working near you. Indcura has information about the WiFi, parking, and much more.',
     imageSrc:
       'photo-1516635707594-6949bdca3538?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
     imageAlt: 'Coffee shop',
@@ -17,7 +17,7 @@ export const homePageCopy = {
   contentBlockB: {
     title: 'How does it work?',
     description:
-      'Work From Roam uses individuals like yourself to keep the information updated and accurate. Our moderators also try their best to ensure the accuracy of information from users. The more people using Work From Roam, the more information available, so share Work From Roam with your friends and family.',
+      'Indcura uses individuals like yourself to keep the information updated and accurate. Our moderators also try their best to ensure the accuracy of information from users. The more people using Indcura, the more information available, so share Indcura with your friends and family.',
     imageSrc:
       'photo-1543269865-f576bdee5d1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
     imageAlt: 'Coffee shop',

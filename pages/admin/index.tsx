@@ -5,13 +5,13 @@ import SpotApproval from 'components/SpotApproval';
 import SpotsTable from 'components/Spots/SpotsTable';
 import { AuthUserType } from 'types/user';
 import { batchAdd } from 'utils/spot';
+import { COMPANY_NAME } from 'shared/constants';
 import { doGetPendingSpots } from 'services/spot';
 import { doMigration } from 'migrations/spot/0003-add-company-field';
 import { doSpotApprove } from 'services/spot';
 import { successNotification } from 'utils/notifications';
 import { useEffect, useState } from 'react';
-
-const PAGE_TITLE = 'WFR | Admin';
+const PAGE_TITLE = `${COMPANY_NAME} | Admin`;
 
 const AdminPage = ({ authUser }: AuthUserType) => {
   const [spots, setSpots] = useState([]);

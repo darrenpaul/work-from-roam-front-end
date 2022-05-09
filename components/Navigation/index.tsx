@@ -5,6 +5,7 @@ import Heading5 from 'elements/typography/Heading5';
 import NavigationLink from './NavigationLink';
 import { addSignInUrlQuery } from 'utils/signInSignUp';
 import { AuthUserType } from 'types/user';
+import { COMPANY_NAME } from 'shared/constants';
 import { doSignOutUser } from 'services/user';
 import { getCopy } from 'utils/copyReader';
 import { infoNotification } from 'utils/notifications';
@@ -18,8 +19,6 @@ import {
   linksContainerStyle,
   menuButtonStyle,
 } from './styles';
-
-const COMPANY_NAME = 'Work.From.Roam';
 
 const Navigation = ({ authUser }: AuthUserType) => {
   const isLoggedIn = !!authUser?.user?.uid;

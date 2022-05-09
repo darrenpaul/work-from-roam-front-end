@@ -1,8 +1,9 @@
 import PageWrapper from 'containers/PageWrapper';
 import Spots from 'components/Spots';
 import { AuthUserType } from 'types/user';
+import { COMPANY_NAME } from 'shared/constants';
 
-const PAGE_TITLE = 'WFR | View Spots';
+const PAGE_TITLE = `${COMPANY_NAME} | View Spots`;
 
 const ViewSpotsPage = ({ authUser }: AuthUserType) => {
   const accessToken: string = authUser?.accessToken;

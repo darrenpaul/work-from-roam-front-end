@@ -2,13 +2,13 @@ import PageWrapper from 'containers/PageWrapper';
 import SpotForm from 'components/forms/SpotForm';
 import useSpot from 'hooks/useSpot';
 import { AuthUserType } from 'types/user';
+import { COMPANY_NAME } from 'shared/constants';
 import { doCreateSpotSuggestion } from 'services/spotSuggestion';
 import { ROLES } from 'utils/roles';
 import { SpotType } from 'types/spot';
 import { successNotification } from 'utils/notifications';
 import { useRouter } from 'next/router';
-
-const PAGE_TITLE = 'WFR | Spot Suggestion';
+const PAGE_TITLE = `${COMPANY_NAME} | Spot Suggestion`;
 
 const SpotSuggestionPage = ({ authUser }: AuthUserType) => {
   const router = useRouter();
