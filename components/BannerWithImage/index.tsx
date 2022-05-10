@@ -29,7 +29,7 @@ const BannerWithImage = ({
   return (
     <section className={mainContainerStyle()}>
       <div className={imageContainerStyle()}>
-        <Image src={srcImage} alt={altText} layout="fill" objectFit="cover" />
+        <Image src={srcImage} alt={altText} layout="fill" objectFit="cover" priority={true} />
       </div>
 
       <div className={gradientOverlayStyle()}></div>

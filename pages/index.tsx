@@ -47,7 +47,7 @@ const Home = ({ authUser }: AuthUserType) => {
         srcImage={getCopy(`${contentB}:imageSrc`)}
         altText={getCopy(`${contentB}:imageAlt`)}
         reverse={true}
-        styles="mt-4 md:mt-0"
+        styles="mt-sides"
       />
 
       {!isLoggedIn && (
@@ -58,7 +58,7 @@ const Home = ({ authUser }: AuthUserType) => {
           description={getCopy(`${promotionBannerContent}:description`)}
           buttonText={getCopy(`${promotionBannerContent}:buttonText`)}
           buttonOnClick={handleShowSignUp}
-          styles={'mt-item'}
+          styles="mt-sides"
         />
       )}
     </PageWrapper>

@@ -3,9 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     formats: ['image/webp'],
-    loader: 'imgix',
-    path: 'https://images.unsplash.com',
+    domains: ['res.cloudinary.com'],
   },
+  swcMinify: true,
 };
 
 module.exports = nextConfig;
