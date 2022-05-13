@@ -1,7 +1,10 @@
 export const LOADER_COLOR = '#94a3b8';
 
-export const loaderWrapperContainerStyle = () => {
+export const loaderWrapperContainerStyle = (loading: boolean) => {
   const base = ['z-50', 'fixed', 'top-0', 'left-0', 'pointer-events-none'];
+  if (!loading) {
+    base.push('hidden');
+  }
   return base.join(' ');
 };
 
@@ -23,7 +26,7 @@ export const loaderBackdropStyle = () => {
     'top-0',
     'left-0',
     'flex items-center justify-center',
-    'pointer-events-auto'
+    'pointer-events-auto',
   ];
   return base.join(' ');
 };

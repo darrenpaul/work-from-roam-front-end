@@ -34,6 +34,10 @@ const SignIn = ({ onSignIn }: Params) => {
     setUserData({ ...userData, [id]: value.trim() });
   };
 
+  const handleKeypress = (event) => {
+    console.log(event);
+  };
+
   return (
     <div className={formContainerStyle()}>
       <Heading5>Sign into your account</Heading5>
@@ -45,6 +49,7 @@ const SignIn = ({ onSignIn }: Params) => {
         label="Email"
         placeholder="Enter your email"
         styles={'mt-item'}
+        required
       />
 
       <Input
@@ -55,6 +60,7 @@ const SignIn = ({ onSignIn }: Params) => {
         label="Password"
         placeholder="Enter your password"
         type="password"
+        required
       />
 
       <Button onClick={handleSignInUser}>Sign In</Button>

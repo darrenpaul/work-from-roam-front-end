@@ -1,4 +1,4 @@
 export const spotsContainerStyle = () => {
-  const base = ['flex'];
+  const base = ['flex', 'relative'];
   return base.join(' ');
 };

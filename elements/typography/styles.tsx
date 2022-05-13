@@ -27,13 +27,11 @@ export const heading4Style = (color?: string, styles?: string) => {
 export const heading5Style = (color?: string, styles?: string) => {
   const textColor = color ? color : 'text-dark-copy';
   const base = ['text-xl', fontStyle, 'font-bold', textColor, 'break-normal'];
-  console.log([...base, styles].join(' '));
   return [...base, styles].join(' ');
 };
 
 export const heading6Style = (color?: string, styles?: string) => {
   const textColor = color ? color : 'text-dark-copy';
   const base = ['text-lrg', fontStyle, 'font-bold', textColor];
-  console.log([...base, styles].join(' '));
   return [...base, styles].join(' ');
 };

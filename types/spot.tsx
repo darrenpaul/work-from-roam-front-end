@@ -1,5 +1,6 @@
 export interface SpotType {
-  name: string;
+  id?: string;
+  company: string;
   email: string;
   phoneNumber: string;
   phoneCode: string;

@@ -11,7 +11,6 @@ import {
   timeSelectorContainerStyle,
 } from './styles';
 import { generateHours, generateMinutes, splitTime } from '../../utils/dateUtils';
-import { useState } from 'react';
 
 const hours = generateHours();
 const minutes = generateMinutes();

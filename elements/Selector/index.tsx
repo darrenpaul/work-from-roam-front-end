@@ -7,14 +7,17 @@ interface Params {
   options: Array<any>;
   onChange: Function;
   initialValue: { value: string; label: string };
+  styles?: string;
 }
 
 const Selector = ({ id, options, onChange, value, initialValue, styles }: Params) => {
   const formatOptions = () => {
-    return options.map((option) => ({
-      value: option,
-      label: option
-    }));
+    return options.map((option) => {
+      if ((option?.label, option?.value)) {
+        return option;
+      }
+      return { value: option, label: option };
+    });
   };
 
   const handleChange = ({ value }: { value: string }) => {
@@ -23,6 +26,7 @@ const Selector = ({ id, options, onChange, value, initialValue, styles }: Params
 
   return (
     <Select
+      hasValue={true}
       className={selectorStyle(styles)}
       value={value}
       onChange={handleChange}
