@@ -25,12 +25,14 @@ const SpotDetail = ({ spot, onClick, isLoggedIn }: Params) => {
     <div onClick={() => onClick()} className={spotDetailOverlayContainerStyle()}>
       <div className={spotDetailContainerStyle()}>
         <Heading5>{company}</Heading5>
-        <Paragraph>{description}</Paragraph>
-        <div className={spotAmenitiesContainerStyle()}>
-          {amenityKeys.map((amenity, index) => (
-            <div key={index}>{getAmenityIcon(amenity)}</div>
-          ))}
-        </div>
+        <Paragraph styles="mt-item">{description}</Paragraph>
+        {amenityKeys.length > 0 && (
+          <div className={spotAmenitiesContainerStyle()}>
+            {amenityKeys.map((amenity, index) => (
+              <div key={index}>{getAmenityIcon(amenity)}</div>
+            ))}
+          </div>
+        )}
         {isLoggedIn && <Link href={`/spot-suggestion/${id}`}>Add suggestion</Link>}
       </div>
     </div>

@@ -32,6 +32,6 @@ export const heading5Style = (color?: string, styles?: string) => {
 
 export const heading6Style = (color?: string, styles?: string) => {
   const textColor = color ? color : 'text-dark-copy';
-  const base = ['text-lrg', fontStyle, 'font-bold', textColor];
+  const base = ['text-lg', fontStyle, 'font-bold', textColor];
   return [...base, styles].join(' ');
 };

@@ -8,6 +8,7 @@ export const spotDetailOverlayContainerStyle = () => {
     'z-40',
     'p-4',
     'border rounded',
+    'w-48',
   ];
   return base.join(' ');
 };
@@ -18,6 +19,6 @@ export const spotDetailContainerStyle = () => {
 };
 
 export const spotAmenitiesContainerStyle = () => {
-  const base = ['flex', 'items-center', 'gap-4'];
+  const base = ['flex', 'items-center', 'gap-4', 'mb-item'];
   return base.join(' ');
 };

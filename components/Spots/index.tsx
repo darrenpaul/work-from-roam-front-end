@@ -31,6 +31,7 @@ const Spots = ({ spots, isLoggedIn }: Params) => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [userLocation, setUserLocation] = useState();
   const [spotsInArea, setSpotsInArea] = useState([]);
+  const [selectedSuburb, setSelectedSuburb] = useState();
   const [selectedCountry, setSelectedCountry] = useState();
   const [spotCoordinates, setSpotCoordinates] = useState();
   const [showFilter, setShowFilter] = useState(false);
@@ -58,6 +59,24 @@ const Spots = ({ spots, isLoggedIn }: Params) => {
     return countries;
   };
 
+  const suburbsInCountry = () => {
+    const suburbs = [];
+
+    if (selectedCountry) {
+      if (spots.length > 0) {
+        spots.forEach((spot) => {
+          if (!suburbs.includes(spot.suburb)) {
+            if (spot.country === selectedCountry) {
+              suburbs.push(spot.suburb);
+            }
+          }
+        });
+      }
+    }
+
+    return suburbs;
+  };
+
   const getUserLocation = () => {
     if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
@@ -83,11 +102,17 @@ const Spots = ({ spots, isLoggedIn }: Params) => {
     setSelectedSpot(undefined);
   };
 
-  const filterSpotsForArea = (value = '') => {
+  const handleSuburbSelectChange = (id: string, value: string) => {
+    filterSpotsForArea(value, 'suburb');
+    setSelectedSuburb(value);
+    setSelectedSpot(undefined);
+  };
+
+  const filterSpotsForArea = (value = '', key = 'country') => {
     const filteredSpotsInArea = spots
       .filter((spot: SpotType) => {
         if (value) {
-          return spot.country === value;
+          return spot[key] === value;
         }
         return spot;
       })
@@ -125,7 +150,7 @@ const Spots = ({ spots, isLoggedIn }: Params) => {
         <div className={filterContainerStyle()}>
           <div className={filterContentStyle()}>
             <Heading5>Search</Heading5>
-            <Paragraph>Spot Name</Paragraph>
+            <Paragraph styles="mt-item">Spot Name</Paragraph>
             <Selector
               id="spots"
               value={{ label: selectedSpot?.company, value: selectedSpot?.id }}
@@ -133,13 +158,25 @@ const Spots = ({ spots, isLoggedIn }: Params) => {
               onChange={onSpotSelectChange}
             />
 
-            <Paragraph>Country</Paragraph>
+            <Paragraph styles="mt-item">Country</Paragraph>
             <Selector
               id="country"
               initialValue={selectedCountry}
               options={countriesWithSpots()}
               onChange={handleCountrySelectChange}
             />
+
+            {selectedCountry && (
+              <>
+                <Paragraph styles="mt-item">Suburb</Paragraph>
+                <Selector
+                  id="suburb"
+                  initialValue={selectedSuburb}
+                  options={suburbsInCountry()}
+                  onChange={handleSuburbSelectChange}
+                />
+              </>
+            )}
 
             <Button onClick={handleShowFilter} styles="mt-item">
               Close
