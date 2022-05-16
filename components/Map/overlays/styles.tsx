@@ -7,7 +7,7 @@ export const spotDetailOverlayContainerStyle = () => {
     'shadow-lg',
     'z-40',
     'p-4',
-    'border rounded'
+    'border rounded',
   ];
   return base.join(' ');
 };

@@ -4,6 +4,7 @@ interface Params {
   children: React.ReactNode;
   onClick: Function;
   variant?: { normal: string; hover: string; text: string };
+  circle?: boolean;
   styles?: string;
 }
 
@@ -14,8 +15,8 @@ export const BUTTON_VARIANTS = {
     text: 'text-light-copy',
   },
   secondary: {
-    normal: 'bg-transparent',
-    hover: 'bg-transparent',
+    normal: 'bg-button-secondary',
+    hover: 'hover:bg-button-secondary-hover',
     text: 'text-dark-copy',
   },
   info: {
@@ -30,9 +31,15 @@ export const BUTTON_VARIANTS = {
   },
 };
 
-const Button = ({ children, onClick, variant = BUTTON_VARIANTS.primary, styles = '' }: Params) => {
+const Button = ({
+  children,
+  onClick,
+  variant = BUTTON_VARIANTS.primary,
+  circle = false,
+  styles = '',
+}: Params) => {
   return (
-    <button className={buttonStyle(variant, styles)} onClick={() => onClick()}>
+    <button className={buttonStyle(variant, circle, styles)} onClick={() => onClick()}>
       {children}
     </button>
   );

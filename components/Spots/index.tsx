@@ -4,12 +4,21 @@ import SpotDetail from 'components/Map/overlays/SpotDetail';
 import SpotDetailPanel from 'components/SpotDetailPanel';
 
 import { getVisibleSpots } from 'utils/map';
-import { spotsContainerStyle } from './styles';
+import {
+  spotsContainerStyle,
+  filterButtonContainerStyle,
+  filterContainerStyle,
+  filterContentStyle,
+} from './styles';
 import { useEffect, useState } from 'react';
 import Selector from 'elements/Selector';
 import { LIST_OF_COUNTRIES } from 'constants/countries';
 import { SpotType } from 'types/spot';
 import { sortBy } from 'lodash';
+import Button, { BUTTON_VARIANTS } from 'elements/Button';
+import MagnifyingGlassIcon from 'assets/icons/MagnifyingGlass';
+import Heading5 from 'elements/typography/Heading5';
+import Paragraph from 'elements/typography/Paragraphy';
 
 interface Params {
   spots: SpotType[];
@@ -24,6 +33,7 @@ const Spots = ({ spots, isLoggedIn }: Params) => {
   const [spotsInArea, setSpotsInArea] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState();
   const [spotCoordinates, setSpotCoordinates] = useState();
+  const [showFilter, setShowFilter] = useState(false);
 
   useEffect(() => {
     getUserLocation();
@@ -33,6 +43,20 @@ const Spots = ({ spots, isLoggedIn }: Params) => {
     filterSpotsForArea();
     if (spots.length > 0) return;
   }, [spots]);
+
+  const countriesWithSpots = () => {
+    const countries = [];
+
+    if (spots.length > 0) {
+      spots.forEach((spot) => {
+        if (!countries.includes(spot.country)) {
+          countries.push(spot.country);
+        }
+      });
+    }
+
+    return countries;
+  };
 
   const getUserLocation = () => {
     if (navigator && navigator.geolocation) {
@@ -91,22 +115,42 @@ const Spots = ({ spots, isLoggedIn }: Params) => {
     setVisibleSpots(visibleSpots);
   };
 
+  const handleShowFilter = () => {
+    setShowFilter(!showFilter);
+  };
+
   return (
     <div className={spotsContainerStyle()}>
-      <div className="absolute z-40 -translate-x-1/2 left-1/2 w-96 mt-item">
-        <Selector
-          id="spots"
-          value={{ label: selectedSpot?.company, value: selectedSpot?.id }}
-          options={spotsInArea}
-          onChange={onSpotSelectChange}
-        />
+      {showFilter && (
+        <div className={filterContainerStyle()}>
+          <div className={filterContentStyle()}>
+            <Heading5>Search</Heading5>
+            <Paragraph>Spot Name</Paragraph>
+            <Selector
+              id="spots"
+              value={{ label: selectedSpot?.company, value: selectedSpot?.id }}
+              options={spotsInArea}
+              onChange={onSpotSelectChange}
+            />
 
-        <Selector
-          id="country"
-          initialValue={selectedCountry}
-          options={LIST_OF_COUNTRIES}
-          onChange={handleCountrySelectChange}
-        />
+            <Paragraph>Country</Paragraph>
+            <Selector
+              id="country"
+              initialValue={selectedCountry}
+              options={countriesWithSpots()}
+              onChange={handleCountrySelectChange}
+            />
+
+            <Button onClick={handleShowFilter} styles="mt-item">
+              Close
+            </Button>
+          </div>
+        </div>
+      )}
+      <div className={filterButtonContainerStyle()}>
+        <Button variant={BUTTON_VARIANTS.secondary} circle={true} onClick={handleShowFilter}>
+          <MagnifyingGlassIcon width={16} height={16} />
+        </Button>
       </div>
 
       <Map

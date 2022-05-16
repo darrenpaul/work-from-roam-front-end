@@ -1,5 +1,6 @@
 export const buttonStyle = (
   variant: { normal: string; hover: string; text: string },
+  circle: boolean,
   styles: string,
 ) => {
   const base = [
@@ -11,8 +12,15 @@ export const buttonStyle = (
     'rounded',
     'break-normal',
     'ease-in duration-300',
-    'w-full',
   ];
+
+  if (circle) {
+    base.push('rounded-full w-12 h-12');
+  } else {
+    base.push('w-full');
+  }
+
+  base.push(styles);
 
   return [...base, styles].join(' ');
 };
