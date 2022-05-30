@@ -1,10 +1,10 @@
-export const amenityListContainerStyle = () => {
-  const base = ['flex flex-col items-start', 'w-full'];
+export const amenityListContainerStyle = (styles: string) => {
+  const base = ['flex flex-col', styles];
   return [...base].join(' ');
 };
 
 export const amenityContainerStyle = () => {
-  const base = ['flex', 'w-full', 'mb-4'];
+  const base = ['flex', 'w-full', 'mb-4', 'mt-item'];
   return [...base].join(' ');
 };
 

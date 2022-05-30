@@ -1,6 +1,7 @@
 import Amenities from 'components/amenity/Amenities';
 import Button from 'elements/Button';
 import Heading3 from 'elements/typography/Heading3';
+import Heading4 from 'elements/typography/Heading4';
 import Image from 'next/image';
 import ImageCrop from 'components/ImageCrop';
 import ImageInput from 'elements/ImageInput';
@@ -17,6 +18,8 @@ import { spotFormValidation } from 'utils/validation';
 import { SpotType } from 'types/spot';
 import { uploadBlobToFirebase } from 'utils/image';
 import { useState } from 'react';
+import { getCopy } from 'utils/copyReader';
+import Divider from 'elements/Divider';
 
 const MAX_IMAGE_SIZE = 2000;
 const IMAGE_SAVE_DIRECTORY = 'spots';
@@ -133,6 +136,15 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
     setOperatingHours(newState);
   };
 
+  const handleBatchOperatingHoursChange = (id, value) => {
+    const newState = { ...operatingHours };
+    const keys = Object.keys(operatingHours);
+    keys.forEach((element) => {
+      newState[element] = { ...operatingHours[element], [id]: value };
+    });
+    setOperatingHours(newState);
+  };
+
   return (
     <div className={formContainerStyle()}>
       <Map
@@ -150,7 +162,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
       </Map>
 
       <div className={formInputsContainerStyle()}>
-        <Heading3 styles="mt-sides">Add a new spot</Heading3>
+        <Heading3 styles="mt-sides">{getCopy('spotFormCopy:pageTitle')}</Heading3>
         <Paragraph>Fill in as much as you can and we'll do this rest!</Paragraph>
 
         {/* <ImageInput onChange={handleImageSelect} />
@@ -254,9 +266,14 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
           placeholder="Enter the country where the shop is located"
         />
 
-        <OperatingHours data={operatingHours} onChange={handleOperatingHoursChange} />
+        <OperatingHours
+          styles={'mt-item'}
+          data={operatingHours}
+          onChange={handleOperatingHoursChange}
+          onBatchChange={handleBatchOperatingHoursChange}
+        />
 
-        <Amenities initialData={amenities} onChange={handleAmenityChange} />
+        <Amenities styles={'mt-item'} initialData={amenities} onChange={handleAmenityChange} />
 
         {isAdmin && (
           <Input

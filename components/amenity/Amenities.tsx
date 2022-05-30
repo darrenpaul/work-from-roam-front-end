@@ -8,10 +8,14 @@ import {
   amenityListContainerStyle,
   amenitySelectorContainerStyle,
 } from './styles';
+import Heading4 from 'elements/typography/Heading4';
+import Divider from 'elements/Divider';
+import { getCopy } from 'utils/copyReader';
 
 interface Params {
   initialData: AmenityType;
   onChange: Function;
+  styles?: string;
 }
 
 interface AmenityType {
@@ -42,7 +46,7 @@ interface AmenityType {
   };
 }
 
-const Amenities = ({ initialData, onChange }: Params) => {
+const Amenities = ({ initialData, onChange, styles = '' }: Params) => {
   const [amenities, setAmenities] = useState<AmenityType>(initialData);
 
   const handleInputChange = (id: keyof AmenityType, value: object) => {
@@ -52,7 +56,10 @@ const Amenities = ({ initialData, onChange }: Params) => {
   };
 
   return (
-    <div className={amenityListContainerStyle()}>
+    <div className={amenityListContainerStyle(styles)}>
+      <Heading4>{getCopy('spotFormCopy:amenities')}</Heading4>
+      <Divider styles={'mt-2'} />
+
       {AMENITIES.map((amenity, index) => (
         <div key={index} className={amenityContainerStyle()}>
           <button

@@ -42,7 +42,14 @@ export const signUpSignInCopy = {
   signOutSuccess: 'You are now signed out',
 };
 
+export const spotFormCopy = {
+  pageTitle: 'Add new spot',
+  openCloseTimes: 'Open and close times',
+  amenities: 'Amenities',
+};
+
 export const copyDictionary = {
   homePageCopy: homePageCopy,
   signUpSignInCopy: signUpSignInCopy,
+  spotFormCopy: spotFormCopy,
 };

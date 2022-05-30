@@ -1,4 +1,4 @@
-export const formContainerStyle = (styles = '') => {
+export const formContainerStyle = (styles?: string) => {
   const base = ['flex flex-col', 'items-center', styles];
   return base.join(' ');
 };
