@@ -1,5 +1,14 @@
-export const timeSelectorContainerStyle = () => {
+export const timeSelectorContainerStyle = ({ mt, ml }) => {
   const base = ['flex'];
+
+  if (mt) {
+    base.push(`mt-${mt}`);
+  }
+
+  if (ml) {
+    base.push(`ml-${ml}`);
+  }
+
   return base.join(' ');
 };
 

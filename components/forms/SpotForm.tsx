@@ -13,13 +13,13 @@ import Paragraph from 'elements/typography/Paragraphy';
 import { BASE_AMENITIES, BASE_OPERATING_HOURS } from 'utils/spot';
 import { blobObjectFromBlobUrl, readFile } from 'utils/file';
 import { errorNotification } from 'utils/notifications';
-import { formContainerStyle, formInputsContainerStyle } from './styles';
 import { spotFormValidation } from 'utils/validation';
 import { SpotType } from 'types/spot';
 import { uploadBlobToFirebase } from 'utils/image';
 import { useState } from 'react';
 import { getCopy } from 'utils/copyReader';
 import Divider from 'elements/Divider';
+import Flex from 'containers/Flex';
 
 const MAX_IMAGE_SIZE = 2000;
 const IMAGE_SAVE_DIRECTORY = 'spots';
@@ -146,7 +146,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
   };
 
   return (
-    <div className={formContainerStyle()}>
+    <Flex column align="center">
       <Map
         initialCenter={spotData.coordinates}
         onMapClick={handleMapClick}
@@ -161,9 +161,11 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
         )}
       </Map>
 
-      <div className={formInputsContainerStyle()}>
+      <Flex width_md="screen-1/2" column mt="item">
         <Heading3 styles="mt-sides">{getCopy('spotFormCopy:pageTitle')}</Heading3>
         <Paragraph>Fill in as much as you can and we'll do this rest!</Paragraph>
+
+        <Divider styles={'mt-2'} />
 
         {/* <ImageInput onChange={handleImageSelect} />
         {images.map((image, index) => (
@@ -286,8 +288,8 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
         )}
 
         <Button onClick={handleSubmit}>Submit</Button>
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 };
 

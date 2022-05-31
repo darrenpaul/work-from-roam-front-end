@@ -4,8 +4,8 @@ import Input from 'elements/Input';
 import { AuthUserType } from 'types/user';
 import { doUpdateUser } from 'services/user';
 import { errorNotification, successNotification } from 'utils/notifications';
-import { formContainerStyle, formInputsContainerStyle } from './styles';
 import { useState } from 'react';
+import Flex from 'containers/Flex';
 
 interface Params {
   authUser: AuthUserType;
@@ -39,8 +39,8 @@ const UserUpdateForm = ({ authUser, styles }: Params) => {
   };
 
   return (
-    <div className={formContainerStyle(styles)}>
-      <div className={formInputsContainerStyle()}>
+    <Flex column align="center">
+      <Flex width_md="screen-1/2" column mt="item">
         <Heading3>User Information</Heading3>
 
         <Input
@@ -65,8 +65,8 @@ const UserUpdateForm = ({ authUser, styles }: Params) => {
         />
 
         <Button onClick={handleSubmit}>Update</Button>
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 };
 

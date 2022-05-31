@@ -1,8 +1,20 @@
 const fontStyle = 'font-montserrat';
 
-export const paragraphStyle = (color?: string, styles?: string) => {
+export const labelStyle = () => {
+  const base = ['text-label'];
+  return [...base].join(' ');
+};
+
+export const paragraphStyle = ({ color, mt, ml, styles }) => {
   const textColor = color ? color : 'text-dark-copy';
   const base = ['text-sm', fontStyle, textColor];
+  if (mt) {
+    base.push(`mt-${mt}`);
+  }
+
+  if (ml) {
+    base.push(`ml-${ml}`);
+  }
   return [...base, styles].join(' ');
 };
 

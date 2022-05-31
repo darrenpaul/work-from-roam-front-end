@@ -15,8 +15,10 @@ import { generateHours, generateMinutes, splitTime } from '../../utils/dateUtils
 const hours = generateHours();
 const minutes = generateMinutes();
 
-const TimeSelector = ({ onChange, id, time }) => {
+const TimeSelector = ({ onChange, id, time, mt = 0, ml = 0 }) => {
   const { showModal, handleShowModal, handleCloseModal } = useShowModal();
+
+  const styleProps = { mt, ml };
 
   const showSelector = () => {
     handleShowModal();
@@ -31,7 +33,7 @@ const TimeSelector = ({ onChange, id, time }) => {
   };
 
   return (
-    <div className={timeSelectorContainerStyle()}>
+    <div className={timeSelectorContainerStyle({ ...styleProps })}>
       <Input
         id={'mondayOpening'}
         placeholder={'Opening'}

@@ -1,5 +1,7 @@
 import Heading6 from 'elements/typography/Heading6';
 import Button from 'elements/Button';
+import Flex from 'containers/Flex';
+import Grid from 'containers/Grid';
 import SwitchButton from 'elements/SwitchButton';
 import TimeSelector from 'components/TimeSelector';
 import { dayNames, splitTime } from 'utils/dateUtils';
@@ -10,7 +12,7 @@ import { getCopy } from 'utils/copyReader';
 import { useState } from 'react';
 
 const OperatingHours = ({ data, onChange, onBatchChange, styles }) => {
-  const [individualHours, setIndividualHours] = useState(false);
+  const [individualHours, setIndividualHours] = useState(true);
   const handleIsOpenChange = (id, value) => {
     onChange(id, { open: value });
   };
@@ -31,24 +33,24 @@ const OperatingHours = ({ data, onChange, onBatchChange, styles }) => {
 
   return (
     <div className={operatingHoursContainerStyle(styles)}>
-      <Heading4>{getCopy('spotFormCopy:openCloseTimes')}</Heading4>
-
-      <div className="flex">
-        <Heading6>Edit All</Heading6>
+      <Flex width="full" justify="between" align="center">
+        <Heading4>{getCopy('spotFormCopy:openCloseTimes')}</Heading4>
 
         <SwitchButton
+          label="Edit all"
           onChange={() => setIndividualHours(!individualHours)}
           initialValue={data.monday.open}
         />
-      </div>
+      </Flex>
 
       <Divider styles={'mt-2'} />
 
       {individualHours === false && (
-        <div className={operatingHourContainerStyle()}>
+        <Grid width="full" justify="between" align="center" mt="item" columns="2" columns_md="4">
           <Heading6>All times</Heading6>
 
           <SwitchButton
+            label="Open"
             onChange={(id, value) => onBatchChange('open', value)}
             initialValue={data.monday.open}
           />
@@ -62,15 +64,28 @@ const OperatingHours = ({ data, onChange, onBatchChange, styles }) => {
             onChange={(id, value) => handleBatchChange('closeTime', value)}
             time={data.monday.closeTime}
           />
-        </div>
+        </Grid>
       )}
 
       {individualHours === true &&
         dayNames.map(({ nice, key }, index) => (
-          <div className={operatingHourContainerStyle()} key={index}>
+          <Grid
+            key={index}
+            width="full"
+            justify="between"
+            align="center"
+            mt="item"
+            columns="2"
+            columns_md="4"
+          >
             <Heading6>{nice}</Heading6>
 
-            <SwitchButton id={key} onChange={handleIsOpenChange} initialValue={data[key].open} />
+            <SwitchButton
+              label="Open"
+              id={key}
+              onChange={handleIsOpenChange}
+              initialValue={data[key].open}
+            />
 
             <TimeSelector
               onChange={(id, value) => handleTimeChange('openTime', id, value)}
@@ -83,7 +98,7 @@ const OperatingHours = ({ data, onChange, onBatchChange, styles }) => {
               id={key}
               time={data[key].closeTime}
             />
-          </div>
+          </Grid>
         ))}
     </div>
   );

@@ -4,11 +4,6 @@ import { stringDateAndTimeFromSeconds } from 'utils/dateUtils';
 import { successNotification } from 'utils/notifications';
 
 const SpotsTable = ({ spots, onSpotApproval }) => {
-  const handleSpotApproval = async (spotId) => {
-    // await doSpotApprove(accessToken, selectedSpot?.id);
-    successNotification('Spot approved successfully');
-  };
-
   return (
     <div>
       <table>
@@ -27,7 +22,7 @@ const SpotsTable = ({ spots, onSpotApproval }) => {
             return (
               <tr key={index}>
                 <td>{spot.id}</td>
-                <td>{spot.name}</td>
+                <td>{spot.company}</td>
                 <td>{stringDateAndTimeFromSeconds(spot.createdDate._seconds)}</td>
                 <td>{spot.address}</td>
                 <td>{spot.city}</td>

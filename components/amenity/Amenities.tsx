@@ -1,5 +1,7 @@
 import Selector from 'elements/Selector';
-import { AMENITIES, getAmenityIcon } from 'utils/amenity';
+import Flex from 'containers/Flex';
+import { getAmenityIcon } from 'utils/amenity';
+import { AMENITIES } from 'constants/amenity';
 import { LIGHT_COPY } from 'shared/styles/colors';
 import { useState } from 'react';
 import {
@@ -9,6 +11,7 @@ import {
   amenitySelectorContainerStyle,
 } from './styles';
 import Heading4 from 'elements/typography/Heading4';
+import Paragraph from 'elements/typography/Paragraphy';
 import Divider from 'elements/Divider';
 import { getCopy } from 'utils/copyReader';
 
@@ -62,19 +65,22 @@ const Amenities = ({ initialData, onChange, styles = '' }: Params) => {
 
       {AMENITIES.map((amenity, index) => (
         <div key={index} className={amenityContainerStyle()}>
-          <button
-            className={amenityButtonStyle(
-              amenities[amenity.key as keyof AmenityType]?.available as boolean,
-            )}
-            onClick={() =>
-              handleInputChange(amenity.key, {
-                available: !amenities[amenity.key as keyof AmenityType]?.available,
-              })
-            }
-            value={amenity.name}
-          >
-            {getAmenityIcon(amenity.key, amenities[amenity.key]?.available && LIGHT_COPY)}
-          </button>
+          <Flex column>
+            <button
+              className={amenityButtonStyle(
+                amenities[amenity.key as keyof AmenityType]?.available as boolean,
+              )}
+              onClick={() =>
+                handleInputChange(amenity.key, {
+                  available: !amenities[amenity.key as keyof AmenityType]?.available,
+                })
+              }
+              value={amenity.name}
+            >
+              {getAmenityIcon(amenity.key, amenities[amenity.key]?.available && LIGHT_COPY)}
+            </button>
+            <Paragraph mt="item">{amenity.name}</Paragraph>
+          </Flex>
 
           {amenity.options.length > 0 && amenities[amenity.key]?.available && (
             <div className={amenitySelectorContainerStyle()}>

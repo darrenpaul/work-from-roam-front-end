@@ -1,7 +1,7 @@
 import Heading6 from 'elements/typography/Heading6';
 import Paragraph from 'elements/typography/Paragraphy';
 import { amenityContainerStyle, amenityTitleContainerStyle } from './styles';
-import { missingData } from 'utils/amenity';
+import { MISSING_DATA } from 'constants/amenity';
 
 interface Params {
   amenity: { available: string; cost: string; option: string };
@@ -18,13 +18,13 @@ const AmenityItem = ({
   icon,
   availableText = 'Available',
   costText = 'Cost',
-  optionText = 'Option'
+  optionText = 'Option',
 }: Params) => {
   const Icon = icon;
 
   const formatAvailable = () => {
     if (!amenity?.available) {
-      return `${availableText}: ${missingData}`;
+      return `${availableText}: ${MISSING_DATA}`;
     }
 
     return `${availableText}: ${amenity?.available ? 'Yes' : 'No'}`;
