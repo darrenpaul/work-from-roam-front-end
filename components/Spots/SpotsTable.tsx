@@ -12,8 +12,8 @@ const SpotsTable = ({ spots, onSpotApproval }) => {
             <th>ID</th>
             <th>Name</th>
             <th>Created Date</th>
-            <th>Address</th>
-            <th>City</th>
+            <th>Created By</th>
+            <th>Country</th>
             <th>Approve</th>
           </tr>
         </thead>
@@ -24,8 +24,8 @@ const SpotsTable = ({ spots, onSpotApproval }) => {
                 <td>{spot.id}</td>
                 <td>{spot.company}</td>
                 <td>{stringDateAndTimeFromSeconds(spot.createdDate._seconds)}</td>
-                <td>{spot.address}</td>
-                <td>{spot.city}</td>
+                <td>{spot.createdBy}</td>
+                <td>{spot.country}</td>
                 <td>
                   <Button onClick={() => onSpotApproval(spot.id)}>Approve</Button>
                 </td>

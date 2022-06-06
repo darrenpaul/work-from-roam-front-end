@@ -16,10 +16,11 @@ import { errorNotification } from 'utils/notifications';
 import { spotFormValidation } from 'utils/validation';
 import { SpotType } from 'types/spot';
 import { uploadBlobToFirebase } from 'utils/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getCopy } from 'utils/copyReader';
 import Divider from 'elements/Divider';
 import Flex from 'containers/Flex';
+import { DEFAULT_CENTER_COORDINATES } from 'utils/map';
 
 const MAX_IMAGE_SIZE = 2000;
 const IMAGE_SAVE_DIRECTORY = 'spots';
@@ -37,7 +38,7 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
     email: initialSpot.email || '',
     phoneNumber: initialSpot.phoneNumber || '',
     phoneCode: initialSpot.phoneCode || '27',
-    coordinates: initialSpot.coordinates || undefined,
+    coordinates: initialSpot.coordinates || DEFAULT_CENTER_COORDINATES,
     address: initialSpot.address || '',
     suburb: initialSpot.suburb || '',
     city: initialSpot.city || '',
@@ -71,6 +72,22 @@ const SpotForm = ({ initialSpot, onSubmit, showHomeMarker = true, isAdmin = fals
   const [showCropper, setShowCropper] = useState(false);
   const [cropImage, setCropImage] = useState<File | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!initialSpot.coordinates) {
+      getUserLocation();
+    }
+  }, []);
+
+  const getUserLocation = () => {
+    if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const { latitude, longitude } = position.coords;
+        const coordinates = { lat: latitude, lng: longitude };
+        setSpotData({ ...spotData, coordinates });
+      });
+    }
+  };
 
   const handleSubmit = async () => {
     const { errors, isValid } = spotFormValidation(spotData);

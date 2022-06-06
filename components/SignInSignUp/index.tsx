@@ -11,6 +11,8 @@ import { humanError } from 'utils/errors';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { VIEW_SPOTS_ROUTE } from 'utils/routes';
+import { splitUrlParams } from 'utils/url';
+
 const SignUpSignIn = () => {
   const { showModal, handleShowModal, handleCloseModal } = useShowModal();
   const router = useRouter();
@@ -42,20 +44,6 @@ const SignUpSignIn = () => {
     router.events.on('routeChangeComplete', handleHistoryChange);
     return () => router.events.off('routeChangeComplete', handleHistoryChange);
   }, []);
-
-  const splitUrlParams = (url) => {
-    const urlParams = url.split('?')[1];
-    if (!urlParams) return null;
-    const urlParamsArray = urlParams.split('&');
-
-    const urlParamsObject = {};
-    urlParamsArray.forEach((param) => {
-      const paramArray = param.split('=');
-      urlParamsObject[paramArray[0]] = paramArray[1];
-    });
-
-    return urlParamsObject;
-  };
 
   const onModalClose = () => {
     router.replace('', undefined, { shallow: true });

@@ -19,6 +19,11 @@ import Button, { BUTTON_VARIANTS } from 'elements/Button';
 import MagnifyingGlassIcon from 'assets/icons/MagnifyingGlass';
 import Heading5 from 'elements/typography/Heading5';
 import Paragraph from 'elements/typography/Paragraphy';
+import Router from 'next/router';
+import { useRouter } from 'next/router';
+import { splitUrlParams } from 'utils/url';
+
+import { DEFAULT_CENTER_COORDINATES, DEFAULT_MAP_ZOOM } from 'utils/map';
 
 interface Params {
   spots: SpotType[];
@@ -29,12 +34,15 @@ const Spots = ({ spots, isLoggedIn }: Params) => {
   const [visibleSpots, setVisibleSpots] = useState([]);
   const [selectedSpot, setSelectedSpot] = useState();
   const [mapLoaded, setMapLoaded] = useState(false);
-  const [userLocation, setUserLocation] = useState();
+  const [userLocation, setUserLocation] = useState(DEFAULT_CENTER_COORDINATES);
   const [spotsInArea, setSpotsInArea] = useState([]);
   const [selectedSuburb, setSelectedSuburb] = useState();
   const [selectedCountry, setSelectedCountry] = useState();
   const [spotCoordinates, setSpotCoordinates] = useState();
   const [showFilter, setShowFilter] = useState(false);
+  const router = useRouter();
+
+  const hasSpotIdQuery = !!splitUrlParams(router.asPath)?.spotId;
 
   useEffect(() => {
     getUserLocation();
@@ -44,6 +52,34 @@ const Spots = ({ spots, isLoggedIn }: Params) => {
     filterSpotsForArea();
     if (spots.length > 0) return;
   }, [spots]);
+
+  useEffect(() => {
+    const url = router.asPath;
+    onSpotChange(url);
+  }, [spots]);
+
+  useEffect(() => {
+    const handleHistoryChange = (url) => {
+      onSpotChange(url);
+    };
+    router.events.on('routeChangeComplete', handleHistoryChange);
+    return () => router.events.off('routeChangeComplete', handleHistoryChange);
+  });
+
+  const onSpotChange = (url: string) => {
+    const urlQuery = splitUrlParams(url);
+    if (urlQuery === null) {
+      getUserLocation();
+      setSpotCoordinates({
+        lat: userLocation?.lat,
+        lng: userLocation?.lng,
+      });
+      return;
+    }
+    const spot = spots.find((spot) => spot.id === urlQuery.spotId);
+    setSelectedSpot(spot);
+    setSpotCoordinates({ lat: spot?.coordinates.lat, lng: spot?.coordinates.lng });
+  };
 
   const countriesWithSpots = () => {
     const countries = [];
@@ -78,22 +114,23 @@ const Spots = ({ spots, isLoggedIn }: Params) => {
   };
 
   const getUserLocation = () => {
-    if (navigator && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        const { latitude, longitude } = position.coords;
-        setUserLocation({ lat: latitude, lng: longitude });
-      });
+    if (hasSpotIdQuery === false) {
+      if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ lat: latitude, lng: longitude });
+        });
+      }
     }
   };
 
   const handleSelectSpot = ({ spot }) => {
     if (!spot) return;
+    Router.push('/view-spots/?spotId=' + spot.id);
+  };
 
-    if (selectedSpot?.id === spot.id) {
-      setSelectedSpot(undefined);
-    } else {
-      setSelectedSpot(spot);
-    }
+  const handleUnselectSpot = () => {
+    Router.push('/view-spots');
   };
 
   const handleCountrySelectChange = (id: string, value: string) => {
@@ -192,7 +229,7 @@ const Spots = ({ spots, isLoggedIn }: Params) => {
 
       <Map
         fullHeight={true}
-        onMapClick={() => setSelectedSpot(null)}
+        onMapClick={handleUnselectSpot}
         onChildClick={handleSelectSpot}
         onMapLoaded={(mapLoaded) => {
           setMapLoaded(mapLoaded);

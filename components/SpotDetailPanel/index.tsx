@@ -13,6 +13,7 @@ import PhoneIcon from 'assets/icons/Phone';
 import { createDirectionURL } from 'utils/map';
 import { dayNames } from 'utils/dateUtils';
 import { spotDetailContainerStyle } from './styles';
+import { errorNotification, successNotification } from 'utils/notifications';
 
 const SpotDetailPanel = ({
   id,
@@ -46,9 +47,24 @@ const SpotDetailPanel = ({
     window.open(directionURL);
   };
 
+  const handleShareSpot = async () => {
+    const content = window.location.href;
+
+    try {
+      await navigator.clipboard.writeText(content);
+      successNotification('Copied to clipboard');
+    } catch (error) {
+      if (error && error?.message) {
+        errorNotification(error.message);
+      }
+    }
+  };
+
   return (
     <div className={spotDetailContainerStyle()}>
       <Heading5>{company}</Heading5>
+      <Button onClick={handleShareSpot}>Share</Button>
+
       {isLoggedIn && <Link href={`/spot-suggestion/${id}`}>Add suggestion</Link>}
 
       {website && <LinkWithIcon styles={'mt-item'} icon={GlobeIcon} url={website}></LinkWithIcon>}

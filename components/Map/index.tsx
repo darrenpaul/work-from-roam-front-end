@@ -14,7 +14,6 @@ interface Params {
   onChildClick: Function;
   onMapLoaded: Function;
   onMapChange: Function;
-  showHomeMarker: boolean;
   children: ReactNode;
 }
 
@@ -25,31 +24,15 @@ const Map = ({
   onChildClick,
   onMapLoaded,
   onMapChange,
-  showHomeMarker = true,
   children,
 }: Params) => {
   const [center, setCenter] = useState(initialCenter || DEFAULT_CENTER_COORDINATES);
   const [zoom, setZoom] = useState(DEFAULT_MAP_ZOOM);
   const [mapLoading, setMapLoading] = useState(true);
-  const [userCenter, setUserCenter] = useState({ lat: 0, lng: 0 });
 
   useEffect(() => {
-    getUserLocation();
+    setCenter(initialCenter);
   }, [initialCenter]);
-
-  const getUserLocation = () => {
-    if (!initialCenter) {
-      if (navigator && navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          const { latitude, longitude } = position.coords;
-          setUserCenter({ lat: latitude, lng: longitude });
-          setCenter({ lat: latitude, lng: longitude });
-        });
-      }
-    } else {
-      setCenter(initialCenter);
-    }
-  };
 
   const handleApiLoaded = () => {
     setMapLoading(false);
@@ -82,9 +65,6 @@ const Map = ({
           onChildClick={handleOnChildClick}
         >
           {children}
-          {userCenter && userCenter?.lat && userCenter?.lng && showHomeMarker && (
-            <MarkerHome onClick={() => {}} lat={userCenter.lat} lng={userCenter.lng} />
-          )}
         </GoogleMap>
       )}
     </div>

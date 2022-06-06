@@ -8,7 +8,7 @@ import SpotDetailPanel from 'components/SpotDetailPanel';
 import { dayNames, formatTimeObject } from 'utils/dateUtils';
 import { doSpotApprove } from 'services/spot';
 import { getPendingSpots } from 'apiClient/spot';
-import { getVisibleSpots } from 'utils/map';
+import { DEFAULT_CENTER_COORDINATES, getVisibleSpots } from 'utils/map';
 import { spotDetailContainerStyle, spotsContainerStyle } from './styles';
 import { successNotification } from 'utils/notifications';
 import { useEffect, useState } from 'react';
@@ -45,6 +45,7 @@ const PendingSpots = ({ accessToken, spots }) => {
         onChildClick={handleSelectSpot}
         onMapLoaded={() => setSelectedSpot(null)}
         onMapChange={handleOnMapChange}
+        initialCenter={DEFAULT_CENTER_COORDINATES}
       >
         {visibleSpots.map((spot) => (
           <MarkerCoffee

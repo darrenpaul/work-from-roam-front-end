@@ -2,6 +2,9 @@ import batchJsonData from 'data/batchData.json';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import dayjs from 'dayjs';
 import { doCreateSpot } from 'services/spot';
+import { NextRouter } from 'next/router';
+
+const SPOT_ID_QUERY = 'spotId';
 
 dayjs.extend(customParseFormat);
 
@@ -224,4 +227,8 @@ const southAfricaAddress = (formattedAddress) => {
   //   zipCode = addressPieces[6];
   //   country = addressPieces[7];
   // }
+};
+
+export const addSelectedSpotUrlQuery = (router: NextRouter, spotId: string) => {
+  router.replace(`?${SPOT_ID_QUERY}=${spotId}`, undefined, { shallow: true });
 };
