@@ -1,10 +1,10 @@
-import BannerWithImage from 'components/BannerWithImage';
-import ContentWithImage from 'components/ContentWithImage';
+import BannerWithImage from 'components/shared/BannerWithImage';
+import ContentWithImage from 'components/shared/ContentWithImage';
 import PageWrapper from 'containers/PageWrapper';
-import PromotionBanner from 'components/PromotionBanner';
+import PromotionBanner from 'components/shared/PromotionBanner';
 import { addSignUpUrlQuery } from 'utils/signInSignUp';
 import { AuthUserType } from 'types/user';
-import { COMPANY_NAME } from 'shared/constants';
+import { COMPANY_NAME } from 'constants/site';
 import { getCopy } from 'utils/copyReader';
 import { useRouter } from 'next/router';
 

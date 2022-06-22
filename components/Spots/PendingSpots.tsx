@@ -1,9 +1,9 @@
 import Button from 'elements/Button';
 import Heading3 from 'elements/typography/Heading3';
-import Map from 'components/Map';
-import MarkerCoffee from 'components/Map/markers/MarkerCoffee';
+import Map from 'components/shared/Map';
+import MarkerCoffee from 'components/shared/Map/markers/MarkerCoffee';
 import Paragraph from 'elements/typography/Paragraphy';
-import SpotDetail from 'components/Map/overlays/SpotDetail';
+import SpotDetail from 'components/shared/Map/overlays/SpotDetail';
 import SpotDetailPanel from 'components/SpotDetailPanel';
 import { dayNames, formatTimeObject } from 'utils/dateUtils';
 import { doSpotApprove } from 'services/spot';

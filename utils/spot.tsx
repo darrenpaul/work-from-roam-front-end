@@ -115,14 +115,14 @@ export const batchAdd = (accessToken) => {
         });
       }
 
-      const addressData = malaysiaAddress(formatted_address);
+      const addressData = swedenAddress(formatted_address);
       let address = addressData?.address;
       let city = addressData?.city;
       let suburb = addressData?.suburb;
       let zipCode = addressData?.zipCode;
       let country = addressData?.country;
 
-      if (address && city && zipCode && country) {
+      if (city && zipCode && country) {
         address = address.trim();
         suburb = suburb.trim();
         city = city.trim();
@@ -227,6 +227,33 @@ const southAfricaAddress = (formattedAddress) => {
   //   zipCode = addressPieces[6];
   //   country = addressPieces[7];
   // }
+};
+
+const swedenAddress = (formattedAddress) => {
+  const splitAddress = formattedAddress.split(',');
+  const addressPieces = [];
+  splitAddress.forEach((item) => {
+    addressPieces.push(item.trim());
+  });
+
+  const suburbZipCodeRegex = /(^.+), (\d{1,3} \d{1,3}) (.+), (.+)/gm.exec(formattedAddress);
+  if (suburbZipCodeRegex) {
+    const city = suburbZipCodeRegex[suburbZipCodeRegex.length - 2];
+    const address = suburbZipCodeRegex[suburbZipCodeRegex.length - 4];
+    const suburb = '';
+    const zipCode = suburbZipCodeRegex[suburbZipCodeRegex.length - 3];
+    const country = suburbZipCodeRegex[suburbZipCodeRegex.length - 1];
+    const justAddress = [];
+    for (const item of addressPieces) {
+      if (item.includes(suburb) || item.includes(zipCode)) {
+        break;
+      }
+
+      justAddress.push(item);
+    }
+
+    return { address, city, suburb, zipCode, country };
+  }
 };
 
 export const addSelectedSpotUrlQuery = (router: NextRouter, spotId: string) => {

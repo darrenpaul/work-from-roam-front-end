@@ -1,5 +1,5 @@
 import Button, { BUTTON_VARIANTS } from 'elements/Button';
-import FormLoader from 'elements/Loaders/FormLoader';
+import FormLoader from 'components/shared/Loaders/FormLoader';
 import Modal from 'containers/Modal';
 import SignIn from './SignIn';
 import SignUp from './SignUp';

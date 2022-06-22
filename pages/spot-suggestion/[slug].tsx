@@ -2,7 +2,7 @@ import PageWrapper from 'containers/PageWrapper';
 import SpotForm from 'components/forms/SpotForm';
 import useSpot from 'hooks/useSpot';
 import { AuthUserType } from 'types/user';
-import { COMPANY_NAME } from 'shared/constants';
+import { COMPANY_NAME } from 'constants/site';
 import { doCreateSpotSuggestion } from 'services/spotSuggestion';
 import { ROLES } from 'utils/roles';
 import { SpotType } from 'types/spot';

@@ -1,5 +1,5 @@
 import Heading6 from 'elements/typography/Heading6';
-import { COMPANY_NAME } from '../../shared/constants';
+import { COMPANY_NAME } from 'constants/site';
 import { containerStyle, contentContainerStyle } from './styles';
 
 const Footer = () => {

@@ -1,6 +1,6 @@
 import GoogleMap from 'google-map-react';
-import MapLoader from 'elements/Loaders/MapLoader';
-import MarkerHome from 'components/Map/markers/MarkerHome';
+import MapLoader from 'components/shared/Loaders/MapLoader';
+import MarkerHome from 'components/shared/Map/markers/MarkerHome';
 import { DEFAULT_CENTER_COORDINATES, DEFAULT_MAP_ZOOM } from 'utils/map';
 import { mapContainerWrapperStyle } from './styles';
 import { ReactNode, useEffect, useState } from 'react';
@@ -22,7 +22,7 @@ const Map = ({
   fullHeight,
   onMapClick,
   onChildClick,
-  onMapLoaded,
+  onMapLoaded = () => {},
   onMapChange,
   children,
 }: Params) => {

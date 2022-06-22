@@ -1,8 +1,8 @@
-import Footer from 'components/Footer';
+import Footer from 'components/shared/Footer';
 import Head from 'next/head';
-import Navigation from 'components/Navigation';
+import Navigation from 'components/shared/Navigation';
 import { pageContainerStyle, pageContentContainerStyle } from './styles';
-import { SITE_DESCRIPTION, SITE_URL } from 'shared/constants.ts';
+import { SITE_DESCRIPTION, SITE_URL } from 'constants/site';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

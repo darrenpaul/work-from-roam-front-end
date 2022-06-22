@@ -5,13 +5,14 @@ import Heading5 from 'elements/typography/Heading5';
 import NavigationLink from './NavigationLink';
 import { addSignInUrlQuery } from 'utils/signInSignUp';
 import { AuthUserType } from 'types/user';
-import { COMPANY_NAME } from 'shared/constants';
+import { COMPANY_NAME } from 'constants/site';
 import { doSignOutUser } from 'services/user';
 import { getCopy } from 'utils/copyReader';
 import { infoNotification } from 'utils/notifications';
 import { NAVIGATION_ROUTES } from 'utils/navigation';
 import { ROLES } from 'utils/roles';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { useState } from 'react';
 import {
   buttonsContainerStyle,
@@ -59,7 +60,9 @@ const Navigation = ({ authUser }: AuthUserType) => {
 
   return (
     <div className={containerStyle()}>
-      <Heading5>{COMPANY_NAME}</Heading5>
+      <Heading5>
+        <Link href="/">{COMPANY_NAME}</Link>
+      </Heading5>
 
       <div className={menuButtonStyle()} onClick={handleShowMobileMenu}>
         {showMobileMenu ? <CrossIcon /> : <BarsIcon />}

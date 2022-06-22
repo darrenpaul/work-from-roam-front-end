@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import Loader from 'elements/Loaders/PageLoader';
+import Loader from 'components/shared/Loaders/PageLoader';
 import useFirebaseAuth from 'hooks/useUser';
 import { AuthUserProvider } from 'contexts/UserContext';
 import { useRouter } from 'next/router';
